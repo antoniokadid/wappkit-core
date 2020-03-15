@@ -22,7 +22,6 @@
             "AntonioKadid\\WAPPKitCore\\": "src/"
         }
     },
-
     "require-dev": {
         "phpunit/phpunit": "^9"
     }
