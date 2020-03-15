@@ -1,5 +1,7 @@
 <?php declare(strict_types=1);
 
+namespace AntonioKadid\WAPPKitCore\Tests\Collections;
+
 use AntonioKadid\WAPPKitCore\Collections\Stack;
 use PHPUnit\Framework\TestCase;
 
