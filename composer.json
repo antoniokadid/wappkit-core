@@ -12,15 +12,13 @@
     ],
     "require": {
         "php": ">=7.3",
-        "ext-json": "*"
+        "ext-json": "*",
+        "ext-pdo": "*",
+        "ext-mysqli": "*",
+        "ext-gd": "*"
     },
     "require-dev": {
         "phpunit/phpunit": "^9"
-    },
-    "suggest": {
-        "ext-gd": "Required for Graphics",
-        "ext-pdo": "Required for using PDO Connection",
-        "ext-mysqli": "Required for using MySQLi Connection"
     },
     "autoload": {
         "psr-4": {
