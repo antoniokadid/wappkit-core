@@ -4,8 +4,51 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1ed54c5236910d4f40311e5fba01adce",
-    "packages": [],
+    "content-hash": "22f63767abfb513ce10f094ea6813874",
+    "packages": [
+        {
+            "name": "antoniokadid/wappkit-core-collections",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/antoniokadid/php-wappkit-core-collections.git",
+                "reference": "6dba031447762627f31ba16d5d2183563a49d523"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/antoniokadid/php-wappkit-core-collections/zipball/6dba031447762627f31ba16d5d2183563a49d523",
+                "reference": "6dba031447762627f31ba16d5d2183563a49d523",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "AntonioKadid\\WAPPKitCore\\Collections\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Antonio Kadid",
+                    "email": "antoniokadid@gmail.com",
+                    "homepage": "http://www.antoniokadid.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A PHP WYSIWYG library that defines collections of objects.",
+            "time": "2020-03-29T09:03:17+00:00"
+        }
+    ],
     "packages-dev": [
         {
             "name": "doctrine/instantiator",
@@ -1444,16 +1487,16 @@
         },
         {
             "name": "symfony/polyfill-ctype",
-            "version": "v1.14.0",
+            "version": "v1.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-ctype.git",
-                "reference": "fbdeaec0df06cf3d51c93de80c7eb76e271f5a38"
+                "reference": "4719fa9c18b0464d399f1a63bf624b42b6fa8d14"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/fbdeaec0df06cf3d51c93de80c7eb76e271f5a38",
-                "reference": "fbdeaec0df06cf3d51c93de80c7eb76e271f5a38",
+                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/4719fa9c18b0464d399f1a63bf624b42b6fa8d14",
+                "reference": "4719fa9c18b0464d399f1a63bf624b42b6fa8d14",
                 "shasum": ""
             },
             "require": {
@@ -1465,7 +1508,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.14-dev"
+                    "dev-master": "1.15-dev"
                 }
             },
             "autoload": {
@@ -1498,7 +1541,7 @@
                 "polyfill",
                 "portable"
             ],
-            "time": "2020-01-13T11:15:53+00:00"
+            "time": "2020-02-27T09:26:54+00:00"
         },
         {
             "name": "theseer/tokenizer",
