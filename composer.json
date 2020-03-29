@@ -16,7 +16,8 @@
         "ext-pdo": "*",
         "ext-mysqli": "*",
         "ext-gd": "*",
-        "antoniokadid/wappkit-core-collections": ">=2.0"
+        "antoniokadid/wappkit-core-collections": ">=2.0",
+        "antoniokadid/wappkit-core-graphics": ">=2.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^9"
