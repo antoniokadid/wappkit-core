@@ -16,7 +16,7 @@
         "antoniokadid/wappkit-core-graphics": ">=2.0",
         "antoniokadid/wappkit-core-mysql": ">=2.0",
         "antoniokadid/wappkit-core-text": ">=2.0",
-        "antoniokadid/wappkit-core-http": ">=2.0",
+        "antoniokadid/wappkit-core-http": "dev-master",
         "antoniokadid/wappkit-core-io": ">=1.0",
         "antoniokadid/wappkit-core-audio": ">=1.0",
         "antoniokadid/wappkit-core-programmability": ">=1.0"
