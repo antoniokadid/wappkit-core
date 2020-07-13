@@ -4,24 +4,24 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c523d065d2e82b28bf812b3c68b4c5c3",
+    "content-hash": "9f40da0594940f68412c7b2e65f1906f",
     "packages": [
         {
             "name": "antoniokadid/wappkit-core-audio",
-            "version": "1.0.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/antoniokadid/wappkit-core-audio.git",
-                "reference": "36f8ce97ffb7a966b3d8f370b34138b3772e27c6"
+                "reference": "8f2632a0406acdaa66309d22c68005d59f73c662"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/antoniokadid/wappkit-core-audio/zipball/36f8ce97ffb7a966b3d8f370b34138b3772e27c6",
-                "reference": "36f8ce97ffb7a966b3d8f370b34138b3772e27c6",
+                "url": "https://api.github.com/repos/antoniokadid/wappkit-core-audio/zipball/8f2632a0406acdaa66309d22c68005d59f73c662",
+                "reference": "8f2632a0406acdaa66309d22c68005d59f73c662",
                 "shasum": ""
             },
             "require": {
-                "antoniokadid/wappkit-core-io": ">=1.0",
+                "antoniokadid/wappkit-core-io": "dev-master",
                 "php": ">=7.1"
             },
             "require-dev": {
@@ -46,20 +46,20 @@
                 }
             ],
             "description": "A PHP library to work with audio files.",
-            "time": "2020-03-29T13:53:47+00:00"
+            "time": "2020-07-13T04:26:03+00:00"
         },
         {
             "name": "antoniokadid/wappkit-core-collections",
-            "version": "2.0.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/antoniokadid/wappkit-core-collections.git",
-                "reference": "812d92aa8bd6270234a9ac02962132297b85f99b"
+                "reference": "a561d4771c877253d81ad714e6cb82d3d9074ccc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/antoniokadid/wappkit-core-collections/zipball/812d92aa8bd6270234a9ac02962132297b85f99b",
-                "reference": "812d92aa8bd6270234a9ac02962132297b85f99b",
+                "url": "https://api.github.com/repos/antoniokadid/wappkit-core-collections/zipball/a561d4771c877253d81ad714e6cb82d3d9074ccc",
+                "reference": "a561d4771c877253d81ad714e6cb82d3d9074ccc",
                 "shasum": ""
             },
             "require": {
@@ -88,20 +88,20 @@
                 }
             ],
             "description": "A PHP library to define collections of objects.",
-            "time": "2020-03-29T10:00:59+00:00"
+            "time": "2020-07-13T04:27:26+00:00"
         },
         {
             "name": "antoniokadid/wappkit-core-graphics",
-            "version": "2.0.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/antoniokadid/wappkit-core-graphics.git",
-                "reference": "1c148554573ca7a0e45d310184966a63e36b38ae"
+                "reference": "ce842626aadacff57aa31f5174b428218cc36159"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/antoniokadid/wappkit-core-graphics/zipball/1c148554573ca7a0e45d310184966a63e36b38ae",
-                "reference": "1c148554573ca7a0e45d310184966a63e36b38ae",
+                "url": "https://api.github.com/repos/antoniokadid/wappkit-core-graphics/zipball/ce842626aadacff57aa31f5174b428218cc36159",
+                "reference": "ce842626aadacff57aa31f5174b428218cc36159",
                 "shasum": ""
             },
             "require": {
@@ -130,7 +130,7 @@
                 }
             ],
             "description": "A PHP library to process true color images.",
-            "time": "2020-03-29T10:01:50+00:00"
+            "time": "2020-07-13T04:28:17+00:00"
         },
         {
             "name": "antoniokadid/wappkit-core-http",
@@ -138,17 +138,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/antoniokadid/wappkit-core-http.git",
-                "reference": "b07678140dcb7f85be44755211cb3ac34297f595"
+                "reference": "aa6ea36ca49074b08d7e4c2ec24c66e34efe252e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/antoniokadid/wappkit-core-http/zipball/b07678140dcb7f85be44755211cb3ac34297f595",
-                "reference": "b07678140dcb7f85be44755211cb3ac34297f595",
+                "url": "https://api.github.com/repos/antoniokadid/wappkit-core-http/zipball/aa6ea36ca49074b08d7e4c2ec24c66e34efe252e",
+                "reference": "aa6ea36ca49074b08d7e4c2ec24c66e34efe252e",
                 "shasum": ""
             },
             "require": {
-                "antoniokadid/wappkit-core-collections": ">=2.0",
-                "antoniokadid/wappkit-core-text": ">=2.0",
+                "antoniokadid/wappkit-core-collections": "dev-master",
+                "antoniokadid/wappkit-core-text": "dev-master",
                 "ext-curl": "*",
                 "php": ">=7.1"
             },
@@ -174,20 +174,20 @@
                 }
             ],
             "description": "A PHP library to receive and respond to HTTP requests.",
-            "time": "2020-07-10T05:07:29+00:00"
+            "time": "2020-07-13T04:30:23+00:00"
         },
         {
             "name": "antoniokadid/wappkit-core-io",
-            "version": "1.0.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/antoniokadid/wappkit-core-io.git",
-                "reference": "b327ac231787f9123014e3cebd4c9298f8baf32c"
+                "reference": "babb67750291a7f54df138a262bb8d03cbaeef51"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/antoniokadid/wappkit-core-io/zipball/b327ac231787f9123014e3cebd4c9298f8baf32c",
-                "reference": "b327ac231787f9123014e3cebd4c9298f8baf32c",
+                "url": "https://api.github.com/repos/antoniokadid/wappkit-core-io/zipball/babb67750291a7f54df138a262bb8d03cbaeef51",
+                "reference": "babb67750291a7f54df138a262bb8d03cbaeef51",
                 "shasum": ""
             },
             "require": {
@@ -215,20 +215,20 @@
                 }
             ],
             "description": "A PHP library to read and write to files and data streams.",
-            "time": "2020-03-29T13:45:50+00:00"
+            "time": "2020-07-13T04:32:14+00:00"
         },
         {
             "name": "antoniokadid/wappkit-core-mysql",
-            "version": "2.0.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/antoniokadid/wappkit-core-mysql.git",
-                "reference": "d687dd957e855e5a7418a7c53822cbd3bd684bff"
+                "reference": "09e654cc7465db84a8c2fc8d3abab751fd418397"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/antoniokadid/wappkit-core-mysql/zipball/d687dd957e855e5a7418a7c53822cbd3bd684bff",
-                "reference": "d687dd957e855e5a7418a7c53822cbd3bd684bff",
+                "url": "https://api.github.com/repos/antoniokadid/wappkit-core-mysql/zipball/09e654cc7465db84a8c2fc8d3abab751fd418397",
+                "reference": "09e654cc7465db84a8c2fc8d3abab751fd418397",
                 "shasum": ""
             },
             "require": {
@@ -258,11 +258,11 @@
                 }
             ],
             "description": "A PHP library to connect with MySQL.",
-            "time": "2020-03-29T10:29:45+00:00"
+            "time": "2020-07-13T04:33:32+00:00"
         },
         {
             "name": "antoniokadid/wappkit-core-programmability",
-            "version": "1.0.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/antoniokadid/wappkit-core-programmability.git",
@@ -305,7 +305,7 @@
         },
         {
             "name": "antoniokadid/wappkit-core-text",
-            "version": "2.0.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/antoniokadid/wappkit-core-text.git",
@@ -856,16 +856,16 @@
         },
         {
             "name": "phpunit/php-file-iterator",
-            "version": "3.0.3",
+            "version": "3.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-file-iterator.git",
-                "reference": "8e282e5f5e2db5fb2271b3962ad69875c34a6f41"
+                "reference": "25fefc5b19835ca653877fe081644a3f8c1d915e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-file-iterator/zipball/8e282e5f5e2db5fb2271b3962ad69875c34a6f41",
-                "reference": "8e282e5f5e2db5fb2271b3962ad69875c34a6f41",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-file-iterator/zipball/25fefc5b19835ca653877fe081644a3f8c1d915e",
+                "reference": "25fefc5b19835ca653877fe081644a3f8c1d915e",
                 "shasum": ""
             },
             "require": {
@@ -908,7 +908,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-06-26T11:50:37+00:00"
+            "time": "2020-07-11T05:18:21+00:00"
         },
         {
             "name": "phpunit/php-invoker",
@@ -2046,23 +2046,23 @@
         },
         {
             "name": "theseer/tokenizer",
-            "version": "1.1.3",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/theseer/tokenizer.git",
-                "reference": "11336f6f84e16a720dae9d8e6ed5019efa85a0f9"
+                "reference": "75a63c33a8577608444246075ea0af0d052e452a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/theseer/tokenizer/zipball/11336f6f84e16a720dae9d8e6ed5019efa85a0f9",
-                "reference": "11336f6f84e16a720dae9d8e6ed5019efa85a0f9",
+                "url": "https://api.github.com/repos/theseer/tokenizer/zipball/75a63c33a8577608444246075ea0af0d052e452a",
+                "reference": "75a63c33a8577608444246075ea0af0d052e452a",
                 "shasum": ""
             },
             "require": {
                 "ext-dom": "*",
                 "ext-tokenizer": "*",
                 "ext-xmlwriter": "*",
-                "php": "^7.0"
+                "php": "^7.2 || ^8.0"
             },
             "type": "library",
             "autoload": {
@@ -2082,7 +2082,13 @@
                 }
             ],
             "description": "A small library for converting tokenized PHP source code into XML and potentially other formats",
-            "time": "2019-06-13T22:48:21+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/theseer",
+                    "type": "github"
+                }
+            ],
+            "time": "2020-07-12T23:59:07+00:00"
         },
         {
             "name": "webmozart/assert",
@@ -2137,6 +2143,13 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "antoniokadid/wappkit-core-collections": 20,
+        "antoniokadid/wappkit-core-graphics": 20,
+        "antoniokadid/wappkit-core-mysql": 20,
+        "antoniokadid/wappkit-core-text": 20,
+        "antoniokadid/wappkit-core-io": 20,
+        "antoniokadid/wappkit-core-audio": 20,
+        "antoniokadid/wappkit-core-programmability": 20,
         "antoniokadid/wappkit-core-http": 20
     },
     "prefer-stable": false,
