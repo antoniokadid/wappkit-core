@@ -2,6 +2,7 @@
     "name": "antoniokadid/wapp-kit-core",
     "description": "The core of Web Application Kit (WAPPKit)",
     "type": "library",
+    "license": "MIT",
     "authors": [
         {
             "name": "Antonio Kadid",
