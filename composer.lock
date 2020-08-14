@@ -4,24 +4,24 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ef0683071d55fac229e522d78883f93a",
+    "content-hash": "0caa7f11d85a65735fe32fc6e7a2ada6",
     "packages": [
         {
             "name": "antoniokadid/wappkit-core-audio",
-            "version": "dev-master",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/antoniokadid/wappkit-core-audio.git",
-                "reference": "43c2662c9e9a42ed5f525c7bb2d74d210409ca40"
+                "reference": "f1c15e86897d96f4bf351ccea95ba8f5fe46c8f7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/antoniokadid/wappkit-core-audio/zipball/43c2662c9e9a42ed5f525c7bb2d74d210409ca40",
-                "reference": "43c2662c9e9a42ed5f525c7bb2d74d210409ca40",
+                "url": "https://api.github.com/repos/antoniokadid/wappkit-core-audio/zipball/f1c15e86897d96f4bf351ccea95ba8f5fe46c8f7",
+                "reference": "f1c15e86897d96f4bf351ccea95ba8f5fe46c8f7",
                 "shasum": ""
             },
             "require": {
-                "antoniokadid/wappkit-core-io": "dev-master@dev",
+                "antoniokadid/wappkit-core-io": "^1.0",
                 "php": ">=7.1"
             },
             "require-dev": {
@@ -46,20 +46,20 @@
                 }
             ],
             "description": "A PHP library to work with audio files.",
-            "time": "2020-07-31T05:00:48+00:00"
+            "time": "2020-08-11T05:09:55+00:00"
         },
         {
             "name": "antoniokadid/wappkit-core-collections",
-            "version": "dev-master",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/antoniokadid/wappkit-core-collections.git",
-                "reference": "a561d4771c877253d81ad714e6cb82d3d9074ccc"
+                "reference": "1343cbb3df222691958364760706da53d7d8f4aa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/antoniokadid/wappkit-core-collections/zipball/a561d4771c877253d81ad714e6cb82d3d9074ccc",
-                "reference": "a561d4771c877253d81ad714e6cb82d3d9074ccc",
+                "url": "https://api.github.com/repos/antoniokadid/wappkit-core-collections/zipball/1343cbb3df222691958364760706da53d7d8f4aa",
+                "reference": "1343cbb3df222691958364760706da53d7d8f4aa",
                 "shasum": ""
             },
             "require": {
@@ -88,20 +88,20 @@
                 }
             ],
             "description": "A PHP library to define collections of objects.",
-            "time": "2020-07-13T04:27:26+00:00"
+            "time": "2020-08-11T05:12:51+00:00"
         },
         {
             "name": "antoniokadid/wappkit-core-graphics",
-            "version": "dev-master",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/antoniokadid/wappkit-core-graphics.git",
-                "reference": "ce842626aadacff57aa31f5174b428218cc36159"
+                "reference": "605d2cf239f33b76d326f75f7d6401f77534a2e2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/antoniokadid/wappkit-core-graphics/zipball/ce842626aadacff57aa31f5174b428218cc36159",
-                "reference": "ce842626aadacff57aa31f5174b428218cc36159",
+                "url": "https://api.github.com/repos/antoniokadid/wappkit-core-graphics/zipball/605d2cf239f33b76d326f75f7d6401f77534a2e2",
+                "reference": "605d2cf239f33b76d326f75f7d6401f77534a2e2",
                 "shasum": ""
             },
             "require": {
@@ -130,25 +130,25 @@
                 }
             ],
             "description": "A PHP library to process true color images.",
-            "time": "2020-07-13T04:28:17+00:00"
+            "time": "2020-08-11T05:17:56+00:00"
         },
         {
             "name": "antoniokadid/wappkit-core-http",
-            "version": "dev-master",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/antoniokadid/wappkit-core-http.git",
-                "reference": "5a15f01470d61ca4a3451b142fa67e62cd4ba624"
+                "reference": "139e3ab503ac76d0db124f3256b761dceb4cf131"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/antoniokadid/wappkit-core-http/zipball/5a15f01470d61ca4a3451b142fa67e62cd4ba624",
-                "reference": "5a15f01470d61ca4a3451b142fa67e62cd4ba624",
+                "url": "https://api.github.com/repos/antoniokadid/wappkit-core-http/zipball/139e3ab503ac76d0db124f3256b761dceb4cf131",
+                "reference": "139e3ab503ac76d0db124f3256b761dceb4cf131",
                 "shasum": ""
             },
             "require": {
-                "antoniokadid/wappkit-core-collections": "dev-master@dev",
-                "antoniokadid/wappkit-core-text": "dev-master@dev",
+                "antoniokadid/wappkit-core-collections": "^1",
+                "antoniokadid/wappkit-core-text": "^1",
                 "ext-curl": "*",
                 "php": ">=7.1"
             },
@@ -174,20 +174,20 @@
                 }
             ],
             "description": "A PHP library to receive and respond to HTTP requests.",
-            "time": "2020-07-31T05:00:37+00:00"
+            "time": "2020-08-11T05:54:32+00:00"
         },
         {
             "name": "antoniokadid/wappkit-core-io",
-            "version": "dev-master",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/antoniokadid/wappkit-core-io.git",
-                "reference": "babb67750291a7f54df138a262bb8d03cbaeef51"
+                "reference": "47367831d5580ffa21fa91a7e7d9684ddb4f9179"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/antoniokadid/wappkit-core-io/zipball/babb67750291a7f54df138a262bb8d03cbaeef51",
-                "reference": "babb67750291a7f54df138a262bb8d03cbaeef51",
+                "url": "https://api.github.com/repos/antoniokadid/wappkit-core-io/zipball/47367831d5580ffa21fa91a7e7d9684ddb4f9179",
+                "reference": "47367831d5580ffa21fa91a7e7d9684ddb4f9179",
                 "shasum": ""
             },
             "require": {
@@ -215,20 +215,20 @@
                 }
             ],
             "description": "A PHP library to read and write to files and data streams.",
-            "time": "2020-07-13T04:32:14+00:00"
+            "time": "2020-08-11T05:45:04+00:00"
         },
         {
             "name": "antoniokadid/wappkit-core-mysql",
-            "version": "dev-master",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/antoniokadid/wappkit-core-mysql.git",
-                "reference": "09e654cc7465db84a8c2fc8d3abab751fd418397"
+                "reference": "847646aeab244a3fab9f14a8d4682aa335afb28b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/antoniokadid/wappkit-core-mysql/zipball/09e654cc7465db84a8c2fc8d3abab751fd418397",
-                "reference": "09e654cc7465db84a8c2fc8d3abab751fd418397",
+                "url": "https://api.github.com/repos/antoniokadid/wappkit-core-mysql/zipball/847646aeab244a3fab9f14a8d4682aa335afb28b",
+                "reference": "847646aeab244a3fab9f14a8d4682aa335afb28b",
                 "shasum": ""
             },
             "require": {
@@ -258,25 +258,25 @@
                 }
             ],
             "description": "A PHP library to connect with MySQL.",
-            "time": "2020-07-13T04:33:32+00:00"
+            "time": "2020-08-11T05:41:40+00:00"
         },
         {
             "name": "antoniokadid/wappkit-core-programmability",
-            "version": "dev-master",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/antoniokadid/wappkit-core-programmability.git",
-                "reference": "0ffe31ee107586f95d82043e4102bf8a82bf6505"
+                "reference": "60d7b413765d070e10bc624df6f8ee149965d1e3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/antoniokadid/wappkit-core-programmability/zipball/0ffe31ee107586f95d82043e4102bf8a82bf6505",
-                "reference": "0ffe31ee107586f95d82043e4102bf8a82bf6505",
+                "url": "https://api.github.com/repos/antoniokadid/wappkit-core-programmability/zipball/60d7b413765d070e10bc624df6f8ee149965d1e3",
+                "reference": "60d7b413765d070e10bc624df6f8ee149965d1e3",
                 "shasum": ""
             },
             "require": {
-                "antoniokadid/wappkit-core-collections": "dev-master",
-                "antoniokadid/wappkit-core-io": "dev-master",
+                "antoniokadid/wappkit-core-collections": "^1",
+                "antoniokadid/wappkit-core-io": "^1",
                 "php": ">=7.1"
             },
             "require-dev": {
@@ -301,20 +301,20 @@
                 }
             ],
             "description": "A PHP library that allows user code to be executed and produce results similar to a template engine.",
-            "time": "2020-07-13T04:34:43+00:00"
+            "time": "2020-08-11T05:32:25+00:00"
         },
         {
             "name": "antoniokadid/wappkit-core-text",
-            "version": "dev-master",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/antoniokadid/wappkit-core-text.git",
-                "reference": "d3689a3ed853f3d7097d1d7b530ff5290b65a74f"
+                "reference": "cd5b3bdc6773e8ec13872c6c67f430830eea980d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/antoniokadid/wappkit-core-text/zipball/d3689a3ed853f3d7097d1d7b530ff5290b65a74f",
-                "reference": "d3689a3ed853f3d7097d1d7b530ff5290b65a74f",
+                "url": "https://api.github.com/repos/antoniokadid/wappkit-core-text/zipball/cd5b3bdc6773e8ec13872c6c67f430830eea980d",
+                "reference": "cd5b3bdc6773e8ec13872c6c67f430830eea980d",
                 "shasum": ""
             },
             "require": {
@@ -344,7 +344,7 @@
                 }
             ],
             "description": "A PHP library to work with text.",
-            "time": "2020-07-13T04:35:52+00:00"
+            "time": "2020-08-11T05:26:52+00:00"
         }
     ],
     "packages-dev": [
@@ -473,29 +473,82 @@
             "time": "2020-06-29T13:22:24+00:00"
         },
         {
-            "name": "phar-io/manifest",
-            "version": "1.0.3",
+            "name": "nikic/php-parser",
+            "version": "v4.8.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/phar-io/manifest.git",
-                "reference": "7761fcacf03b4d4f16e7ccb606d4879ca431fcf4"
+                "url": "https://github.com/nikic/PHP-Parser.git",
+                "reference": "8c58eb4cd4f3883f82611abeac2efbc3dbed787e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phar-io/manifest/zipball/7761fcacf03b4d4f16e7ccb606d4879ca431fcf4",
-                "reference": "7761fcacf03b4d4f16e7ccb606d4879ca431fcf4",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/8c58eb4cd4f3883f82611abeac2efbc3dbed787e",
+                "reference": "8c58eb4cd4f3883f82611abeac2efbc3dbed787e",
+                "shasum": ""
+            },
+            "require": {
+                "ext-tokenizer": "*",
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "ircmaxell/php-yacc": "^0.0.6",
+                "phpunit/phpunit": "^6.5 || ^7.0 || ^8.0 || ^9.0"
+            },
+            "bin": [
+                "bin/php-parse"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.8-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "PhpParser\\": "lib/PhpParser"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Nikita Popov"
+                }
+            ],
+            "description": "A PHP parser written in PHP",
+            "keywords": [
+                "parser",
+                "php"
+            ],
+            "time": "2020-08-09T10:23:20+00:00"
+        },
+        {
+            "name": "phar-io/manifest",
+            "version": "2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phar-io/manifest.git",
+                "reference": "85265efd3af7ba3ca4b2a2c34dbfc5788dd29133"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phar-io/manifest/zipball/85265efd3af7ba3ca4b2a2c34dbfc5788dd29133",
+                "reference": "85265efd3af7ba3ca4b2a2c34dbfc5788dd29133",
                 "shasum": ""
             },
             "require": {
                 "ext-dom": "*",
                 "ext-phar": "*",
-                "phar-io/version": "^2.0",
-                "php": "^5.6 || ^7.0"
+                "ext-xmlwriter": "*",
+                "phar-io/version": "^3.0.1",
+                "php": "^7.2 || ^8.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0.x-dev"
+                    "dev-master": "2.0.x-dev"
                 }
             },
             "autoload": {
@@ -525,24 +578,24 @@
                 }
             ],
             "description": "Component for reading phar.io manifest information from a PHP Archive (PHAR)",
-            "time": "2018-07-08T19:23:20+00:00"
+            "time": "2020-06-27T14:33:11+00:00"
         },
         {
             "name": "phar-io/version",
-            "version": "2.0.1",
+            "version": "3.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phar-io/version.git",
-                "reference": "45a2ec53a73c70ce41d55cedef9063630abaf1b6"
+                "reference": "c6bb6825def89e0a32220f88337f8ceaf1975fa0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phar-io/version/zipball/45a2ec53a73c70ce41d55cedef9063630abaf1b6",
-                "reference": "45a2ec53a73c70ce41d55cedef9063630abaf1b6",
+                "url": "https://api.github.com/repos/phar-io/version/zipball/c6bb6825def89e0a32220f88337f8ceaf1975fa0",
+                "reference": "c6bb6825def89e0a32220f88337f8ceaf1975fa0",
                 "shasum": ""
             },
             "require": {
-                "php": "^5.6 || ^7.0"
+                "php": "^7.2 || ^8.0"
             },
             "type": "library",
             "autoload": {
@@ -572,7 +625,7 @@
                 }
             ],
             "description": "Library for handling version information and constraints",
-            "time": "2018-07-08T19:19:57+00:00"
+            "time": "2020-06-27T14:39:04+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
@@ -785,32 +838,35 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "8.0.2",
+            "version": "9.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "ca6647ffddd2add025ab3f21644a441d7c146cdc"
+                "reference": "4422fca28c3634e2de8c7c373af97a104dd1a45f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/ca6647ffddd2add025ab3f21644a441d7c146cdc",
-                "reference": "ca6647ffddd2add025ab3f21644a441d7c146cdc",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/4422fca28c3634e2de8c7c373af97a104dd1a45f",
+                "reference": "4422fca28c3634e2de8c7c373af97a104dd1a45f",
                 "shasum": ""
             },
             "require": {
                 "ext-dom": "*",
+                "ext-libxml": "*",
                 "ext-xmlwriter": "*",
-                "php": "^7.3",
-                "phpunit/php-file-iterator": "^3.0",
-                "phpunit/php-text-template": "^2.0",
-                "phpunit/php-token-stream": "^4.0",
-                "sebastian/code-unit-reverse-lookup": "^2.0",
-                "sebastian/environment": "^5.0",
-                "sebastian/version": "^3.0",
-                "theseer/tokenizer": "^1.1.3"
+                "nikic/php-parser": "^4.8",
+                "php": "^7.3 || ^8.0",
+                "phpunit/php-file-iterator": "^3.0.3",
+                "phpunit/php-text-template": "^2.0.2",
+                "sebastian/code-unit-reverse-lookup": "^2.0.2",
+                "sebastian/complexity": "^2.0",
+                "sebastian/environment": "^5.1.2",
+                "sebastian/lines-of-code": "^1.0",
+                "sebastian/version": "^3.0.1",
+                "theseer/tokenizer": "^1.2.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^9.0"
+                "phpunit/phpunit": "^9.3"
             },
             "suggest": {
                 "ext-pcov": "*",
@@ -819,7 +875,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "8.0-dev"
+                    "dev-master": "9.1-dev"
                 }
             },
             "autoload": {
@@ -851,7 +907,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-05-23T08:02:54+00:00"
+            "time": "2020-08-13T15:04:53+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -911,16 +967,16 @@
         },
         {
             "name": "phpunit/php-invoker",
-            "version": "3.0.2",
+            "version": "3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-invoker.git",
-                "reference": "f6eedfed1085dd1f4c599629459a0277d25f9a66"
+                "reference": "7a85b66acc48cacffdf87dadd3694e7123674298"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-invoker/zipball/f6eedfed1085dd1f4c599629459a0277d25f9a66",
-                "reference": "f6eedfed1085dd1f4c599629459a0277d25f9a66",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-invoker/zipball/7a85b66acc48cacffdf87dadd3694e7123674298",
+                "reference": "7a85b66acc48cacffdf87dadd3694e7123674298",
                 "shasum": ""
             },
             "require": {
@@ -936,7 +992,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.0-dev"
+                    "dev-master": "3.1-dev"
                 }
             },
             "autoload": {
@@ -966,7 +1022,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-06-26T11:53:53+00:00"
+            "time": "2020-08-06T07:04:15+00:00"
         },
         {
             "name": "phpunit/php-text-template",
@@ -1079,72 +1135,17 @@
             "time": "2020-06-26T11:58:13+00:00"
         },
         {
-            "name": "phpunit/php-token-stream",
-            "version": "4.0.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/sebastianbergmann/php-token-stream.git",
-                "reference": "5672711b6b07b14d5ab694e700c62eeb82fcf374"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-token-stream/zipball/5672711b6b07b14d5ab694e700c62eeb82fcf374",
-                "reference": "5672711b6b07b14d5ab694e700c62eeb82fcf374",
-                "shasum": ""
-            },
-            "require": {
-                "ext-tokenizer": "*",
-                "php": "^7.3 || ^8.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^9.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "4.0-dev"
-                }
-            },
-            "autoload": {
-                "classmap": [
-                    "src/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Sebastian Bergmann",
-                    "email": "sebastian@phpunit.de"
-                }
-            ],
-            "description": "Wrapper around PHP's tokenizer extension.",
-            "homepage": "https://github.com/sebastianbergmann/php-token-stream/",
-            "keywords": [
-                "tokenizer"
-            ],
-            "funding": [
-                {
-                    "url": "https://github.com/sebastianbergmann",
-                    "type": "github"
-                }
-            ],
-            "time": "2020-06-27T06:36:25+00:00"
-        },
-        {
             "name": "phpunit/phpunit",
-            "version": "9.2.6",
+            "version": "9.3.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "1c6a9e4312e209e659f1fce3ce88dd197c2448f6"
+                "reference": "c638a0cac77347980352485912de48c99b42ad00"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/1c6a9e4312e209e659f1fce3ce88dd197c2448f6",
-                "reference": "1c6a9e4312e209e659f1fce3ce88dd197c2448f6",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/c638a0cac77347980352485912de48c99b42ad00",
+                "reference": "c638a0cac77347980352485912de48c99b42ad00",
                 "shasum": ""
             },
             "require": {
@@ -1155,30 +1156,30 @@
                 "ext-mbstring": "*",
                 "ext-xml": "*",
                 "ext-xmlwriter": "*",
-                "myclabs/deep-copy": "^1.9.5",
-                "phar-io/manifest": "^1.0.3",
-                "phar-io/version": "^2.0.1",
-                "php": "^7.3",
-                "phpspec/prophecy": "^1.10.3",
-                "phpunit/php-code-coverage": "^8.0.2",
-                "phpunit/php-file-iterator": "^3.0.3",
-                "phpunit/php-invoker": "^3.0.2",
+                "myclabs/deep-copy": "^1.10.1",
+                "phar-io/manifest": "^2.0.1",
+                "phar-io/version": "^3.0.2",
+                "php": "^7.3 || ^8.0",
+                "phpspec/prophecy": "^1.11.1",
+                "phpunit/php-code-coverage": "^9.1.1",
+                "phpunit/php-file-iterator": "^3.0.4",
+                "phpunit/php-invoker": "^3.1",
                 "phpunit/php-text-template": "^2.0.2",
                 "phpunit/php-timer": "^5.0.1",
                 "sebastian/code-unit": "^1.0.5",
                 "sebastian/comparator": "^4.0.3",
-                "sebastian/diff": "^4.0.1",
+                "sebastian/diff": "^4.0.2",
                 "sebastian/environment": "^5.1.2",
                 "sebastian/exporter": "^4.0.2",
-                "sebastian/global-state": "^4.0",
+                "sebastian/global-state": "^5.0",
                 "sebastian/object-enumerator": "^4.0.2",
                 "sebastian/resource-operations": "^3.0.2",
-                "sebastian/type": "^2.1.1",
+                "sebastian/type": "^2.2.1",
                 "sebastian/version": "^3.0.1"
             },
             "require-dev": {
                 "ext-pdo": "*",
-                "phpspec/prophecy-phpunit": "^2.0"
+                "phpspec/prophecy-phpunit": "^2.0.1"
             },
             "suggest": {
                 "ext-soap": "*",
@@ -1190,7 +1191,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "9.2-dev"
+                    "dev-master": "9.3-dev"
                 }
             },
             "autoload": {
@@ -1229,7 +1230,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-07-13T17:55:55+00:00"
+            "time": "2020-08-11T15:36:12+00:00"
         },
         {
             "name": "sebastian/code-unit",
@@ -1403,6 +1404,59 @@
                 }
             ],
             "time": "2020-06-26T12:05:46+00:00"
+        },
+        {
+            "name": "sebastian/complexity",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/complexity.git",
+                "reference": "33fcd6a26656c6546f70871244ecba4b4dced097"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sebastianbergmann/complexity/zipball/33fcd6a26656c6546f70871244ecba4b4dced097",
+                "reference": "33fcd6a26656c6546f70871244ecba4b4dced097",
+                "shasum": ""
+            },
+            "require": {
+                "nikic/php-parser": "^4.7",
+                "php": "^7.3 || ^8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.2"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Sebastian Bergmann",
+                    "email": "sebastian@phpunit.de",
+                    "role": "lead"
+                }
+            ],
+            "description": "Library for calculating the complexity of PHP code units",
+            "homepage": "https://github.com/sebastianbergmann/complexity",
+            "funding": [
+                {
+                    "url": "https://github.com/sebastianbergmann",
+                    "type": "github"
+                }
+            ],
+            "time": "2020-07-25T14:01:34+00:00"
         },
         {
             "name": "sebastian/diff",
@@ -1600,26 +1654,26 @@
         },
         {
             "name": "sebastian/global-state",
-            "version": "4.0.0",
+            "version": "5.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/global-state.git",
-                "reference": "bdb1e7c79e592b8c82cb1699be3c8743119b8a72"
+                "reference": "22ae663c951bdc39da96603edc3239ed3a299097"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/global-state/zipball/bdb1e7c79e592b8c82cb1699be3c8743119b8a72",
-                "reference": "bdb1e7c79e592b8c82cb1699be3c8743119b8a72",
+                "url": "https://api.github.com/repos/sebastianbergmann/global-state/zipball/22ae663c951bdc39da96603edc3239ed3a299097",
+                "reference": "22ae663c951bdc39da96603edc3239ed3a299097",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.3",
+                "php": "^7.3 || ^8.0",
                 "sebastian/object-reflector": "^2.0",
                 "sebastian/recursion-context": "^4.0"
             },
             "require-dev": {
                 "ext-dom": "*",
-                "phpunit/phpunit": "^9.0"
+                "phpunit/phpunit": "^9.3"
             },
             "suggest": {
                 "ext-uopz": "*"
@@ -1627,7 +1681,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.0-dev"
+                    "dev-master": "5.0-dev"
                 }
             },
             "autoload": {
@@ -1650,7 +1704,66 @@
             "keywords": [
                 "global state"
             ],
-            "time": "2020-02-07T06:11:37+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/sebastianbergmann",
+                    "type": "github"
+                }
+            ],
+            "time": "2020-08-07T04:09:03+00:00"
+        },
+        {
+            "name": "sebastian/lines-of-code",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/lines-of-code.git",
+                "reference": "e02bf626f404b5daec382a7b8a6a4456e49017e5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sebastianbergmann/lines-of-code/zipball/e02bf626f404b5daec382a7b8a6a4456e49017e5",
+                "reference": "e02bf626f404b5daec382a7b8a6a4456e49017e5",
+                "shasum": ""
+            },
+            "require": {
+                "nikic/php-parser": "^4.6",
+                "php": "^7.3 || ^8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.2"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Sebastian Bergmann",
+                    "email": "sebastian@phpunit.de",
+                    "role": "lead"
+                }
+            ],
+            "description": "Library for counting the lines of code in PHP source code",
+            "homepage": "https://github.com/sebastianbergmann/lines-of-code",
+            "funding": [
+                {
+                    "url": "https://github.com/sebastianbergmann",
+                    "type": "github"
+                }
+            ],
+            "time": "2020-07-22T18:33:42+00:00"
         },
         {
             "name": "sebastian/object-enumerator",
@@ -1969,7 +2082,7 @@
         },
         {
             "name": "symfony/polyfill-ctype",
-            "version": "v1.18.0",
+            "version": "v1.18.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-ctype.git",
@@ -2141,16 +2254,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "antoniokadid/wappkit-core-collections": 20,
-        "antoniokadid/wappkit-core-graphics": 20,
-        "antoniokadid/wappkit-core-mysql": 20,
-        "antoniokadid/wappkit-core-text": 20,
-        "antoniokadid/wappkit-core-io": 20,
-        "antoniokadid/wappkit-core-audio": 20,
-        "antoniokadid/wappkit-core-programmability": 20,
-        "antoniokadid/wappkit-core-http": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
