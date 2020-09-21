@@ -19,7 +19,7 @@ class JSONResponse extends GenericResponse implements ArrayAccess
 
     /**
      * JSONResponse constructor.
-     *
+     *`
      * @param array $data
      */
     public function __construct(array $data = [])
