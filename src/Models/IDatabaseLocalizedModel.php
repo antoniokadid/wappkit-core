@@ -6,7 +6,7 @@ use AntonioKadid\WAPPKitCore\DAL\UnitOfWork;
 use AntonioKadid\WAPPKitCore\Localization\ILanguage;
 
 /**
- * Interface IDatabaseLocalizedModel
+ * Interface IDatabaseLocalizedModel.
  *
  * @package AntonioKadid\WAPPKitCore\Models
  */
@@ -14,24 +14,24 @@ interface IDatabaseLocalizedModel
 {
     /**
      * @param UnitOfWork $unitOfWork
-     * @param ILanguage $language
+     * @param ILanguage  $language
      *
      * @return array
      */
-    static function all(UnitOfWork $unitOfWork, ILanguage $language): array;
+    public static function all(UnitOfWork $unitOfWork, ILanguage $language): array;
 
     /**
      * @return bool
      */
-    function add(): bool;
+    public function add(): bool;
 
     /**
      * @return bool
      */
-    function delete(): bool;
+    public function delete(): bool;
 
     /**
      * @return bool
      */
-    function update(): bool;
+    public function update(): bool;
 }

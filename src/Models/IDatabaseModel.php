@@ -5,7 +5,7 @@ namespace AntonioKadid\WAPPKitCore\Models;
 use AntonioKadid\WAPPKitCore\DAL\UnitOfWork;
 
 /**
- * Interface IDatabaseModel
+ * Interface IDatabaseModel.
  *
  * @package AntonioKadid\WAPPKitCore\Models
  */
@@ -16,20 +16,20 @@ interface IDatabaseModel
      *
      * @return array
      */
-    static function all(UnitOfWork $unitOfWork): array;
+    public static function all(UnitOfWork $unitOfWork): array;
 
     /**
      * @return bool
      */
-    function add(): bool;
+    public function add(): bool;
 
     /**
      * @return bool
      */
-    function delete(): bool;
+    public function delete(): bool;
 
     /**
      * @return bool
      */
-    function update(): bool;
+    public function update(): bool;
 }

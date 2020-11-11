@@ -8,17 +8,17 @@ use AntonioKadid\WAPPKitCore\Exceptions\SettingsException;
 use AntonioKadid\WAPPKitCore\Text\JSON\JSONDecoder;
 
 /**
- * Class Settings
+ * Class Settings.
  *
  * @package AntonioKadid\WAPPKitCore
  */
 class Settings extends Map
 {
-    /** @var Settings|NULL */
-    private static $_settings = NULL;
+    /** @var null|Settings */
+    private static $settings = null;
 
     /** @var bool */
-    private $_initialized = FALSE;
+    private $initialized = false;
 
     /**
      * Settings constructor.
@@ -33,12 +33,13 @@ class Settings extends Map
     /**
      * @return Settings
      */
-    public static function Get(): Settings
+    public static function get(): Settings
     {
-        if (self::$_settings == NULL)
-            self::$_settings = new Settings();
+        if (self::$settings == null) {
+            self::$settings = new Settings();
+        }
 
-        return self::$_settings;
+        return self::$settings;
     }
 
     /**
@@ -46,7 +47,44 @@ class Settings extends Map
      */
     public function initialized(): bool
     {
-        return $this->_initialized;
+        return $this->initialized;
+    }
+
+    /**
+     * @param string $filepath
+     *
+     * @throws DevelopmentException
+     * @throws Text\Exceptions\DecodingException
+     *
+     * @return $this
+     */
+    public function loadFromFile(string $filepath): Settings
+    {
+        if (!file_exists($filepath) || !is_readable($filepath)) {
+            throw new DevelopmentException('Unable to load settings file.');
+        }
+
+        return $this->loadFromJson(file_get_contents($filepath));
+    }
+
+    /**
+     * @param string $json
+     *
+     * @throws DevelopmentException
+     * @throws Text\Exceptions\DecodingException
+     *
+     * @return $this
+     */
+    public function loadFromJson(string $json): Settings
+    {
+        $result = JSONDecoder::default($json);
+        if ($result == null) {
+            throw new DevelopmentException('Unable to load settings file.');
+        }
+
+        $this->source = $result;
+
+        return $this;
     }
 
     /**
@@ -54,41 +92,8 @@ class Settings extends Map
      */
     public function throwIfNotInitialized(): void
     {
-        if (!$this->initialized())
+        if (!$this->initialized()) {
             throw new SettingsException('Settings not initialized.');
-    }
-
-    /**
-     * @param string $filepath
-     *
-     * @return $this
-     * @throws DevelopmentException
-     * @throws Text\Exceptions\DecodingException
-     */
-    public function loadFromFile(string $filepath): Settings
-    {
-        if (!file_exists($filepath) || !is_readable($filepath))
-            throw new DevelopmentException('Unable to load settings file.');
-
-        return $this->loadFromJson(file_get_contents($filepath));
-    }
-
-
-    /**
-     * @param string $json
-     *
-     * @return $this
-     * @throws DevelopmentException
-     * @throws Text\Exceptions\DecodingException
-     */
-    public function loadFromJson(string $json): Settings
-    {
-        $result = JSONDecoder::default($json);
-        if ($result == NULL)
-            throw new DevelopmentException('Unable to load settings file.');
-
-        $this->source = $result;
-
-        return $this;
+        }
     }
 }

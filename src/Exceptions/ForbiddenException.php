@@ -7,7 +7,7 @@ use AntonioKadid\WAPPKitCore\Localization\ILanguage;
 use Throwable;
 
 /**
- * Class ForbiddenException
+ * Class ForbiddenException.
  *
  * @package AntonioKadid\WAPPKitCore\Exceptions
  */
@@ -17,10 +17,10 @@ class ForbiddenException extends LocalizedException
      * ForbiddenException constructor.
      *
      * @param string         $message
-     * @param ILanguage|null $language
-     * @param Throwable|null $previous
+     * @param null|ILanguage $language
+     * @param null|Throwable $previous
      */
-    public function __construct(string $message = '', ILanguage $language = NULL, Throwable $previous = NULL)
+    public function __construct(string $message = '', ILanguage $language = null, Throwable $previous = null)
     {
         parent::__construct($message, Status::Forbidden, $language, $previous);
     }

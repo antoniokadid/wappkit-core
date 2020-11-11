@@ -6,14 +6,14 @@ use AntonioKadid\WAPPKitCore\Database\MySQL\Exceptions\MySQLException;
 use AntonioKadid\WAPPKitCore\Database\MySQL\IMySQLConnection;
 
 /**
- * Class UnitOfWork
+ * Class UnitOfWork.
  *
  * @package AntonioKadid\WAPPKitCore\DAL
  */
 abstract class UnitOfWork
 {
     /** @var IMySQLConnection */
-    protected $_db = NULL;
+    protected $db = null;
 
     /**
      * Generate an ID.
@@ -21,10 +21,19 @@ abstract class UnitOfWork
      * @param string $generatorName
      * @param int    $increment
      *
-     * @return int
      * @throws MySQLException
+     *
+     * @return int
      */
-    public abstract function generateId(string $generatorName, int $increment = 1): int;
+    abstract public function generateId(string $generatorName, int $increment = 1): int;
+
+    /**
+     * @return IMySQLConnection
+     */
+    public function getDb(): IMySQLConnection
+    {
+        return $this->db;
+    }
 
     /**
      * Reset an ID to a value.
@@ -32,16 +41,9 @@ abstract class UnitOfWork
      * @param string $generatorName
      * @param int    $newValue
      *
-     * @return bool
      * @throws MySQLException
+     *
+     * @return bool
      */
-    public abstract function resetId(string $generatorName, int $newValue = 0): bool;
-
-    /**
-     * @return IMySQLConnection
-     */
-    public function getDb(): IMySQLConnection
-    {
-        return $this->_db;
-    }
+    abstract public function resetId(string $generatorName, int $newValue = 0): bool;
 }

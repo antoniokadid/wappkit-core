@@ -9,63 +9,68 @@ use AntonioKadid\WAPPKitCore\Text\Exceptions\DecodingException;
 use AntonioKadid\WAPPKitCore\Text\JSON\JSONDecoder;
 
 /**
- * Class Module
+ * Class Module.
  *
  * @package AntonioKadid\WAPPKitCore\Modules
  */
 class Module
 {
-    const SETTINGS_MODULES_ROOT_PATH = 'ModulesRootPath';
-    const MODULE_FILENAME = 'modules.json';
+    public const MODULE_FILENAME            = 'modules.json';
+    public const SETTINGS_MODULES_ROOT_PATH = 'ModulesRootPath';
 
     /**
-     * Module constructor
+     * Module constructor.
      */
     public function __construct()
     {
     }
 
+    /** @var array */
+    public $dependencies = [];
     /** @var string */
     public $identifier;
     /** @var string */
     public $name;
     /** @var float */
     public $version;
-    /** @var array */
-    public $dependencies = [];
 
     /**
      * Get the list of the available module information.
      *
      * @param Settings $settings
      *
-     * @return array
      * @throws SettingsException
      * @throws DevelopmentException
      * @throws DecodingException
+     *
+     * @return array
      */
     public static function all(Settings $settings): array
     {
         $settings->throwIfNotInitialized();
 
         $modulesRootPath = $settings->getString(self::SETTINGS_MODULES_ROOT_PATH);
-        if ($modulesRootPath == NULL)
+        if ($modulesRootPath == null) {
             throw new DevelopmentException('The modules root path is not defined in settings.');
+        }
 
-        if (!file_exists($modulesRootPath))
+        if (!file_exists($modulesRootPath)) {
             throw new DevelopmentException('The modules root path does not exist.');
+        }
 
         $moduleNames = scandir($modulesRootPath);
-        if ($moduleNames === FALSE)
+        if ($moduleNames === false) {
             throw new DevelopmentException('Unable to retrieve the list of directories under modules root path.');
+        }
 
         $moduleNames = array_diff($moduleNames, ['.', '..']);
 
         $modules = [];
         foreach ($moduleNames as $moduleName) {
             $module = self::findByName($settings, $moduleName);
-            if ($module == NULL)
+            if ($module == null) {
                 continue;
+            }
 
             $modules[] = $module;
         }
@@ -79,22 +84,25 @@ class Module
      * @param Settings $settings
      * @param string   $moduleName
      *
-     * @return Module|null
      * @throws DecodingException
      * @throws SettingsException
      * @throws DevelopmentException
+     *
+     * @return null|Module
      */
     public static function findByName(Settings $settings, string $moduleName): ?Module
     {
         $settings->throwIfNotInitialized();
 
         $modulesRootPath = $settings->getString(self::SETTINGS_MODULES_ROOT_PATH);
-        if ($modulesRootPath == NULL)
+        if ($modulesRootPath == null) {
             throw new DevelopmentException('The modules root path is not defined in settings.');
+        }
 
         $path = implode(DIRECTORY_SEPARATOR, [$modulesRootPath, $moduleName, self::MODULE_FILENAME]);
-        if (!file_exists($path) || !is_readable($path))
-            return NULL;
+        if (!file_exists($path) || !is_readable($path)) {
+            return null;
+        }
 
         $module = new Module();
         $module->loadFromFile($path);
@@ -105,14 +113,16 @@ class Module
     /**
      * @param string $filepath
      *
-     * @return $this
      * @throws DecodingException
      * @throws DevelopmentException
+     *
+     * @return $this
      */
     public function loadFromFile(string $filepath): Module
     {
-        if (!file_exists($filepath) || !is_readable($filepath))
+        if (!file_exists($filepath) || !is_readable($filepath)) {
             throw new DevelopmentException('Unable to load module info.');
+        }
 
         $this->loadFromJson(file_get_contents($filepath));
 
@@ -122,23 +132,26 @@ class Module
     /**
      * @param string $json
      *
-     * @return $this
      * @throws DecodingException
      * @throws DevelopmentException
+     *
+     * @return $this
      */
     public function loadFromJson(string $json): Module
     {
         $result = JSONDecoder::default($json);
-        if ($result == NULL)
+        if ($result == null) {
             throw new DevelopmentException('Unable to load module info.');
+        }
 
         $this->identifier = $result['id'];
-        $this->name = $result['name'];
-        $this->version = floatval($result['version']);
-        if (is_array($result['dependencies']))
+        $this->name       = $result['name'];
+        $this->version    = floatval($result['version']);
+        if (is_array($result['dependencies'])) {
             $this->dependencies = $result['dependencies'];
-        else
+        } else {
             $this->dependencies = [];
+        }
 
         return $this;
     }

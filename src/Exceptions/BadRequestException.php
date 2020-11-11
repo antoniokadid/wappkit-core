@@ -7,28 +7,32 @@ use AntonioKadid\WAPPKitCore\Localization\ILanguage;
 use Throwable;
 
 /**
- * Class BadRequestException
+ * Class BadRequestException.
  *
  * @package AntonioKadid\WAPPKitCore\Exceptions
  */
 class BadRequestException extends LocalizedException
 {
     /** @var string */
-    private $_field;
+    private $field;
 
     /**
      * BadRequestException constructor.
      *
      * @param string         $message
      * @param string         $field
-     * @param ILanguage|null $language
-     * @param Throwable|null $previous
+     * @param null|ILanguage $language
+     * @param null|Throwable $previous
      */
-    public function __construct(string $message = '', string $field = '', ILanguage $language = NULL, Throwable $previous = NULL)
-    {
+    public function __construct(
+        string $message = '',
+        string $field = '',
+        ILanguage $language = null,
+        Throwable $previous = null
+    ) {
         parent::__construct($message, Status::BadRequest, $language, $previous);
 
-        $this->_field = $field;
+        $this->field = $field;
     }
 
     /**
@@ -36,6 +40,6 @@ class BadRequestException extends LocalizedException
      */
     public function getField(): string
     {
-        return $this->_field;
+        return $this->field;
     }
 }

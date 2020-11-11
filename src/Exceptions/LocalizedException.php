@@ -7,28 +7,28 @@ use Exception;
 use Throwable;
 
 /**
- * Class LocalizedException
+ * Class LocalizedException.
  *
  * @package AntonioKadid\WAPPKitCore\Exceptions
  */
 class LocalizedException extends Exception
 {
     /** @var ILanguage */
-    private $_language;
+    private $language;
 
     /**
      * LocalizedException constructor.
      *
      * @param string         $message
      * @param int            $code
-     * @param ILanguage|null $language
-     * @param Throwable|null $previous
+     * @param null|ILanguage $language
+     * @param null|Throwable $previous
      */
-    public function __construct($message = '', $code = 0, ILanguage $language = NULL, Throwable $previous = NULL)
+    public function __construct($message = '', $code = 0, ILanguage $language = null, Throwable $previous = null)
     {
         parent::__construct($message, $code, $previous);
 
-        $this->_language = $language;
+        $this->language = $language;
     }
 
     /**
@@ -36,6 +36,6 @@ class LocalizedException extends Exception
      */
     public function getLanguage(): ILanguage
     {
-        return $this->_language;
+        return $this->language;
     }
 }

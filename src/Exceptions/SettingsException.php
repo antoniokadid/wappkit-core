@@ -3,7 +3,7 @@
 namespace AntonioKadid\WAPPKitCore\Exceptions;
 
 /**
- * Class SettingsException
+ * Class SettingsException.
  *
  * @package AntonioKadid\WAPPKitCore\Exceptions
  */

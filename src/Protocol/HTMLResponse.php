@@ -5,14 +5,14 @@ namespace AntonioKadid\WAPPKitCore\Protocol;
 use AntonioKadid\WAPPKitCore\HTTP\Headers;
 
 /**
- * Class HTMLResponse
+ * Class HTMLResponse.
  *
  * @package AntonioKadid\WAPPKitCore\Protocol
  */
 abstract class HTMLResponse extends GenericResponse
 {
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     protected function responseHeaders(): ?Headers
     {

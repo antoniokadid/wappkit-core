@@ -5,7 +5,7 @@ namespace AntonioKadid\WAPPKitCore\Models;
 use AntonioKadid\WAPPKitCore\DAL\UnitOfWork;
 
 /**
- * Class DatabaseModel
+ * Class DatabaseModel.
  *
  * @package AntonioKadid\WAPPKitCore\Models
  */

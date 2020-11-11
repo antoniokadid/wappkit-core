@@ -3,24 +3,24 @@
 namespace AntonioKadid\WAPPKitCore\Localization;
 
 /**
- * Interface ILanguage
+ * Interface ILanguage.
  *
  * @package AntonioKadid\WAPPKitCore\Localization
  */
 interface ILanguage
 {
     /**
+     * @return string
+     */
+    public function getCode(): string;
+
+    /**
      * @return int
      */
-    function getId(): int;
+    public function getId(): int;
 
     /**
      * @return string
      */
-    function getName(): string;
-
-    /**
-     * @return string
-     */
-    function getCode(): string;
+    public function getName(): string;
 }

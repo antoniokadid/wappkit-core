@@ -8,23 +8,24 @@ use AntonioKadid\WAPPKitCore\Text\JSON\JSONEncoder;
 use ArrayAccess;
 
 /**
- * Class JSONResponse
+ * Class JSONResponse.
  *
  * @package AntonioKadid\WAPPKitCore\Protocol
  */
 class JSONResponse extends GenericResponse implements ArrayAccess
 {
     /** @var array */
-    private $_data;
+    private $data;
 
     /**
      * JSONResponse constructor.
-     *`
+     *`.
+     *
      * @param array $data
      */
     public function __construct(array $data = [])
     {
-        $this->_data = $data;
+        $this->data = $data;
     }
 
     /**
@@ -38,67 +39,59 @@ class JSONResponse extends GenericResponse implements ArrayAccess
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function offsetExists($offset)
+    {
+        return array_key_exists($offset, $this->data);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function offsetGet($offset)
+    {
+        if (!$this->offsetExists($offset)) {
+            return null;
+        }
+
+        return $this->data[$offset];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function offsetSet($offset, $value)
+    {
+        $this->data[$offset] = $value;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function offsetUnset($offset)
+    {
+        if (!$this->offsetExists($offset)) {
+            return;
+        }
+
+        unset($this->data[$offset]);
+    }
+
+    /**
      * @param array $_data
      *
      * @return JSONResponse
      */
     public function setData(array $_data): JSONResponse
     {
-        $this->_data = $_data;
+        $this->data = $_data;
 
         return $this;
     }
 
     /**
-     * @inheritDoc
-     */
-    public function offsetExists($offset)
-    {
-        return array_key_exists($offset, $this->_data);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function offsetGet($offset)
-    {
-        if (!$this->offsetExists($offset))
-            return NULL;
-
-        return $this->_data[$offset];
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function offsetSet($offset, $value)
-    {
-        $this->_data[$offset] = $value;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function offsetUnset($offset)
-    {
-        if (!$this->offsetExists($offset))
-            return;
-
-        unset($this->_data[$offset]);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    protected function responseHeaders(): ?Headers
-    {
-        return new Headers([
-            'Content-Type' => 'application/json'
-        ]);
-    }
-
-    /**
-     * @inheritDoc
+     * {@inheritdoc}
      *
      * @throws EncodingException
      */
@@ -106,6 +99,16 @@ class JSONResponse extends GenericResponse implements ArrayAccess
     {
         $encoder = new JSONEncoder();
 
-        return $encoder->encode($this->_data);
+        return $encoder->encode($this->data);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function responseHeaders(): ?Headers
+    {
+        return new Headers([
+            'Content-Type' => 'application/json'
+        ]);
     }
 }

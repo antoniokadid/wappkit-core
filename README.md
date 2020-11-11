@@ -7,10 +7,10 @@ Powers WAPPKit, a privately owned CMS.
 
 ## Installation
 
-composer require antoniokadid/wappkit-core:dev-master
+composer require antoniokadid/wappkit-core:dev-main
 
 ## Requirements
-* PHP 7.1
+* PHP 7.3
 
 ## LICENSE
 

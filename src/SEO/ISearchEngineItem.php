@@ -3,7 +3,7 @@
 namespace AntonioKadid\WAPPKitCore\SEO;
 
 /**
- * Interface ISearchEngineItem
+ * Interface ISearchEngineItem.
  *
  * @package AntonioKadid\WAPPKitCore\SEO
  */
@@ -14,12 +14,12 @@ interface ISearchEngineItem
      *
      * @return OpenGraphData
      */
-    function getOpenGraphData(): OpenGraphData;
+    public function getOpenGraphData(): OpenGraphData;
 
     /**
      * Get SEO data from underlined object.
      *
      * @return SeoData
      */
-    function getSeoData(): SeoData;
+    public function getSeoData(): SeoData;
 }

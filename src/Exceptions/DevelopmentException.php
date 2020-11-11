@@ -5,7 +5,7 @@ namespace AntonioKadid\WAPPKitCore\Exceptions;
 use Exception;
 
 /**
- * Class DevelopmentException
+ * Class DevelopmentException.
  *
  * @package AntonioKadid\WAPPKitCore\Exceptions
  */
