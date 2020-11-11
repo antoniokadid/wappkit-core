@@ -22,6 +22,6 @@ class UnauthorizedException extends LocalizedException
      */
     public function __construct(string $message = '', ILanguage $language = null, Throwable $previous = null)
     {
-        parent::__construct($message, Status::Unauthorized, $language, $previous);
+        parent::__construct($message, Status::UNAUTHORIZED, $language, $previous);
     }
 }

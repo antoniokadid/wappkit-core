@@ -22,6 +22,6 @@ class ForbiddenException extends LocalizedException
      */
     public function __construct(string $message = '', ILanguage $language = null, Throwable $previous = null)
     {
-        parent::__construct($message, Status::Forbidden, $language, $previous);
+        parent::__construct($message, Status::FORBIDDEN, $language, $previous);
     }
 }

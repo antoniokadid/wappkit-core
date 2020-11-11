@@ -22,6 +22,6 @@ class NotFoundException extends LocalizedException
      */
     public function __construct(string $message = '', ILanguage $language = null, Throwable $previous = null)
     {
-        parent::__construct($message, Status::NotFound, $language, $previous);
+        parent::__construct($message, Status::NOT_FOUND, $language, $previous);
     }
 }

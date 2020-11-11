@@ -30,7 +30,7 @@ class BadRequestException extends LocalizedException
         ILanguage $language = null,
         Throwable $previous = null
     ) {
-        parent::__construct($message, Status::BadRequest, $language, $previous);
+        parent::__construct($message, Status::BAD_REQUEST, $language, $previous);
 
         $this->field = $field;
     }
