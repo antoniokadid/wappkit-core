@@ -7,7 +7,7 @@ Powers WAPPKit, a privately owned CMS.
 
 ## Installation
 
-composer require antoniokadid/wappkit-core:dev-main
+composer require antoniokadid/wappkit-core:dev-master
 
 ## Requirements
 * PHP 7.3
