@@ -19,14 +19,10 @@
     ],
     "require": {
         "php": ">=7.3",
-        "antoniokadid/wappkit-core-collections": "^1",
-        "antoniokadid/wappkit-core-graphics": "^1",
-        "antoniokadid/wappkit-core-mysql": "^1",
-        "antoniokadid/wappkit-core-text": "^1",
-        "antoniokadid/wappkit-core-io": "^1",
-        "antoniokadid/wappkit-core-audio": "^1",
-        "antoniokadid/wappkit-core-programmability": "^1",
-        "antoniokadid/wappkit-core-http": "^1"
+        "ext-json": "*",
+        "ext-gd": "*",
+        "ext-mbstring": "*",
+        "ext-curl": "*"
     },
     "require-dev": {
         "phpunit/phpunit": "^9",
@@ -52,6 +48,7 @@
         }
     },
     "scripts": {
-        "test": "./vendor/bin/phpunit --testdox tests"
+        "test": "./vendor/bin/phpunit --testdox tests",
+        "translate": "php ./tools/generate-translations.php src locale el"
     }
 }
