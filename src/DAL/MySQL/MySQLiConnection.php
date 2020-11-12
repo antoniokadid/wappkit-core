@@ -1,18 +1,18 @@
 <?php
 
-namespace AntonioKadid\WAPPKitCore\Database\MySQL\Connections;
+namespace AntonioKadid\WAPPKitCore\DAL\MySQL;
 
-use AntonioKadid\WAPPKitCore\Database\Exceptions\MySQLException;
-use AntonioKadid\WAPPKitCore\Database\MySQL\IMySQLConnection;
+use AntonioKadid\WAPPKitCore\DAL\IDatabaseConnection;
+use AntonioKadid\WAPPKitCore\Exceptions\DatabaseException;
 use mysqli;
 use mysqli_stmt;
 
 /**
  * Class MySQLiConnection.
  *
- * @package AntonioKadid\WAPPKitCore\Database\MySQL\Connections
+ * @package AntonioKadid\WAPPKitCore\DAL\MySQL
  */
-class MySQLiConnection implements IMySQLConnection
+class MySQLiConnection implements IDatabaseConnection
 {
     /** @var mysqli */
     private $mysqli;
@@ -27,7 +27,7 @@ class MySQLiConnection implements IMySQLConnection
      * @param string $password
      * @param string $encoding
      *
-     * @throws MySQLException
+     * @throws DatabaseException
      */
     public function __construct(
         string $host,
@@ -39,19 +39,19 @@ class MySQLiConnection implements IMySQLConnection
     ) {
         $this->mysqli = new mysqli($host, $username, $password, $dbName, $port);
         if ($this->mysqli->connect_errno !== 0) {
-            throw new MySQLException($this->mysqli->connect_error, '', [], $this->msqli->connect_errno);
+            throw new DatabaseException($this->mysqli->connect_error, '', [], $this->msqli->connect_errno);
         }
 
         if ($this->mysqli->set_charset($encoding) !== true) {
-            throw new MySQLException('Cannot set character set.');
+            throw new DatabaseException('Cannot set character set.');
         }
 
         if ($this->mysqli->autocommit(false) !== true) {
-            throw new MySQLException('Cannot disable auto-commit.');
+            throw new DatabaseException('Cannot disable auto-commit.');
         }
 
         if ($this->mysqli->begin_transaction() !== true) {
-            throw new MySQLException('Cannot initiate transaction.');
+            throw new DatabaseException('Cannot initiate transaction.');
         }
     }
 
@@ -66,15 +66,15 @@ class MySQLiConnection implements IMySQLConnection
     public function commit(): bool
     {
         if ($this->mysqli == null) {
-            throw new MySQLException('Database connection not initialized.');
+            throw new DatabaseException('Database connection not initialized.');
         }
 
         if ($this->mysqli->ping() !== true) {
-            throw new MySQLException('Database connection not active.');
+            throw new DatabaseException('Database connection not active.');
         }
 
         if ($this->mysqli->commit() !== true) {
-            throw new MySQLException($this->mysqli->error, '', [], $this->msqli->errno);
+            throw new DatabaseException($this->mysqli->error, '', [], $this->msqli->errno);
         }
 
         $this->mysqli->close();
@@ -89,24 +89,24 @@ class MySQLiConnection implements IMySQLConnection
     public function execute(string $sql, array $params = []): int
     {
         if ($this->mysqli == null) {
-            throw new MySQLException('Database connection not initialized.');
+            throw new DatabaseException('Database connection not initialized.');
         }
 
         if ($this->mysqli->ping() !== true) {
-            throw new MySQLException('Database connection not active.');
+            throw new DatabaseException('Database connection not active.');
         }
 
         $statement = $this->mysqli->prepare($sql);
         if ($statement === false) {
-            throw new MySQLException($this->mysqli->error, $sql, $params, $this->msqli->errno);
+            throw new DatabaseException($this->mysqli->error, $sql, $params, $this->msqli->errno);
         }
 
         if ($this->bindParameters($statement, $params) !== true) {
-            throw new MySQLException($statement->error, $sql, $params, $statement->errno);
+            throw new DatabaseException($statement->error, $sql, $params, $statement->errno);
         }
 
         if ($statement->execute() !== true) {
-            throw new MySQLException($statement->error, $sql, $params, $statement->errno);
+            throw new DatabaseException($statement->error, $sql, $params, $statement->errno);
         }
 
         return $statement->affected_rows;
@@ -118,29 +118,29 @@ class MySQLiConnection implements IMySQLConnection
     public function query(string $sql, array $params = []): array
     {
         if ($this->mysqli == null) {
-            throw new MySQLException('Database connection not initialized.');
+            throw new DatabaseException('Database connection not initialized.');
         }
 
         if ($this->mysqli->ping() !== true) {
-            throw new MySQLException('Database connection not active.');
+            throw new DatabaseException('Database connection not active.');
         }
 
         $statement = $this->mysqli->prepare($sql);
         if ($statement === false) {
-            throw new MySQLException($this->mysqli->error, $sql, $params, $this->msqli->errno);
+            throw new DatabaseException($this->mysqli->error, $sql, $params, $this->msqli->errno);
         }
 
         if ($this->bindParameters($statement, $params) !== true) {
-            throw new MySQLException($statement->error, $sql, $params, $statement->errno);
+            throw new DatabaseException($statement->error, $sql, $params, $statement->errno);
         }
 
         if ($statement->execute() !== true) {
-            throw new MySQLException($statement->error, $sql, $params, $statement->errno);
+            throw new DatabaseException($statement->error, $sql, $params, $statement->errno);
         }
 
         $preparedResult = $statement->get_result();
         if ($preparedResult === false) {
-            throw new MySQLException($statement->error, $sql, $params, $statement->errno);
+            throw new DatabaseException($statement->error, $sql, $params, $statement->errno);
         }
 
         $result = [];

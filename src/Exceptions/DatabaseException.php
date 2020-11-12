@@ -1,16 +1,16 @@
 <?php
 
-namespace AntonioKadid\WAPPKitCore\Database\Exceptions;
+namespace AntonioKadid\WAPPKitCore\Exceptions;
 
 use Exception;
 use Throwable;
 
 /**
- * Class MySQLException.
+ * Class DatabaseException.
  *
- * @package AntonioKadid\WAPPKitCore\Database\Exceptions
+ * @package AntonioKadid\WAPPKitCore\Exceptions
  */
-class MySQLException extends Exception
+class DatabaseException extends Exception
 {
     /** @var array */
     private $parameters;
@@ -18,7 +18,7 @@ class MySQLException extends Exception
     private $query;
 
     /**
-     * MySQLException constructor.
+     * DatabaseException constructor.
      *
      * @param string         $message
      * @param string         $sqlQuery

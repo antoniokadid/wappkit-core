@@ -1,20 +1,20 @@
 <?php
 
-namespace AntonioKadid\WAPPKitCore\Database\MySQL;
+namespace AntonioKadid\WAPPKitCore\DAL;
 
-use AntonioKadid\WAPPKitCore\Database\Exceptions\MySQLException;
+use AntonioKadid\WAPPKitCore\Exceptions\DatabaseException;
 
 /**
- * Interface IMySQLConnection.
+ * Interface IDatabaseConnection.
  *
- * @package AntonioKadid\WAPPKitCore\Database\MySQL
+ * @package AntonioKadid\WAPPKitCore\DAL
  */
-interface IMySQLConnection
+interface IDatabaseConnection
 {
     /**
      * Commit the active transaction.
      *
-     * @throws MySQLException
+     * @throws DatabaseException
      *
      * @return bool
      */
@@ -26,7 +26,7 @@ interface IMySQLConnection
      * @param string $sql
      * @param array  $params
      *
-     * @throws MySQLException
+     * @throws DatabaseException
      *
      * @return int the number of affected rows
      */
@@ -38,7 +38,7 @@ interface IMySQLConnection
      * @param string $sql
      * @param array  $params
      *
-     * @throws MySQLException
+     * @throws DatabaseException
      *
      * @return array
      */

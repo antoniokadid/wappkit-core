@@ -2,8 +2,7 @@
 
 namespace AntonioKadid\WAPPKitCore\DAL;
 
-use AntonioKadid\WAPPKitCore\Database\MySQL\Exceptions\MySQLException;
-use AntonioKadid\WAPPKitCore\Database\MySQL\IMySQLConnection;
+use AntonioKadid\WAPPKitCore\Exceptions\DatabaseException;
 
 /**
  * Class UnitOfWork.
@@ -12,7 +11,7 @@ use AntonioKadid\WAPPKitCore\Database\MySQL\IMySQLConnection;
  */
 abstract class UnitOfWork
 {
-    /** @var IMySQLConnection */
+    /** @var IDatabaseConnection */
     protected $db = null;
 
     /**
@@ -21,16 +20,16 @@ abstract class UnitOfWork
      * @param string $generatorName
      * @param int    $increment
      *
-     * @throws MySQLException
+     * @throws DatabaseException
      *
      * @return int
      */
     abstract public function generateId(string $generatorName, int $increment = 1): int;
 
     /**
-     * @return IMySQLConnection
+     * @return IDatabaseConnection
      */
-    public function getDb(): IMySQLConnection
+    public function getDb(): IDatabaseConnection
     {
         return $this->db;
     }
@@ -41,7 +40,7 @@ abstract class UnitOfWork
      * @param string $generatorName
      * @param int    $newValue
      *
-     * @throws MySQLException
+     * @throws DatabaseException
      *
      * @return bool
      */
