@@ -2,7 +2,7 @@
 
 namespace AntonioKadid\WAPPKitCore\Models;
 
-use AntonioKadid\WAPPKitCore\DAL\UnitOfWork;
+use AntonioKadid\WAPPKitCore\DAL\AbstractUnitOfWork;
 
 /**
  * Interface IDatabaseModel.
@@ -12,11 +12,11 @@ use AntonioKadid\WAPPKitCore\DAL\UnitOfWork;
 interface IDatabaseModel
 {
     /**
-     * @param UnitOfWork $unitOfWork
+     * @param AbstractUnitOfWork $unitOfWork
      *
      * @return array
      */
-    public static function all(UnitOfWork $unitOfWork): array;
+    public static function all(AbstractUnitOfWork $unitOfWork): array;
 
     /**
      * @return bool

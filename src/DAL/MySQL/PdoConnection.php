@@ -2,23 +2,23 @@
 
 namespace AntonioKadid\WAPPKitCore\Database\MySQL;
 
-use AntonioKadid\WAPPKitCore\DAL\IDatabaseConnection;
+use AntonioKadid\WAPPKitCore\DAL\DatabaseConnectionInterface;
 use AntonioKadid\WAPPKitCore\Exceptions\DatabaseException;
 use PDO;
 use PDOException;
 
 /**
- * Class PdoConnection.
+ * Class PDOConnection.
  *
  * @package AntonioKadid\WAPPKitCore\Database\MySQL
  */
-class PdoConnection implements IDatabaseConnection
+class PDOConnection implements DatabaseConnectionInterface
 {
     /** @var PDO */
     private $pdo;
 
     /**
-     * PdoConnection constructor.
+     * PDOConnection constructor.
      *
      * @param string $host
      * @param int    $port

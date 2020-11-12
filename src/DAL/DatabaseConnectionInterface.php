@@ -9,7 +9,7 @@ use AntonioKadid\WAPPKitCore\Exceptions\DatabaseException;
  *
  * @package AntonioKadid\WAPPKitCore\DAL
  */
-interface IDatabaseConnection
+interface DatabaseConnectionInterface
 {
     /**
      * Commit the active transaction.
@@ -43,7 +43,6 @@ interface IDatabaseConnection
      * @return array
      */
     public function query(string $sql, array $params = []): array;
-
 
     /**
      * Rollback the active transaction.

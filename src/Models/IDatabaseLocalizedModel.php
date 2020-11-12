@@ -2,7 +2,7 @@
 
 namespace AntonioKadid\WAPPKitCore\Models;
 
-use AntonioKadid\WAPPKitCore\DAL\UnitOfWork;
+use AntonioKadid\WAPPKitCore\DAL\AbstractUnitOfWork;
 use AntonioKadid\WAPPKitCore\Localization\ILanguage;
 
 /**
@@ -13,12 +13,12 @@ use AntonioKadid\WAPPKitCore\Localization\ILanguage;
 interface IDatabaseLocalizedModel
 {
     /**
-     * @param UnitOfWork $unitOfWork
+     * @param AbstractUnitOfWork $unitOfWork
      * @param ILanguage  $language
      *
      * @return array
      */
-    public static function all(UnitOfWork $unitOfWork, ILanguage $language): array;
+    public static function all(AbstractUnitOfWork $unitOfWork, ILanguage $language): array;
 
     /**
      * @return bool

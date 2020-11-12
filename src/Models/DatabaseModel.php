@@ -2,7 +2,7 @@
 
 namespace AntonioKadid\WAPPKitCore\Models;
 
-use AntonioKadid\WAPPKitCore\DAL\UnitOfWork;
+use AntonioKadid\WAPPKitCore\DAL\AbstractUnitOfWork;
 
 /**
  * Class DatabaseModel.
@@ -11,6 +11,6 @@ use AntonioKadid\WAPPKitCore\DAL\UnitOfWork;
  */
 abstract class DatabaseModel
 {
-    /** @var UnitOfWork */
+    /** @var AbstractUnitOfWork */
     protected $unitOfWork;
 }

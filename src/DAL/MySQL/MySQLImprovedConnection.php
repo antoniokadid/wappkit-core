@@ -2,23 +2,23 @@
 
 namespace AntonioKadid\WAPPKitCore\DAL\MySQL;
 
-use AntonioKadid\WAPPKitCore\DAL\IDatabaseConnection;
+use AntonioKadid\WAPPKitCore\DAL\DatabaseConnectionInterface;
 use AntonioKadid\WAPPKitCore\Exceptions\DatabaseException;
 use mysqli;
 use mysqli_stmt;
 
 /**
- * Class MySQLiConnection.
+ * Class MySQLImprovedConnection.
  *
  * @package AntonioKadid\WAPPKitCore\DAL\MySQL
  */
-class MySQLiConnection implements IDatabaseConnection
+class MySQLImprovedConnection implements DatabaseConnectionInterface
 {
     /** @var mysqli */
     private $mysqli;
 
     /**
-     * MySQLiConnection constructor.
+     * MySQLImprovedConnection constructor.
      *
      * @param string $host
      * @param int    $port
