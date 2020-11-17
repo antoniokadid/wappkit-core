@@ -1,6 +1,6 @@
 <?php
 
-namespace AntonioKadid\WAPPKitCore\Functions;
+namespace AntonioKadid\WAPPKitCore\Localization;
 
 function __(string $text, string $domain = 'default')
 {

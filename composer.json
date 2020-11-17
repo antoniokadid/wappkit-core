@@ -41,7 +41,7 @@
             "AntonioKadid\\WAPPKitCore\\": "src/"
         },
         "files": [
-            "src/Functions/__.php"
+            "src/Localization/__.php"
         ]
     },
     "autoload-dev": {

@@ -4,7 +4,7 @@ namespace AntonioKadid\WAPPKitCore\Extensibility;
 
 use AntonioKadid\WAPPKitCore\Exceptions\InvalidArgumentException;
 
-use function AntonioKadid\WAPPKitCore\Functions\__;
+use function AntonioKadid\WAPPKitCore\Localization\__;
 
 /**
  * Class CallableRegistry.
