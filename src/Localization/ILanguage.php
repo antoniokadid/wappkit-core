@@ -15,11 +15,6 @@ interface ILanguage
     public function getCode(): string;
 
     /**
-     * @return int
-     */
-    public function getId(): int;
-
-    /**
      * @return string
      */
     public function getName(): string;

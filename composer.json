@@ -39,16 +39,18 @@
     "autoload": {
         "psr-4": {
             "AntonioKadid\\WAPPKitCore\\": "src/"
-        }
+        },
+        "files": [
+            "src/Functions/__.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
-            "AntonioKadid\\WAPPKitCore\\": "src/",
             "AntonioKadid\\WAPPKitCore\\Tests\\": "tests/"
         }
     },
     "scripts": {
-        "test": "./vendor/bin/phpunit --testdox tests",
-        "translate": "php ./tools/generate-translations.php src locale el"
+        "test": "./vendor/bin/phpunit --testdox --verbose tests",
+        "translate": "php ./tools/generate-translations.php --input=src --output=locale --locales=el --clean"
     }
 }
