@@ -26,12 +26,16 @@ class Headers extends Map
      */
     public static function fromString(string $headers): Headers
     {
-        $parts = preg_split('/\r\n|\r|\n/', trim($headers));
+        $parts = preg_split('/\r\n|\r|\n/', $headers);
 
         $headers = new Headers();
         foreach ($parts as $part) {
-            list($header, $value) = explode(':', $part);
-            $headers[$header]     = $value;
+            $result = preg_match('/^([^:]+):\s*(.*)$/', $part, $matches);
+            if ($result === false || $result == 0) {
+                continue;
+            }
+
+            $headers[$matches[1]] = $matches[2];
         }
 
         return $headers;
