@@ -2,7 +2,7 @@
 
 namespace AntonioKadid\WAPPKitCore\Tests\Reflection;
 
-use AntonioKadid\WAPPKitCore\Exceptions\InvalidParameterValueException;
+use AntonioKadid\WAPPKitCore\Exceptions\InvalidArgumentException;
 use AntonioKadid\WAPPKitCore\Exceptions\UnknownParameterTypeException;
 use AntonioKadid\WAPPKitCore\Reflection\CallableInvoker;
 use AntonioKadid\WAPPKitCore\Reflection\ClosureInvoker;
@@ -17,7 +17,7 @@ use ReflectionException;
 class IntegerTest extends TestCase
 {
     /**
-     * @throws InvalidParameterValueException
+     * @throws InvalidArgumentException
      * @throws ReflectionException
      * @throws UnknownParameterTypeException
      */
@@ -28,7 +28,7 @@ class IntegerTest extends TestCase
         $this->assertEquals(20, $result);
     }
     /**
-     * @throws InvalidParameterValueException
+     * @throws InvalidArgumentException
      * @throws UnknownParameterTypeException
      * @throws ReflectionException
      */
@@ -42,7 +42,7 @@ class IntegerTest extends TestCase
         $result = $invoker->invoke(['value' => 15]);
         $this->assertEquals(20, $result);
 
-        $this->expectException(InvalidParameterValueException::class);
+        $this->expectException(InvalidArgumentException::class);
         $invoker->invoke(['value1' => 15]);
 
         $invoker->setClosure(

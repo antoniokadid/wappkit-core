@@ -2,7 +2,7 @@
 
 namespace AntonioKadid\WAPPKitCore\Tests\Reflection;
 
-use AntonioKadid\WAPPKitCore\Exceptions\InvalidParameterValueException;
+use AntonioKadid\WAPPKitCore\Exceptions\InvalidArgumentException;
 use AntonioKadid\WAPPKitCore\Exceptions\UnknownParameterTypeException;
 use AntonioKadid\WAPPKitCore\Reflection\ClosureInvoker;
 use PHPUnit\Framework\TestCase;
@@ -16,7 +16,7 @@ use ReflectionException;
 class ArrayTest extends TestCase
 {
     /**
-     * @throws InvalidParameterValueException
+     * @throws InvalidArgumentException
      * @throws UnknownParameterTypeException
      * @throws ReflectionException
      */

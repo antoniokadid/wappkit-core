@@ -2,7 +2,7 @@
 
 namespace AntonioKadid\WAPPKitCore\Reflection;
 
-use AntonioKadid\WAPPKitCore\Exceptions\InvalidParameterValueException;
+use AntonioKadid\WAPPKitCore\Exceptions\InvalidArgumentException;
 use AntonioKadid\WAPPKitCore\Exceptions\UnknownParameterTypeException;
 use Closure;
 use ReflectionException;
@@ -32,7 +32,7 @@ class ClosureInvoker extends Invoker implements IInvoker
      * @param array $parameters
      * @param bool  $keyValuePairs true, if the $parameters is a key-value pair array else False
      *
-     * @throws InvalidParameterValueException
+     * @throws InvalidArgumentException
      * @throws UnknownParameterTypeException
      * @throws ReflectionException
      *

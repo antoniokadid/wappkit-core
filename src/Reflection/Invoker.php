@@ -2,7 +2,7 @@
 
 namespace AntonioKadid\WAPPKitCore\Reflection;
 
-use AntonioKadid\WAPPKitCore\Exceptions\InvalidParameterValueException;
+use AntonioKadid\WAPPKitCore\Exceptions\InvalidArgumentException;
 use AntonioKadid\WAPPKitCore\Exceptions\UnknownParameterTypeException;
 use ReflectionException;
 use ReflectionNamedType;
@@ -45,7 +45,7 @@ class Invoker
      * @param array $reflectionParameters
      * @param array $data
      *
-     * @throws InvalidParameterValueException
+     * @throws InvalidArgumentException
      * @throws ReflectionException
      * @throws UnknownParameterTypeException
      *
@@ -84,7 +84,7 @@ class Invoker
                     $result[] = null;
                 }
 
-                throw new InvalidParameterValueException($parameterName, sprintf('Invalid value for parameter %s.', $parameterName));
+                throw new InvalidArgumentException($parameterName, sprintf('Invalid value for parameter %s.', $parameterName));
             }
 
             $result[] = !$reflectionParameter->hasType() ?
@@ -100,7 +100,7 @@ class Invoker
      * @param callable            $callable
      * @param array               $data
      *
-     * @throws InvalidParameterValueException
+     * @throws InvalidArgumentException
      * @throws ReflectionException
      * @throws UnknownParameterTypeException
      *
@@ -117,7 +117,7 @@ class Invoker
      * @param string              $className
      * @param array               $data
      *
-     * @throws InvalidParameterValueException
+     * @throws InvalidArgumentException
      * @throws ReflectionException
      * @throws UnknownParameterTypeException
      *
@@ -143,7 +143,7 @@ class Invoker
      * @param ReflectionParameter $parameter
      * @param array               $data
      *
-     * @throws InvalidParameterValueException
+     * @throws InvalidArgumentException
      * @throws ReflectionException
      * @throws UnknownParameterTypeException
      *
@@ -171,7 +171,7 @@ class Invoker
             case 'float':
                 return floatval($parameterValue);
             default:
-                throw new InvalidParameterValueException($parameterName, sprintf('Invalid value for parameter %s.', $parameterName));
+                throw new InvalidArgumentException($parameterName, sprintf('Invalid value for parameter %s.', $parameterName));
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace AntonioKadid\WAPPKitCore\Reflection;
 
-use AntonioKadid\WAPPKitCore\Exceptions\InvalidParameterValueException;
+use AntonioKadid\WAPPKitCore\Exceptions\InvalidArgumentException;
 use AntonioKadid\WAPPKitCore\Exceptions\UnknownParameterTypeException;
 use ReflectionClass;
 use ReflectionException;
@@ -30,7 +30,7 @@ class ConstructorInvoker extends Invoker implements IInvoker
      * @param array $parameters
      * @param bool  $keyValuePairs
      *
-     * @throws InvalidParameterValueException
+     * @throws InvalidArgumentException
      * @throws UnknownParameterTypeException
      * @throws ReflectionException
      *

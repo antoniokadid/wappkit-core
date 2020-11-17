@@ -2,7 +2,7 @@
 
 namespace AntonioKadid\WAPPKitCore\HTTP\Routing;
 
-use AntonioKadid\WAPPKitCore\Exceptions\InvalidParameterValueException;
+use AntonioKadid\WAPPKitCore\Exceptions\InvalidArgumentException;
 use AntonioKadid\WAPPKitCore\Exceptions\MethodNotAllowedException;
 use AntonioKadid\WAPPKitCore\Exceptions\NotImplementedException;
 use AntonioKadid\WAPPKitCore\Exceptions\UnknownParameterTypeException;
@@ -101,7 +101,7 @@ final class Router
     }
 
     /**
-     * @throws InvalidParameterValueException
+     * @throws InvalidArgumentException
      * @throws MethodNotAllowedException
      * @throws NotImplementedException
      * @throws ReflectionException
