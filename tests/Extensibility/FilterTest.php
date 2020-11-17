@@ -9,14 +9,14 @@ final class FilterTest extends TestCase
 {
     public function testApply()
     {
-        $uniqueId = Filter::registry()->add('test-filter', function(string $value) { return strtoupper($value); });
-        $uniqueId2 = Filter::registry()->add('test-filter', function(string $value) { return sprintf('%s from second filter.', $value); });
+        $uniqueRef1 = Filter::registry()->add('sample_filter', function(string $value) { return strtoupper($value); });
+        $uniqueRef2 = Filter::registry()->add('sample_filter', function(string $value) { return sprintf('%s from second filter.', $value); });
 
-        $result = Filter::apply('test-filter', 'hello');
+        $result = Filter::apply('sample_filter', 'hello');
 
         $this->assertEquals('HELLO from second filter.', $result);
 
-        Filter::registry()->remove('test-filter', $uniqueId);
-        Filter::registry()->remove('test-filter', $uniqueId2);
+        Filter::registry()->remove($uniqueRef1);
+        Filter::registry()->remove($uniqueRef2);
     }
 }

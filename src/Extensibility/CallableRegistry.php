@@ -2,6 +2,10 @@
 
 namespace AntonioKadid\WAPPKitCore\Extensibility;
 
+use AntonioKadid\WAPPKitCore\Exceptions\InvalidArgumentException;
+
+use function AntonioKadid\WAPPKitCore\Functions\__;
+
 /**
  * Class CallableRegistry.
  *
@@ -21,6 +25,10 @@ class CallableRegistry
      */
     public function __construct(string $name)
     {
+        if (!$this->validName($name)) {
+            throw new InvalidArgumentException('name', __('Name can include only a-z, A-Z, 0-9, _ (underscore) and - (dash).'));
+        }
+
         $this->name = $name;
     }
 
@@ -34,11 +42,15 @@ class CallableRegistry
      */
     public function add(string $name, callable $callable): string
     {
-        if (!array_key_exists($name, $this->registry)) {
+        if (!$this->validName($name)) {
+            throw new InvalidArgumentException('name', __('Name can include only a-z, A-Z, 0-9, _ (underscore) and - (dash).'));
+        }
+
+        if (!isset($this->registry[$name])) {
             $this->registry[$name] = [];
         }
 
-        $uniqueId = uniqid("{$this->name}.{$name}", true);
+        $uniqueId = uniqid("{$this->name}:{$name}#", true);
 
         $this->registry[$name][$uniqueId] = $callable;
 
@@ -54,30 +66,33 @@ class CallableRegistry
      */
     public function any(string $name): bool
     {
-        if (!array_key_exists($name, $this->registry)) {
-            return false;
-        }
-
-        return count($this->registry[$name]) > 0;
+        return isset($this->registry[$name]) && count($this->registry[$name]) > 0;
     }
 
     /**
      * Remove a callable from the registry.
      *
-     * @param string $name     the name of the section
-     * @param string $uniqueId the unique identifier that was generated when the callable was added to the registry
+     * @param string $uniqueRef the unique reference that was generated when the callable was added to the registry
      */
-    public function remove(string $name, string $uniqueId): void
+    public function remove(string $uniqueRef): void
     {
-        if (!array_key_exists($name, $this->registry)) {
+        if (preg_match('/^([^:]+):([^#]+)#(.+)$/', $uniqueRef, $uniqueRefData) !== 1) {
             return;
         }
 
-        if (!array_key_exists($uniqueId, $this->registry[$name])) {
+        $registryName = $uniqueRefData[1];
+        $section      = $uniqueRefData[2];
+        $uniqueId     = $uniqueRefData[3];
+
+        if (strcasecmp($registryName, $this->name) !== 0) {
             return;
         }
 
-        unset($this->registry[$name][$uniqueId]);
+        if (!isset($this->registry[$section]) || !isset($this->registry[$section][$uniqueRef])) {
+            return;
+        }
+
+        unset($this->registry[$section][$uniqueRef]);
     }
 
     /**
@@ -89,10 +104,23 @@ class CallableRegistry
      */
     public function section(string $name): ?array
     {
-        if (!array_key_exists($name, $this->registry)) {
+        if (!$this->validName($name) || !isset($this->registry[$name])) {
             return null;
         }
 
         return $this->registry[$name];
+    }
+
+    /**
+     * Validate name.
+     *
+     * @param string $name
+     * @param bool   $silent
+     *
+     * @return bool
+     */
+    private function validName(string $name): bool
+    {
+        return preg_match('/^[\w-]+$/', $name) === 1;
     }
 }

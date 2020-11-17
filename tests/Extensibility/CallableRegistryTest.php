@@ -2,37 +2,59 @@
 
 namespace AntonioKadid\WAPPKitCore\Tests\Extensibility;
 
+use AntonioKadid\WAPPKitCore\Exceptions\InvalidArgumentException;
 use AntonioKadid\WAPPKitCore\Extensibility\CallableRegistry;
 use PHPUnit\Framework\TestCase;
 
 final class CallableRegistryTest extends TestCase
 {
-    /** @var CallableRegistry */
-    private $registry;
-
-    protected function setUp(): void {
-        $this->registry = new CallableRegistry('test');
+    public function testConstructorWithInvalidName()
+    {
+        $this->expectException(InvalidArgumentException::class);
+        new CallableRegistry('test!@');
     }
 
-    public function testAddAndRemove()
+    public function testConstructorWithValidName()
     {
-        $this->assertFalse($this->registry->any('test-action'));
+        $registry = new CallableRegistry('test');
 
-        $uniqueId1 = $this->registry->add('test-action', function() { echo 'Hello world'; });
-        $uniqueId2 = $this->registry->add('test-action', function() { echo 'Hello world 2'; });
+        $this->assertTrue($registry instanceof CallableRegistry);
+    }
 
-        $this->assertTrue($this->registry->any('test-action'));
+    public function testAddActionWithInvalidName()
+    {
+        $registry = new CallableRegistry('test');
 
-        $this->registry->remove('test-action', $uniqueId1);
+        $this->expectException(InvalidArgumentException::class);
+        $registry->add('sample@action', function() { echo 'Hello world'; });
+    }
 
-        $this->assertTrue($this->registry->any('test-action'));
+    public function testAddActionWithValidName()
+    {
+        $registry = new CallableRegistry('test');
+        $registry->add('sample_action', function() { echo 'Hello world'; });
+        $registry->add('sample-action', function() { echo 'Hello world'; });
 
-        $this->registry->remove('test-action1234', $uniqueId2);
+        $this->assertTrue($registry->any('sample_action'));
+    }
 
-        $this->assertTrue($this->registry->any('test-action'));
+    public function testRemove()
+    {
+        $registry = new CallableRegistry('test');
 
-        $this->registry->remove('test-action', $uniqueId2);
+        $this->assertFalse($registry->any('sample_action'));
 
-        $this->assertFalse($this->registry->any('test-action'));
+        $uniqueRef1 = $registry->add('sample_action', function() { echo 'Hello world'; });
+        $uniqueRef2 = $registry->add('sample_action', function() { echo 'Hello world 2'; });
+
+        $this->assertTrue($registry->any('sample_action'));
+
+        $registry->remove($uniqueRef1);
+
+        $this->assertTrue($registry->any('sample_action'));
+
+        $registry->remove($uniqueRef2);
+
+        $this->assertFalse($registry->any('sample_action'));
     }
 }
