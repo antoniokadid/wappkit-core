@@ -26,7 +26,7 @@ class CallableRegistry
     public function __construct(string $name)
     {
         if (!$this->validName($name)) {
-            throw new InvalidArgumentException('name', __('Name can include only a-z, A-Z, 0-9, _ (underscore) and - (dash).'));
+            throw new InvalidArgumentException('name', __('Name can include only a-z, A-Z, 0-9, _ (underscore) and - (dash).', 'wappkit-core'));
         }
 
         $this->name = $name;
@@ -43,7 +43,7 @@ class CallableRegistry
     public function add(string $name, callable $callable): string
     {
         if (!$this->validName($name)) {
-            throw new InvalidArgumentException('name', __('Name can include only a-z, A-Z, 0-9, _ (underscore) and - (dash).'));
+            throw new InvalidArgumentException('name', __('Name can include only a-z, A-Z, 0-9, _ (underscore) and - (dash).', 'wappkit-core'));
         }
 
         if (!isset($this->registry[$name])) {
