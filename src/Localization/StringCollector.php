@@ -2,6 +2,7 @@
 
 namespace AntonioKadid\WAPPKitCore\Localization;
 
+use AntonioKadid\WAPPKitCore\Exceptions\IOException;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use SplFileInfo;
@@ -9,14 +10,14 @@ use SplFileInfo;
 /**
  * Class StringCollector.
  *
- * @package AntonioKadid\WAPPKitCore\Localization
+ * @package AntonioKadid\WAPPKitCore\Localization\Translation
  */
 class StringCollector
 {
+    /** @var array */
+    private $accumulatedStrings;
     /** @var string */
-    private $regex = "/%s\\(\s*(([\"\'])(?:[^\\2\\\\]|\\\\.)*?\\2)(\s*\\)|\\,[^\\)]+\\))/";
-    /** @var string */
-    private $srcDirectory;
+    private $regex;
 
     /**
      * StringCollector constructor.
@@ -24,63 +25,129 @@ class StringCollector
      * @param string $srcDirectory
      * @param string $functionName
      */
-    public function __construct(string $srcDirectory, string $functionName = '__')
+    public function __construct(string $functionName = '__')
     {
-        $this->srcDirectory    = $srcDirectory;
-        $this->regex           = sprintf($this->regex, $functionName);
+        $collectSingle = '(?:\s*[\']((?:[^\'\\\\]|\\\\.)*)[\']\s*)';
+        $collectDouble = '(?:\s*["]((?:[^"\\\\]|\\\\.)*)["]\s*)';
+
+        $regExWithoutDomain = sprintf('%1$s\((?:%2$s|%3$s)\)', $functionName, $collectSingle, $collectDouble);
+        $regExWithDomain    = sprintf('%1$s\((?:%2$s|%3$s),(?:%2$s|%3$s)\)', $functionName, $collectSingle, $collectDouble);
+
+        $this->regex = sprintf('/(?:%s)|(?:%s)/', $regExWithoutDomain, $regExWithDomain);
     }
 
     /**
-     * Collect strings from all PHP files found recursivelly in source directory.
+     * @param array $directories
+     *
+     * @throws IOException
      *
      * @return array
      */
-    public function collect(): array
+    public function collectFromDirectories(array $directories): array
     {
-        if (!is_readable($this->srcDirectory)) {
-            return [];
-        }
+        $this->reset();
 
-        $filesIterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($this->srcDirectory));
-
-        $result = [];
-
-        // @var SplFileInfo $file
-        foreach ($filesIterator as $file) {
-            if ($file->isDir() || strcasecmp($file->getExtension(), 'php') !== 0) {
-                continue;
+        foreach ($directories as $directory) {
+            if (!is_readable($directory)) {
+                throw new IOException(sprintf(__('%s is not readable.', 'wappkit-core'), $directory));
             }
 
-            $strings = $this->processPHPFile($file, $result);
+            $filesIterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($directory));
 
-            $result = array_merge($result, $strings);
+            // @var SplFileInfo $file
+            foreach ($filesIterator as $file) {
+                if ($file->isDir() || strcasecmp($file->getExtension(), 'php') !== 0) {
+                    continue;
+                }
+
+                $this->processFile($file);
+            }
         }
 
-        return $result;
+        return $this->accumulatedStrings;
+    }
+
+    /**
+     * @param string $directory
+     *
+     * @throws IOException
+     *
+     * @return array
+     */
+    public function collectFromDirectory(string $directory): array
+    {
+        return $this->collectFromDirectories([$directory]);
+    }
+
+    /**
+     * @param string $input
+     *
+     * @return array
+     */
+    public function collectFromString(string $input): array
+    {
+        $this->reset();
+        $this->processString($input);
+
+        return $this->accumulatedStrings;
     }
 
     /**
      * Extract strings from a PHP file used as parameters of the provided function name.
      *
      * @param SplFileInfo $file
-     *
-     * @return array
      */
-    private function processPHPFile(SplFileInfo $file): array
+    private function processFile(SplFileInfo $file): void
     {
         $path = realpath($file->getPathname());
 
-        $contents = file_get_contents($path);
-
-        $count = preg_match_all($this->regex, $contents, $matches);
-        if ($count === false || $count == 0) {
-            return [];
+        if (!is_readable($path)) {
+            return;
         }
 
-        array_walk($matches[1], function (string &$match) {
-            $match = trim($match, '\'"');
-        });
+        $this->processString(file_get_contents($path));
+    }
 
-        return $matches[1];
+    /**
+     * @param array $noDomainStrings
+     * @param array $domainStrings
+     * @param array $domains
+     */
+    private function processMatches(array $noDomainStrings, array $domainStrings, array $domains): void
+    {
+        $count = max(count($noDomainStrings), count($domainStrings), count($domains));
+
+        for ($i = 0; $i < $count; $i++) {
+            $string = empty($domains[$i]) ? $noDomainStrings[$i] : $domainStrings[$i];
+            $domain = empty($domains[$i]) ? DEFAULT_DOMAIN : $domains[$i];
+
+            if (!isset($this->accumulatedStrings[$domain])) {
+                $this->accumulatedStrings[$domain] = [];
+            }
+
+            array_push($this->accumulatedStrings[$domain], $string);
+        }
+    }
+
+    /**
+     * Extract strings from a code string used as parameters of the provided function name.
+     *
+     * @param string $input
+     */
+    private function processString(string $input): void
+    {
+        $count = preg_match_all($this->regex, $input, $matches);
+        if ($count === false || $count == 0) {
+            return;
+        }
+
+        $this->processMatches($matches[1], $matches[3], $matches[5]);
+    }
+
+    private function reset(): void
+    {
+        unset($this->accumulatedStrings);
+
+        $this->accumulatedStrings = [];
     }
 }

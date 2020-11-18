@@ -51,6 +51,6 @@
     },
     "scripts": {
         "test": "./vendor/bin/phpunit --testdox --verbose tests",
-        "translate": "php ./tools/generate-translations.php --input=src --output=locale --locales=el --clean"
+        "translate": "php ./tools/generate-translations.php --input=src --output=locale --locales=el --clean-strings --clean-domains --clean-locales"
     }
 }
