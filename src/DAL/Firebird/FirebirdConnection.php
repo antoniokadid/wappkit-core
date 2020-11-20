@@ -104,6 +104,16 @@ class FirebirdConnection implements DatabaseConnectionInterface
         return $result !== false;
     }
 
+    /**
+     * @param mixed $generator
+     * @param int   $increament
+     *
+     * @return int
+     */
+    public function genId($generator, $increament = 1): int {
+        return intval(ibase_gen_id($generator, $increament, $this->transaction));
+    }
+
     public function query(string $sql, array $params = []): array
     {
         $query = @ibase_prepare($this->connection, $this->transaction, $sql);
