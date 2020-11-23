@@ -3,9 +3,9 @@
 namespace AntonioKadid\WAPPKitCore\HTTP\Routing;
 
 use AntonioKadid\WAPPKitCore\Exceptions\InvalidArgumentException;
-use AntonioKadid\WAPPKitCore\Exceptions\MethodNotAllowedException;
-use AntonioKadid\WAPPKitCore\Exceptions\NotImplementedException;
 use AntonioKadid\WAPPKitCore\Exceptions\UnknownParameterTypeException;
+use AntonioKadid\WAPPKitCore\HTTP\Exceptions\MethodNotAllowedException;
+use AntonioKadid\WAPPKitCore\HTTP\Exceptions\NotImplementedException;
 use AntonioKadid\WAPPKitCore\Reflection\CallableInvoker;
 use ReflectionClass;
 use ReflectionException;
