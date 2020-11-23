@@ -2,7 +2,7 @@
 
 namespace AntonioKadid\WAPPKitCore\Graphics;
 
-use AntonioKadid\WAPPKitCore\Exceptions\GraphicsException;
+use AntonioKadid\WAPPKitCore\Graphics\Exceptions\GraphicsException;
 use InvalidArgumentException;
 
 /**

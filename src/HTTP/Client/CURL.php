@@ -2,8 +2,8 @@
 
 namespace AntonioKadid\WAPPKitCore\HTTP\Client;
 
-use AntonioKadid\WAPPKitCore\Exceptions\CURLException;
 use AntonioKadid\WAPPKitCore\Exceptions\EncodingException;
+use AntonioKadid\WAPPKitCore\HTTP\Exceptions\CURLException;
 use AntonioKadid\WAPPKitCore\HTTP\Headers;
 use AntonioKadid\WAPPKitCore\HTTP\Method;
 use AntonioKadid\WAPPKitCore\HTTP\URL;

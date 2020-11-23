@@ -1,8 +1,8 @@
 <?php
 
-namespace AntonioKadid\WAPPKitCore\Exceptions;
+namespace AntonioKadid\WAPPKitCore\DAL\Exceptions;
 
-use Exception;
+use AntonioKadid\WAPPKitCore\Exceptions\WAPPKitCoreException;
 use Throwable;
 
 /**
@@ -10,7 +10,7 @@ use Throwable;
  *
  * @package AntonioKadid\WAPPKitCore\Exceptions
  */
-class DatabaseException extends Exception
+class DatabaseException extends WAPPKitCoreException
 {
     /** @var array */
     private $parameters;

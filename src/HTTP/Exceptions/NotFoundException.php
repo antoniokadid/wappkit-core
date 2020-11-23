@@ -1,7 +1,8 @@
 <?php
 
-namespace AntonioKadid\WAPPKitCore\Exceptions;
+namespace AntonioKadid\WAPPKitCore\HTTP\Exceptions;
 
+use AntonioKadid\WAPPKitCore\Exceptions\WAPPKitCoreException;
 use AntonioKadid\WAPPKitCore\HTTP\Status;
 use AntonioKadid\WAPPKitCore\Localization\ILanguage;
 use Throwable;
@@ -11,7 +12,7 @@ use Throwable;
  *
  * @package AntonioKadid\WAPPKitCore\Exceptions
  */
-class NotFoundException extends LocalizedException
+class NotFoundException extends WAPPKitCoreException
 {
     /**
      * NotFoundException constructor.

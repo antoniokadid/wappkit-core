@@ -1,30 +1,30 @@
 <?php
 
-namespace AntonioKadid\WAPPKitCore\Exceptions;
+namespace AntonioKadid\WAPPKitCore\HTTP\Exceptions;
 
+use AntonioKadid\WAPPKitCore\Exceptions\WAPPKitCoreException;
 use AntonioKadid\WAPPKitCore\HTTP\Status;
-use Exception;
 use Throwable;
 
 /**
- * Class NotImplementedException.
+ * Class MethodNotAllowedException.
  *
  * @package AntonioKadid\WAPPKitCore\Exceptions
  */
-class NotImplementedException extends Exception
+class MethodNotAllowedException extends WAPPKitCoreException
 {
     /** @var string */
     private $route;
 
     /**
-     * NotImplementedException constructor.
+     * MethodNotAllowedException constructor.
      *
      * @param string         $route
      * @param null|Throwable $previous
      */
     public function __construct(string $route, Throwable $previous = null)
     {
-        parent::__construct('Not implemented.', Status::NOT_IMPLEMENTED, $previous);
+        parent::__construct('Method not allowed.', Status::METHOD_NOT_ALLOWED, $previous);
 
         $this->route = $route;
     }

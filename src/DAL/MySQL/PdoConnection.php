@@ -3,7 +3,7 @@
 namespace AntonioKadid\WAPPKitCore\Database\MySQL;
 
 use AntonioKadid\WAPPKitCore\DAL\DatabaseConnectionInterface;
-use AntonioKadid\WAPPKitCore\Exceptions\DatabaseException;
+use AntonioKadid\WAPPKitCore\DAL\Exceptions\DatabaseException;
 use PDO;
 use PDOException;
 

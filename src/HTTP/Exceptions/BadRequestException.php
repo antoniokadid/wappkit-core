@@ -1,9 +1,9 @@
 <?php
 
-namespace AntonioKadid\WAPPKitCore\Exceptions;
+namespace AntonioKadid\WAPPKitCore\HTTP\Exceptions;
 
+use AntonioKadid\WAPPKitCore\Exceptions\WAPPKitCoreException;
 use AntonioKadid\WAPPKitCore\HTTP\Status;
-use AntonioKadid\WAPPKitCore\Localization\ILanguage;
 use Throwable;
 
 /**
@@ -11,7 +11,7 @@ use Throwable;
  *
  * @package AntonioKadid\WAPPKitCore\Exceptions
  */
-class BadRequestException extends LocalizedException
+class BadRequestException extends WAPPKitCoreException
 {
     /** @var string */
     private $field;
@@ -21,16 +21,14 @@ class BadRequestException extends LocalizedException
      *
      * @param string         $message
      * @param string         $field
-     * @param null|ILanguage $language
      * @param null|Throwable $previous
      */
     public function __construct(
         string $message = '',
         string $field = '',
-        ILanguage $language = null,
         Throwable $previous = null
     ) {
-        parent::__construct($message, Status::BAD_REQUEST, $language, $previous);
+        parent::__construct($message, Status::BAD_REQUEST, $previous);
 
         $this->field = $field;
     }

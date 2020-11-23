@@ -3,10 +3,10 @@
 namespace AntonioKadid\WAPPKitCore\Exceptions;
 
 /**
- * Class CURLException.
+ * Class WAPPKitCoreException.
  *
  * @package AntonioKadid\WAPPKitCore\Exceptions
  */
-class CURLException extends \Exception
+class WAPPKitCoreException extends \Exception
 {
 }

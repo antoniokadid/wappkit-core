@@ -2,7 +2,6 @@
 
 namespace AntonioKadid\WAPPKitCore\Exceptions;
 
-use InvalidArgumentException as RootInvalidArgumentException;
 use Throwable;
 
 /**
@@ -10,7 +9,7 @@ use Throwable;
  *
  * @package AntonioKadid\WAPPKitCore\Exceptions
  */
-class InvalidArgumentException extends RootInvalidArgumentException
+class InvalidArgumentException extends WAPPKitCoreException
 {
     /** @var string */
     private $argumentName;

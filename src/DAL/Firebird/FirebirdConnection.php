@@ -3,7 +3,7 @@
 namespace AntonioKadid\WAPPKitCore\DAL\Firebird;
 
 use AntonioKadid\WAPPKitCore\DAL\DatabaseConnectionInterface;
-use AntonioKadid\WAPPKitCore\Exceptions\DatabaseException;
+use AntonioKadid\WAPPKitCore\DAL\Exceptions\DatabaseException;
 
 /**
  * Class FirebirdConnection.
@@ -110,7 +110,8 @@ class FirebirdConnection implements DatabaseConnectionInterface
      *
      * @return int
      */
-    public function genId($generator, $increament = 1): int {
+    public function genId($generator, $increament = 1): int
+    {
         return intval(ibase_gen_id($generator, $increament, $this->transaction));
     }
 

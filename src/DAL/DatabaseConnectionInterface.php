@@ -2,7 +2,7 @@
 
 namespace AntonioKadid\WAPPKitCore\DAL;
 
-use AntonioKadid\WAPPKitCore\Exceptions\DatabaseException;
+use AntonioKadid\WAPPKitCore\DAL\Exceptions\DatabaseException;
 
 /**
  * Interface IDatabaseConnection.
