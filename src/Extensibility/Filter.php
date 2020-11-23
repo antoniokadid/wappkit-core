@@ -7,7 +7,7 @@ namespace AntonioKadid\WAPPKitCore\Extensibility;
  *
  * @package AntonioKadid\WAPPKitCore\Extensibility
  */
-class Filter
+class Filter extends Hook
 {
     /** @var CallableRegistry */
     private static $registry = null;
@@ -40,7 +40,7 @@ class Filter
      *
      * @return CallableRegistry
      */
-    public static function registry(): CallableRegistry
+    protected static function registry(): CallableRegistry
     {
         if (self::$registry == null) {
             self::$registry = new CallableRegistry('filter');

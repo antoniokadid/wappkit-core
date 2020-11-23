@@ -7,7 +7,7 @@ namespace AntonioKadid\WAPPKitCore\Extensibility;
  *
  * @package AntonioKadid\WAPPKitCore\Extensibility
  */
-class Action
+class Action extends Hook
 {
     /** @var CallableRegistry */
     private static $registry = null;
@@ -35,7 +35,7 @@ class Action
      *
      * @return CallableRegistry
      */
-    public static function registry(): CallableRegistry
+    protected static function registry(): CallableRegistry
     {
         if (self::$registry == null) {
             self::$registry = new CallableRegistry('action');
