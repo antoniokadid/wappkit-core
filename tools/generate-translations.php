@@ -2,8 +2,8 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use AntonioKadid\WAPPKitCore\Localization\TranslationGenerator;
 use AntonioKadid\WAPPKitCore\Localization\StringCollector;
+use AntonioKadid\WAPPKitCore\Localization\TranslationGenerator;
 
 array_shift($argv);
 
@@ -32,9 +32,9 @@ $parameters = array_combine(
     )
 );
 
-$inputDirectory  = realpath(array_key_exists('--input', $parameters) ? $parameters['--input'] : '');
-$outputDirectory = realpath(array_key_exists('--output', $parameters) ? $parameters['--output'] : '');
-$locales         = array_key_exists('--locales', $parameters) ? explode(',', $parameters['--locales']) : [];
+$inputDirectory         = realpath(array_key_exists('--input', $parameters) ? $parameters['--input'] : '');
+$outputDirectory        = realpath(array_key_exists('--output', $parameters) ? $parameters['--output'] : '');
+$locales                = array_key_exists('--locales', $parameters) ? explode(',', $parameters['--locales']) : [];
 $cleanStrings           = array_key_exists('--clean-strings', $parameters) === true;
 $cleanDomains           = array_key_exists('--clean-domains', $parameters) === true;
 $cleanLocales           = array_key_exists('--clean-locales', $parameters) === true;
