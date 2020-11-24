@@ -3,8 +3,6 @@
 namespace AntonioKadid\WAPPKitCore\Protocol;
 
 use AntonioKadid\WAPPKitCore\HTTP\Headers;
-use AntonioKadid\WAPPKitCore\Text\Exceptions\EncodingException;
-use AntonioKadid\WAPPKitCore\Text\JSON\JSONEncoder;
 use ArrayAccess;
 
 /**
@@ -92,14 +90,10 @@ class JSONResponse extends GenericResponse implements ArrayAccess
 
     /**
      * {@inheritdoc}
-     *
-     * @throws EncodingException
      */
     protected function responseBody()
     {
-        $encoder = new JSONEncoder();
-
-        return $encoder->encode($this->data);
+        return json_encode($this->data, JSON_THROW_ON_ERROR);
     }
 
     /**

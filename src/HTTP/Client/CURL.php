@@ -2,12 +2,10 @@
 
 namespace AntonioKadid\WAPPKitCore\HTTP\Client;
 
-use AntonioKadid\WAPPKitCore\Exceptions\EncodingException;
 use AntonioKadid\WAPPKitCore\HTTP\Exceptions\CURLException;
 use AntonioKadid\WAPPKitCore\HTTP\Headers;
 use AntonioKadid\WAPPKitCore\HTTP\Method;
 use AntonioKadid\WAPPKitCore\HTTP\URL;
-use AntonioKadid\WAPPKitCore\Text\JSON\JSONEncoder;
 
 /**
  * Class CURL.
@@ -78,7 +76,6 @@ class CURL
      * @param null|CURLOptions $options
      *
      * @throws CURLException
-     * @throws EncodingException
      *
      * @return CURLResult
      */
@@ -93,7 +90,6 @@ class CURL
      * @param null|CURLOptions $options
      *
      * @throws CURLException
-     * @throws EncodingException
      *
      * @return CURLResult
      */
@@ -108,7 +104,6 @@ class CURL
      * @param null|CURLOptions $options
      *
      * @throws CURLException
-     * @throws EncodingException
      *
      * @return CURLResult
      */
@@ -175,7 +170,6 @@ class CURL
      * @param null|CURLOptions $options
      *
      * @throws CURLException
-     * @throws EncodingException
      *
      * @return CURLResult
      */
@@ -194,8 +188,7 @@ class CURL
         }
 
         if ($options->headers->getTrimString(Headers::CONTENT_TYPE) === self::CONTENT_TYPE_JSON) {
-            $jsonEncoder = new JSONEncoder();
-            $postData    = $jsonEncoder->encode($data);
+            $postData = json_encode($data, JSON_THROW_ON_ERROR);
 
             curl_setopt($this->curlRef, CURLOPT_POSTFIELDS, $postData);
 

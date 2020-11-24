@@ -1,6 +1,6 @@
 <?php
 
-namespace AntonioKadid\WAPPKitCore\Exceptions;
+namespace AntonioKadid\WAPPKitCore\Programmability\Exceptions;
 
 use AntonioKadid\WAPPKitCore\Programmability\ExecutionContext;
 use Exception;

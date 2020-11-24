@@ -3,7 +3,7 @@
 namespace AntonioKadid\WAPPKitCore\Programmability;
 
 use AntonioKadid\WAPPKitCore\Exceptions\IOException;
-use AntonioKadid\WAPPKitCore\Exceptions\ProgrammabilityException;
+use AntonioKadid\WAPPKitCore\Programmability\Exceptions\ProgrammabilityException;
 use Exception;
 use ReflectionClass;
 use ReflectionException;
