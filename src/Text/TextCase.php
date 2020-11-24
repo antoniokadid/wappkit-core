@@ -115,20 +115,20 @@ abstract class TextCase
         $result = null;
 
         if (
-            @preg_match('/^([[:upper:]]|[[:digit:]]|\\-)+$/u', $input) ||
-            @preg_match('/^([[:lower:]]|[[:digit:]]|\\-)+$/u', $input)
+            @preg_match('/^([[:upper:]]|[[:digit:]]|-)+$/u', $input) ||
+            @preg_match('/^([[:lower:]]|[[:digit:]]|-)+$/u', $input)
         ) :
              // check for Train and Kebab
-            $result = preg_split('/\\-/u', $input, -1, PREG_SPLIT_NO_EMPTY);
+            $result = preg_split('/-/u', $input, -1, PREG_SPLIT_NO_EMPTY);
         elseif (
-            @preg_match('/^([[:upper:]]|[[:digit:]]|\\_)+$/u', $input) ||
-            @preg_match('/^([[:lower:]]|[[:digit:]]|\\_)+$/u', $input)
+            @preg_match('/^([[:upper:]]|[[:digit:]]|_)+$/u', $input) ||
+            @preg_match('/^([[:lower:]]|[[:digit:]]|_)+$/u', $input)
         ) :
             // check for Screaming snake and Snake
-            $result = preg_split('/\\_/u', $input, -1, PREG_SPLIT_NO_EMPTY);
+            $result = preg_split('/_/u', $input, -1, PREG_SPLIT_NO_EMPTY);
         elseif (
-            !@preg_match('/^[[:upper:]][[:alnum:]]{0,}/u', $input) ||
-            !@preg_match('/^[[:lower:]][[:alnum:]]{0,}/u', $input)
+            !@preg_match('/^[[:upper:]][[:alnum:]]*/u', $input) ||
+            !@preg_match('/^[[:lower:]][[:alnum:]]*/u', $input)
         ) :
             // check for Upper Camel and Lower Camel
             $input = preg_replace_callback('/([[:lower:]])([[:upper:]])/u', function ($match) {
