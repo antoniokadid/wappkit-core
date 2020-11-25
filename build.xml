@@ -1,0 +1,20 @@
+<project name="zip" default="build">
+    <fileset id="src_files" dir=".">
+        <include name="src/**/*.php"/>
+        <include name="tests/**/*.php"/>
+        <include name="tools/**/*.php"/>
+        <include name="LICENSE"/>
+        <include name="README.md"/>
+    </fileset>
+
+    <target name="clean">
+        <delete dir="dist"/>
+        <mkdir dir="dist"/>
+    </target>
+
+    <target name="build" depends="clean">
+        <zip destfile="dist/wappkit-core.zip">
+            <fileset refid="src_files"/>
+        </zip>
+    </target>
+</project>

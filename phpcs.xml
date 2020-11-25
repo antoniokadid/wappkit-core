@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!-- https://github.com/squizlabs/PHP_CodeSniffer/wiki/Annotated-Ruleset -->
 <ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="wappkit-core">
     <description>WAPPKit Core Coding Standards</description>
@@ -9,7 +9,7 @@
     <exclude-pattern>*/vendor/*</exclude-pattern>
     <exclude-pattern>*/tests/*</exclude-pattern>
 
-    <!-- SET PHP VERSION TO 7.3 -->
+    <!-- SET PHP VERSION TO 7.3 -->    
     <rule ref="PHPCompatibility" />
     <config name="testVersion" value="7.3"/>
 

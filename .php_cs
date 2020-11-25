@@ -4,6 +4,9 @@
 // https://mlocati.github.io/php-cs-fixer-configurator
 
 return PhpCsFixer\Config::create()
+    ->setUsingCache(false)
+    ->setIndent('    ')
+    ->setLineEnding("\n")
     ->setRules([
         'array_indentation' => true,
         'array_syntax'      => [
@@ -144,6 +147,4 @@ return PhpCsFixer\Config::create()
         'unary_operator_spaces'              => true,
         'whitespace_after_comma_in_array'    => true,
         'yoda_style'                         => false
-    ])
-    ->setIndent('    ')
-    ->setLineEnding("\n");
+    ]);
