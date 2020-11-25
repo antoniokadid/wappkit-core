@@ -9,37 +9,21 @@ class CamelCaseTest extends TestCase
 {
     public function testToCamelCase()
     {
-        $input = ['test', 'camel', 'case'];
+        $camelCase = new CamelCase();
 
-        $camelCase = new CamelCase($input);
-
+        $camelCase->load("Test\ncamel\ncase");
         $this->assertEquals('testCamelCase', $camelCase->toCamelCase());
-    }
 
-    public function testToFlatCase()
-    {
-        $input = ['Test', 'Camel', 'Case'];
+        $camelCase->load("Test\nc@mel\nc@se");
+        $this->assertEquals('testCmelCse', $camelCase->toCamelCase());
 
-        $camelCase = new CamelCase($input);
-
-        $this->assertEquals('testcamelcase', $camelCase->toFlatCase());
     }
 
     public function testToUpperCamelCase()
     {
-        $input = ['test', 'camel', 'case'];
-
-        $camelCase = new CamelCase($input);
+        $camelCase = new CamelCase();
+        $camelCase->load('test camel case');
 
         $this->assertEquals('TestCamelCase', $camelCase->toUpperCamelCase());
-    }
-
-    public function testToUpperFlatCase()
-    {
-        $input = ['Test', 'Camel', 'Case'];
-
-        $camelCase = new CamelCase($input);
-
-        $this->assertEquals('TESTCAMELCASE', $camelCase->toUpperFlatCase());
     }
 }

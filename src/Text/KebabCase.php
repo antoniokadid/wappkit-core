@@ -2,49 +2,8 @@
 
 namespace AntonioKadid\WAPPKitCore\Text;
 
-class KebabCase implements TextCaseInterface
+class KebabCase extends TextCase
 {
-    /** @var string[] */
-    private $dismantled;
-
-    /**
-     * KebabCase constructor.
-     *
-     * @param string[] $dismantled
-     */
-    public function __construct(array $dismantled)
-    {
-        $this->dismantled = $dismantled;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function dismantle(string $input): array
-    {
-        if (!static::valid($input)) {
-            return [];
-        }
-
-        return explode('-', $input);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function sanitize(string $input): string
-    {
-        return preg_replace('/[^[:alnum:]-]/', '', $input) ?? $input;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function valid(string $input): bool
-    {
-        return preg_match('/^[[:alpha:]]+(?:[[:alnum:]]+-?)+-[[:alnum:]]+$/', $input) != false;
-    }
-
     /**
      * Convert to kebab-case.
      *
@@ -52,7 +11,7 @@ class KebabCase implements TextCaseInterface
      */
     public function toKebabCase(): string
     {
-        return strtolower(implode('-', $this->dismantled));
+        return strtolower(implode('-', $this->parts));
     }
 
     /**
@@ -62,7 +21,7 @@ class KebabCase implements TextCaseInterface
      */
     public function toScreamingKebabCase(): string
     {
-        return strtoupper(implode('-', $this->dismantled));
+        return strtoupper(implode('-', $this->parts));
     }
 
     /**
@@ -74,6 +33,30 @@ class KebabCase implements TextCaseInterface
     {
         return implode('-', array_map(function (string $part) {
             return ucfirst(strtolower($part));
-        }, $this->dismantled));
+        }, $this->parts));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function dismantle(string $input): array
+    {
+        return explode('-', $input);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function sanitize(string $input): string
+    {
+        return preg_replace('/[^[:alnum:]-]/', '', $input) ?? $input;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function valid(string $input): bool
+    {
+        return preg_match('/^[[:alpha:]]+(?:[[:alnum:]]+-?)+-[[:alnum:]]+$/', $input) != false;
     }
 }

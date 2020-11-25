@@ -2,49 +2,8 @@
 
 namespace AntonioKadid\WAPPKitCore\Text;
 
-class SnakeCase implements TextCaseInterface
+class SnakeCase extends TextCase
 {
-    /** @var string[] */
-    private $dismantled;
-
-    /**
-     * SnakeCase constructor.
-     *
-     * @param string[] $dismantled
-     */
-    public function __construct(array $dismantled)
-    {
-        $this->dismantled = $dismantled;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function dismantle(string $input): array
-    {
-        if (!static::valid($input)) {
-            return [];
-        }
-
-        return explode('_', $input);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function sanitize(string $input): string
-    {
-        return preg_replace('/[^[:alnum:]_]/', '', $input) ?? $input;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function valid(string $input): bool
-    {
-        return preg_match('/^[[:alpha:]]+(?:[[:alnum:]]+_?)+_[[:alnum:]]+$/', $input) != false;
-    }
-
     /**
      * Convert to Camel_Snake_Case.
      *
@@ -54,7 +13,7 @@ class SnakeCase implements TextCaseInterface
     {
         return implode('_', array_map(function (string $part) {
             return ucfirst(strtolower($part));
-        }, $this->dismantled));
+        }, $this->parts));
     }
 
     /**
@@ -64,7 +23,7 @@ class SnakeCase implements TextCaseInterface
      */
     public function toScreamingSnakeCase(): string
     {
-        return strtoupper(implode('_', $this->dismantled));
+        return strtoupper(implode('_', $this->parts));
     }
 
     /**
@@ -74,6 +33,30 @@ class SnakeCase implements TextCaseInterface
      */
     public function toSnakeCase(): string
     {
-        return strtolower(implode('_', $this->dismantled));
+        return strtolower(implode('_', $this->parts));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function dismantle(string $input): array
+    {
+        return explode('_', $input);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function sanitize(string $input): string
+    {
+        return preg_replace('/[^[:alnum:]_]/', '', $input) ?? $input;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function valid(string $input): bool
+    {
+        return preg_match('/^[[:alpha:]]+(?:[[:alnum:]]+_?)+_[[:alnum:]]+$/', $input) != false;
     }
 }
