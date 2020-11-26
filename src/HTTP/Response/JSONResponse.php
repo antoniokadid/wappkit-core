@@ -1,6 +1,6 @@
 <?php
 
-namespace AntonioKadid\WAPPKitCore\Protocol;
+namespace AntonioKadid\WAPPKitCore\HTTP\Response;
 
 use AntonioKadid\WAPPKitCore\HTTP\Headers;
 use ArrayAccess;
@@ -8,9 +8,9 @@ use ArrayAccess;
 /**
  * Class JSONResponse.
  *
- * @package AntonioKadid\WAPPKitCore\Protocol
+ * @package AntonioKadid\WAPPKitCore\HTTP\Response
  */
-class JSONResponse extends GenericResponse implements ArrayAccess
+class JSONResponse extends Response implements ArrayAccess
 {
     /** @var array */
     private $data;
@@ -91,7 +91,7 @@ class JSONResponse extends GenericResponse implements ArrayAccess
     /**
      * {@inheritdoc}
      */
-    protected function responseBody()
+    protected function body()
     {
         return json_encode($this->data, JSON_THROW_ON_ERROR);
     }
@@ -99,7 +99,7 @@ class JSONResponse extends GenericResponse implements ArrayAccess
     /**
      * {@inheritdoc}
      */
-    protected function responseHeaders(): ?Headers
+    protected function headers(): ?Headers
     {
         return new Headers([
             'Content-Type' => 'application/json'

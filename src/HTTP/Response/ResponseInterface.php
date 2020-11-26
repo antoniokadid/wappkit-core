@@ -7,7 +7,7 @@ namespace AntonioKadid\WAPPKitCore\HTTP\Response;
  *
  * @package AntonioKadid\WAPPKitCore\HTTP\Response
  */
-interface IResponse
+interface ResponseInterface
 {
     public function output();
 }

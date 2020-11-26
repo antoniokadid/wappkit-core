@@ -1,20 +1,20 @@
 <?php
 
-namespace AntonioKadid\WAPPKitCore\Protocol;
+namespace AntonioKadid\WAPPKitCore\HTTP\Response;
 
 use AntonioKadid\WAPPKitCore\HTTP\Headers;
 
 /**
  * Class HTMLResponse.
  *
- * @package AntonioKadid\WAPPKitCore\Protocol
+ * @package AntonioKadid\WAPPKitCore\HTTP\Response
  */
-abstract class HTMLResponse extends GenericResponse
+abstract class HTMLResponse extends Response
 {
     /**
      * {@inheritdoc}
      */
-    protected function responseHeaders(): ?Headers
+    protected function headers(): ?Headers
     {
         return new Headers([
             'Content-Type' => 'text/html'

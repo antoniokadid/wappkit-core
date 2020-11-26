@@ -9,10 +9,57 @@ use AntonioKadid\WAPPKitCore\Collections\Map;
  *
  * @package AntonioKadid\WAPPKitCore\HTTP\Request
  */
-abstract class Request extends Map
+class Request extends Map
 {
     /**
+     * Request constructor.
+     *
+     * @param array $source An array to initialize request. Array keys are preserved. [optional]
+     */
+    private function __construct(array $source = [])
+    {
+        parent::__construct($source);
+    }
+
+    /**
+     * @return Request
+     *
+     * @SuppressWarnings(PHPMD.Superglobals)
+     */
+    public static function get(): Request
+    {
+        return new Request($_GET);
+    }
+
+    /**
+     * @return Request
+     */
+    public static function json(): Request
+    {
+        $data = json_decode(
+            file_get_contents('php://input'),
+            true,
+            512,
+            JSON_THROW_ON_ERROR
+        );
+
+        return new Request(($data === null || !is_array($data)) ? [] : $data);
+    }
+
+    /**
+     * @return Request
+     *
+     * @SuppressWarnings(PHPMD.Superglobals)
+     */
+    public static function post(): Request
+    {
+        return new Request($_POST);
+    }
+
+    /**
      * @return string
+     *
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
     public function getMethod(): string
     {
@@ -21,6 +68,8 @@ abstract class Request extends Map
 
     /**
      * @return string
+     *
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
     public function getQueryString(): string
     {
@@ -29,6 +78,8 @@ abstract class Request extends Map
 
     /**
      * @return null|string
+     *
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
     public function getRemoteIp(): ?string
     {
@@ -49,6 +100,8 @@ abstract class Request extends Map
 
     /**
      * @return string
+     *
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
     public function getUri(): string
     {
@@ -57,6 +110,8 @@ abstract class Request extends Map
 
     /**
      * @return string
+     *
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
     public function getUserAgent(): string
     {

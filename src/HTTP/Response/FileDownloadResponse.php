@@ -1,15 +1,15 @@
 <?php
 
-namespace AntonioKadid\WAPPKitCore\Protocol;
+namespace AntonioKadid\WAPPKitCore\HTTP\Response;
 
 use AntonioKadid\WAPPKitCore\HTTP\Headers;
 
 /**
  * Class FileDownloadResponse.
  *
- * @package AntonioKadid\WAPPKitCore\Protocol
+ * @package AntonioKadid\WAPPKitCore\HTTP\Response
  */
-class FileDownloadResponse extends GenericResponse
+class FileDownloadResponse extends Response
 {
     /** @var string */
     public $contentType;
@@ -23,7 +23,7 @@ class FileDownloadResponse extends GenericResponse
     /**
      * {@inheritdoc}
      */
-    protected function responseBody()
+    protected function body()
     {
         return $this->data;
     }
@@ -31,7 +31,7 @@ class FileDownloadResponse extends GenericResponse
     /**
      * {@inheritdoc}
      */
-    protected function responseHeaders(): ?Headers
+    protected function headers(): ?Headers
     {
         return new Headers([
             'Content-Description'       => 'File Transfer',

@@ -2,7 +2,7 @@
 
 namespace AntonioKadid\WAPPKitCore\Views;
 
-use AntonioKadid\WAPPKitCore\Protocol\HTMLResponse;
+use AntonioKadid\WAPPKitCore\HTTP\Response\HTMLResponse;
 
 /**
  * Class View.

@@ -2,6 +2,7 @@
 
 namespace AntonioKadid\WAPPKitCore\HTTP\Response;
 
+use AntonioKadid\WAPPKitCore\HTTP\Headers;
 use AntonioKadid\WAPPKitCore\HTTP\Status;
 
 /**
@@ -9,12 +10,29 @@ use AntonioKadid\WAPPKitCore\HTTP\Status;
  *
  * @package AntonioKadid\WAPPKitCore\HTTP\Response
  */
-abstract class Response implements IResponse
+abstract class Response implements ResponseInterface
 {
     /** @var int */
     protected $httpStatus = Status::OK;
 
-    abstract public function output();
+    final public function output(): void
+    {
+        if (ob_get_length() !== false) {
+            ob_clean();
+        }
+
+        http_response_code($this->httpStatus);
+
+        $headers = $this->headers();
+        if ($headers != null) {
+            $headers->outputHeaders();
+        }
+
+        $body = $this->body();
+        if ($body != null) {
+            echo $body;
+        }
+    }
 
     /**
      * @param int $httpStatusCode
@@ -27,4 +45,14 @@ abstract class Response implements IResponse
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    abstract protected function body();
+
+    /**
+     * @return null|Headers
+     */
+    abstract protected function headers(): ?Headers;
 }
