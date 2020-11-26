@@ -4,7 +4,6 @@ namespace AntonioKadid\WAPPKitCore\HTTP\Exceptions;
 
 use AntonioKadid\WAPPKitCore\Exceptions\WAPPKitCoreException;
 use AntonioKadid\WAPPKitCore\HTTP\Status;
-use AntonioKadid\WAPPKitCore\Localization\ILanguage;
 use Throwable;
 
 /**
@@ -18,11 +17,10 @@ class NotFoundException extends WAPPKitCoreException
      * NotFoundException constructor.
      *
      * @param string         $message
-     * @param null|ILanguage $language
      * @param null|Throwable $previous
      */
-    public function __construct(string $message = '', ILanguage $language = null, Throwable $previous = null)
+    public function __construct(string $message = '', Throwable $previous = null)
     {
-        parent::__construct($message, Status::NOT_FOUND, $language, $previous);
+        parent::__construct($message, Status::NOT_FOUND, $previous);
     }
 }
