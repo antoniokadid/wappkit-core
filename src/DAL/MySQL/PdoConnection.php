@@ -1,6 +1,6 @@
 <?php
 
-namespace AntonioKadid\WAPPKitCore\Database\MySQL;
+namespace AntonioKadid\WAPPKitCore\DAL\MySQL;
 
 use AntonioKadid\WAPPKitCore\DAL\DatabaseConnectionInterface;
 use AntonioKadid\WAPPKitCore\DAL\Exceptions\DatabaseException;
@@ -122,7 +122,7 @@ class PDOConnection implements DatabaseConnectionInterface
 
         $statement = $this->pdo->prepare($sql);
         if ($statement === false) {
-            throw new DatabaseException($this->pdo->errorInfo()[2], $sql, $params, $this->po->errorInfo()[1]);
+            throw new DatabaseException($this->pdo->errorInfo()[2], $sql, $params, $this->pdo->errorInfo()[1]);
         }
 
         $result = $statement->execute($params);

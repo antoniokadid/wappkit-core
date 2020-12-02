@@ -39,7 +39,7 @@ class MySQLImprovedConnection implements DatabaseConnectionInterface
     ) {
         $this->mysqli = new mysqli($host, $username, $password, $dbName, $port);
         if ($this->mysqli->connect_errno !== 0) {
-            throw new DatabaseException($this->mysqli->connect_error, '', [], $this->msqli->connect_errno);
+            throw new DatabaseException($this->mysqli->connect_error, '', [], $this->msqli->connect_errno ?? 0);
         }
 
         if ($this->mysqli->set_charset($encoding) !== true) {
