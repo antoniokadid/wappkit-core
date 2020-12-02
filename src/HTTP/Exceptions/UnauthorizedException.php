@@ -2,25 +2,25 @@
 
 namespace AntonioKadid\WAPPKitCore\HTTP\Exceptions;
 
-use AntonioKadid\WAPPKitCore\Exceptions\WAPPKitCoreException;
 use AntonioKadid\WAPPKitCore\HTTP\Status;
 use Throwable;
 
 /**
  * Class UnauthorizedException.
  *
- * @package AntonioKadid\WAPPKitCore\Exceptions
+ * @package AntonioKadid\WAPPKitCore\HTTP\Exceptions
  */
-class UnauthorizedException extends WAPPKitCoreException
+class UnauthorizedException extends RouteException
 {
     /**
      * UnauthorizedException constructor.
      *
-     * @param string         $message
+     * @param string         $method
+     * @param string         $uri
      * @param null|Throwable $previous
      */
-    public function __construct(string $message = '', Throwable $previous = null)
+    public function __construct(string $method, string $uri, Throwable $previous = null)
     {
-        parent::__construct($message, Status::UNAUTHORIZED, $previous);
+        parent::__construct($method, $uri, 'Unauthorized.', Status::UNAUTHORIZED, $previous);
     }
 }

@@ -9,18 +9,19 @@ use Throwable;
 /**
  * Class ForbiddenException.
  *
- * @package AntonioKadid\WAPPKitCore\Exceptions
+ * @package AntonioKadid\WAPPKitCore\HTTP\Exceptions
  */
-class ForbiddenException extends WAPPKitCoreException
+class ForbiddenException extends RouteException
 {
     /**
      * ForbiddenException constructor.
      *
-     * @param string         $message
+     * @param string         $method
+     * @param string         $uri
      * @param null|Throwable $previous
      */
-    public function __construct(string $message = '', Throwable $previous = null)
+    public function __construct(string $method, string $uri, Throwable $previous = null)
     {
-        parent::__construct($message, Status::FORBIDDEN, $previous);
+        parent::__construct($method, $uri, 'Forbidden.', Status::FORBIDDEN, $previous);
     }
 }

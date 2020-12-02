@@ -2,7 +2,6 @@
 
 namespace AntonioKadid\WAPPKitCore\HTTP\Exceptions;
 
-use AntonioKadid\WAPPKitCore\Exceptions\WAPPKitCoreException;
 use AntonioKadid\WAPPKitCore\HTTP\Status;
 use Throwable;
 
@@ -11,16 +10,17 @@ use Throwable;
  *
  * @package AntonioKadid\WAPPKitCore\Exceptions
  */
-class NotFoundException extends WAPPKitCoreException
+class NotFoundException extends RouteException
 {
     /**
      * NotFoundException constructor.
      *
-     * @param string         $message
+     * @param string         $method
+     * @param string         $uri
      * @param null|Throwable $previous
      */
-    public function __construct(string $message = '', Throwable $previous = null)
+    public function __construct(string $method, string $uri, Throwable $previous = null)
     {
-        parent::__construct($message, Status::NOT_FOUND, $previous);
+        parent::__construct($method, $uri, 'Not Found.', Status::NOT_FOUND, $previous);
     }
 }

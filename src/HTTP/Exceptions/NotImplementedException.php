@@ -2,38 +2,25 @@
 
 namespace AntonioKadid\WAPPKitCore\HTTP\Exceptions;
 
-use AntonioKadid\WAPPKitCore\Exceptions\WAPPKitCoreException;
 use AntonioKadid\WAPPKitCore\HTTP\Status;
 use Throwable;
 
 /**
  * Class NotImplementedException.
  *
- * @package AntonioKadid\WAPPKitCore\Exceptions
+ * @package AntonioKadid\WAPPKitCore\HTTP\Exceptions
  */
-class NotImplementedException extends WAPPKitCoreException
+class NotImplementedException extends RouteException
 {
-    /** @var string */
-    private $route;
-
     /**
      * NotImplementedException constructor.
      *
-     * @param string         $route
+     * @param string         $method
+     * @param string         $uri
      * @param null|Throwable $previous
      */
-    public function __construct(string $route, Throwable $previous = null)
+    public function __construct(string $method, string $uri, Throwable $previous = null)
     {
-        parent::__construct('Not implemented.', Status::NOT_IMPLEMENTED, $previous);
-
-        $this->route = $route;
-    }
-
-    /**
-     * @return string
-     */
-    public function getRoute(): string
-    {
-        return $this->route;
+        parent::__construct($method, $uri, 'Not Implemented.', Status::NOT_IMPLEMENTED, $previous);
     }
 }
