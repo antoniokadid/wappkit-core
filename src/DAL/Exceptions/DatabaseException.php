@@ -8,7 +8,7 @@ use Throwable;
 /**
  * Class DatabaseException.
  *
- * @package AntonioKadid\WAPPKitCore\Exceptions
+ * @package AntonioKadid\WAPPKitCore\DAL\Exceptions
  */
 class DatabaseException extends WAPPKitCoreException
 {
