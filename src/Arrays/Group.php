@@ -13,9 +13,28 @@ class Group
     /**
      * @param array $array
      */
-    public function __construct(array &$array)
+    private function __construct(array &$array)
     {
         $this->array = &$array;
+    }
+
+    public static function array(array &$array): Group
+    {
+        return new Group($array);
+    }
+
+    /**
+     * @param callable $keySelector
+     *
+     * @return Group
+     *
+     * @suppressWarnings(PHPMD.ShortMethodName)
+     */
+    public function by(callable $keySelector): Group
+    {
+        array_push($this->keySelectors, $keySelector);
+
+        return $this;
     }
 
     /**
@@ -23,19 +42,7 @@ class Group
      */
     public function go(): void
     {
-        self::group($this->array, $this->keySelectors);
-    }
-
-    /**
-     * @param callable $keySelector
-     *
-     * @return Group
-     */
-    public function key(callable $keySelector): Group
-    {
-        array_push($this->keySelectors, $keySelector);
-
-        return $this;
+        $this->array = self::group($this->array, $this->keySelectors);
     }
 
     /**
@@ -46,11 +53,11 @@ class Group
      *
      * @return array
      */
-    private static function group(array &$array, callable ...$selectors): void
+    private static function group(array $array, array $selectors): array
     {
         $currentSelector = array_shift($selectors);
         if ($currentSelector === null) {
-            return;
+            return $array;
         }
 
         $result = [];
@@ -68,11 +75,11 @@ class Group
             array_walk(
                 $result,
                 function (&$value) use ($selectors) {
-                    call_user_func([Utils::class, 'group'], $value, $selectors);
+                    $value = self::group($value, $selectors);
                 }
             );
         }
 
-        $array = &$result;
+        return $result;
     }
 }
