@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace AntonioKadid\WAPPKitCore\Tests\Collections;
+namespace AntonioKadid\WAPPKitCore\Tests\Arrays;
 
-use AntonioKadid\WAPPKitCore\Collections\Offset;
+use AntonioKadid\WAPPKitCore\Arrays\Offset;
 use AntonioKadid\WAPPKitCore\Data\Value;
 
 use function PHPUnit\Framework\assertArrayHasKey;

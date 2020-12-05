@@ -1,6 +1,6 @@
 <?php
 
-namespace AntonioKadid\WAPPKitCore\Collections;
+namespace AntonioKadid\WAPPKitCore\Arrays;
 
 use AntonioKadid\WAPPKitCore\Data\Value;
 use ArrayAccess;
@@ -9,7 +9,7 @@ use ArrayAccess;
  * Class Offset.
  * Access an array offset even if it does not exist.
  *
- * @package AntonioKadid\WAPPKitCore\Collections
+ * @package AntonioKadid\WAPPKitCore\Arrays
  */
 class Offset implements ArrayAccess
 {
