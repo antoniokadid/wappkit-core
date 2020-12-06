@@ -18,6 +18,11 @@ class Group
         $this->array = &$array;
     }
 
+    /**
+     * @param array $array
+     *
+     * @return Group
+     */
     public static function array(array &$array): Group
     {
         return new Group($array);
