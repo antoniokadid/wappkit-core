@@ -34,8 +34,8 @@ class Value implements ValueInterface
     {
         return
             $this->isNull() ? $default :
-            $this->isArray() ? $this->value :
-            $default;
+            ($this->isArray() ? $this->value :
+            $default);
     }
 
     /**
@@ -52,9 +52,9 @@ class Value implements ValueInterface
     {
         return
             $this->isNull() ? $default :
-            $this->isBool() ? $this->value :
-            $convert ? boolval($this->value) :
-            $default;
+            ($this->isBool() ? $this->value :
+            ($convert ? boolval($this->value) :
+            $default));
     }
 
     /**
@@ -103,9 +103,9 @@ class Value implements ValueInterface
     {
         return
             $this->isNull() ? $default :
-            $this->isFloat() ? $this->value :
-            $convert ? floatval($this->value) :
-            $default;
+            ($this->isFloat() ? $this->value :
+            ($convert ? floatval($this->value) :
+            $default));
     }
 
     /**
@@ -122,9 +122,9 @@ class Value implements ValueInterface
     {
         return
             $this->isNull() ? $default :
-            $this->isInt() ? $this->value :
-            $convert ? intval($this->value) :
-            $default;
+            ($this->isInt() ? $this->value :
+            ($convert ? intval($this->value) :
+            $default));
     }
 
     /**
@@ -141,9 +141,9 @@ class Value implements ValueInterface
     {
         return
             $this->isNull() ? $default :
-            $this->isString() ? $this->value :
-            $convert ? strval($this->value) :
-            $default;
+            ($this->isString() ? $this->value :
+            ($convert ? strval($this->value) :
+            $default));
     }
 
     /**
@@ -180,9 +180,9 @@ class Value implements ValueInterface
     {
         return
             $this->isNull() ? $default :
-            $this->isString() ? trim($this->value, $charlist) :
-            $convert ? trim(strval($this->value), $charlist) :
-            $default;
+            ($this->isString() ? trim($this->value, $charlist) :
+            ($convert ? trim(strval($this->value), $charlist) :
+            $default));
     }
 
     /**
