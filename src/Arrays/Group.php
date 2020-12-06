@@ -76,14 +76,12 @@ class Group
             array_push($result[$offset], $item);
         }
 
-        if (!empty($selectors)) {
-            array_walk(
-                $result,
-                function (&$value) use ($selectors) {
-                    $value = self::group($value, $selectors);
-                }
-            );
-        }
+        array_walk(
+            $result,
+            function (&$value) use ($selectors) {
+                $value = self::group($value, $selectors);
+            }
+        );
 
         return $result;
     }
