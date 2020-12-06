@@ -2,6 +2,7 @@
 
 namespace AntonioKadid\WAPPKitCore\Arrays;
 
+use AntonioKadid\WAPPKitCore\Data\Comparer;
 use AntonioKadid\WAPPKitCore\Flag;
 
 class Sort
@@ -20,9 +21,19 @@ class Sort
     /**
      * @param array $array
      */
-    public function __construct(array &$array)
+    private function __construct(array &$array)
     {
         $this->array = &$array;
+    }
+
+    /**
+     * @param array $array
+     *
+     * @return Sort
+     */
+    public static function array(array &$array): Sort
+    {
+        return new Sort($array);
     }
 
     /**
@@ -64,7 +75,7 @@ class Sort
     {
         usort(
             $this->array,
-            function ($item1, $item2) {
+            function ($item1, $item2): int {
                 return self::compare($item1, $item2, $this->modifiers);
             }
         );
@@ -98,11 +109,10 @@ class Sort
             ) :
             Comparer::generic($value1, $value2);
 
-        return $result === 0 ?
-            self::compare($item1, $item2, $modifiers) :
-            Flag::exists($flags, self::FLAG_ORDER_DESC) ?
-                -$result :
-                $result;
+        return
+            $result === 0 ? self::compare($item1, $item2, $modifiers) :
+            (Flag::exists($flags, self::FLAG_ORDER_DESC) ? -$result :
+            $result);
     }
 
     /**

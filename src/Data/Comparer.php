@@ -77,8 +77,9 @@ class Comparer
             $result = $natural ? strnatcasecmp($value1, $value2) : strcasecmp($value1, $value2);
         }
 
-        return $result === 0 ? 0 :
-         $result < 0 ? -1 :
-         1;
+        return
+            $result === 0 ? 0 :
+            ($result < 0 ? -1 :
+            1);
     }
 }
