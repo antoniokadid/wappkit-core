@@ -16,7 +16,7 @@ class Path
      *
      * @return string
      */
-    public static function combine(...$paths): string
+    public static function combine(string ...$paths): string
     {
         return implode(DIRECTORY_SEPARATOR, $paths);
     }
