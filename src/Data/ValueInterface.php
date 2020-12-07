@@ -12,7 +12,6 @@ use DateTime;
 interface ValueInterface
 {
     /**
-     * 
      * Get the value at as array.
      *
      * @param null|array $default

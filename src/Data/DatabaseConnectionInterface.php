@@ -5,7 +5,7 @@ namespace AntonioKadid\WAPPKitCore\Data;
 use AntonioKadid\WAPPKitCore\Data\Exceptions\DatabaseException;
 
 /**
- * Interface IDatabaseConnection.
+ * Interface DatabaseConnectionInterface.
  *
  * @package AntonioKadid\WAPPKitCore\Data
  */
