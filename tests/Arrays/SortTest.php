@@ -42,5 +42,28 @@ final class SortTest extends TestCase
             'decline',
             'century',
         ], $array);
+
+        $array = [
+            ['name' => 'Name 1', 'country' => 'Cyprus', 'city' => 'Paphos'],
+            ['name' => 'Name 2', 'country' => 'Cyprus', 'city' => 'Nicosia'],
+            ['name' => 'Name 3', 'country' => 'Cyprus', 'city' => 'Nicosia'],
+            ['name' => 'Name 4', 'country' => 'Greece', 'city' => 'Athens'],
+            ['name' => 'Name 5', 'country' => 'Greece', 'city' => 'Athens'],
+            ['name' => 'Name 6', 'country' => 'Greece', 'city' => 'Thessaloniki']
+        ];
+
+        Sort::array($array)
+            ->desc(function(array $item) { return $item['country']; })
+            ->asc(function(array $item) { return $item['city']; })
+            ->go();
+
+        assertEquals([
+            ['name' => 'Name 4', 'country' => 'Greece', 'city' => 'Athens'],
+            ['name' => 'Name 5', 'country' => 'Greece', 'city' => 'Athens'],
+            ['name' => 'Name 6', 'country' => 'Greece', 'city' => 'Thessaloniki'],
+            ['name' => 'Name 2', 'country' => 'Cyprus', 'city' => 'Nicosia'],
+            ['name' => 'Name 3', 'country' => 'Cyprus', 'city' => 'Nicosia'],
+            ['name' => 'Name 1', 'country' => 'Cyprus', 'city' => 'Paphos'],
+        ],$array);
     }
 }
