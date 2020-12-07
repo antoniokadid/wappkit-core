@@ -159,6 +159,43 @@ class TextCase
     }
 
     /**
+     * @param string $string
+     *
+     * @return TextCase
+     */
+    public function append(string $string): TextCase
+    {
+        $parts = self::dismantle($string);
+
+        foreach ($parts as $part) {
+            array_push($this->parts, $part);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param string $string
+     *
+     * @return TextCase
+     */
+    public function prepend(string $string): TextCase
+    {
+        $parts = self::dismantle($string);
+        if (empty($parts)) {
+            return $this;
+        }
+
+        $parts = array_reverse($parts, false);
+
+        foreach ($parts as $part) {
+            array_unshift($this->parts, $part);
+        }
+
+        return $this;
+    }
+
+    /**
      * Convert to camelCase.
      *
      * @return string
@@ -272,6 +309,7 @@ class TextCase
     {
         return strtoupper(implode('', $this->parts));
     }
+
 
     /**
      * Attempt to take apart a string.

@@ -9,6 +9,15 @@ use PHPUnit\Framework\TestCase;
 
 class TextCaseTest extends TestCase
 {
+    public function testAppend()
+    {
+        $case = new TextCase('HelloWorld');
+
+        $case->append('this_is_an_example')
+            ->append('of-appending-text');
+
+        assertEquals('helloWorldThisIsAnExampleOfAppendingText', $case->toCamelCase());
+    }
     public function testIdentify()
     {
         $text = 'antonioKadidIsTesting';
@@ -43,6 +52,16 @@ class TextCaseTest extends TestCase
 
         $text = 'Antonio@Kadid--Is-Testing';
         assertEquals(TextCase::UNKNOWN, TextCase::identify($text));
+    }
+
+    public function testPrepend()
+    {
+        $case = new TextCase('HelloWorld');
+
+        $case->prepend('my_first')
+            ->prepend('welcome-to');
+
+        assertEquals('welcome-to-my-first-hello-world', $case->toKebabCase());
     }
 
     public function testToCamelCase()
