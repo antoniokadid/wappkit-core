@@ -22,8 +22,8 @@ class CURLOptions
     public $connectTimeout = 0;
     /** @var int */
     public $executionTimeout = 0;
-    /** @var Headers */
-    public $headers = null;
+    /** @var array */
+    public $headers = [];
     /** @var bool */
     public $verifyCertificateStatus = false;
     /** @var bool */
@@ -37,7 +37,7 @@ class CURLOptions
     public function setup($curl): void
     {
         if ($this->headers != null) {
-            curl_setopt($curl, CURLOPT_HTTPHEADER, $this->headers->asCURLHeaders());
+            curl_setopt($curl, CURLOPT_HTTPHEADER, Headers::asCURLHeaders($this->headers));
         }
 
         // SSL

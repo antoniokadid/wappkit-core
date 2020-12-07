@@ -24,8 +24,8 @@ abstract class Response implements ResponseInterface
         http_response_code($this->httpStatus);
 
         $headers = $this->headers();
-        if ($headers != null) {
-            $headers->outputHeaders();
+        if (is_array($headers)) {
+            Headers::outputHeaders($headers);
         }
 
         $body = $this->body();

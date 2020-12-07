@@ -11,6 +11,11 @@ use AntonioKadid\WAPPKitCore\HTTP\Exceptions\NotFoundException;
  */
 final class Router
 {
+    private const ROUTE_TYPE_CALLABLE = 'callable';
+    private const ROUTE_TYPE_CLASS    = 'class';
+    private const ROUTE_TYPE_FILE     = 'file';
+    private const ROUTE_TYPE_HANDLER  = 'handler';
+
     /** @var array */
     private static $registry = [];
 
@@ -31,26 +36,36 @@ final class Router
             $route = self::$registry[$regex];
 
             switch ($route['type']) {
-                case 'psr4Class':
-                    $interfaces = class_implements($route['class']);
+                case self::ROUTE_TYPE_CALLABLE:
+                    return call_user_func_array($route['callable'], [$method, $uri, $params]);
+                    break;
+                case self::ROUTE_TYPE_CLASS:
+                    if (!class_exists($route['class'], true)) {
+                        break;
+                    }
+
+                    $interfaces = class_implements($route['class'], true);
                     if (array_key_exists(RouteHandlerInterface::class, $interfaces)) {
                         $route = new $route['class']();
                     }
 
                     break;
-                case 'handler':
-                    if (!is_a($route['instance'], RouteHandlerInterface::class)) {
-                        $route = $route['instance'];
+                case self::ROUTE_TYPE_FILE:
+                    require_once $route['file'];
+
+                    if (!class_exists($route['class'], true)) {
+                        break;
+                    }
+
+                    $interfaces = class_implements($route['class'], true);
+                    if (array_key_exists(RouteHandlerInterface::class, $interfaces)) {
+                        $route = new $route['class']();
                     }
 
                     break;
-                case 'fileClass':
-                    require_once $route['file'];
-                    if (class_exists($route['class'], true)) {
-                        $interfaces = class_implements($route['class']);
-                        if (array_key_exists(RouteHandlerInterface::class, $interfaces)) {
-                            $route = new $route['class']();
-                        }
+                case self::ROUTE_TYPE_HANDLER:
+                    if (!is_a($route['instance'], RouteHandlerInterface::class)) {
+                        $route = $route['instance'];
                     }
 
                     break;
@@ -68,33 +83,46 @@ final class Router
     }
 
     /**
+     * Register a class that will be loaded based on internal PSR-4 defined namespaces.
+     *
+     * @param string $regEx
+     * @param string $class
+     */
+    public static function register(string $regEx, string $class): void
+    {
+        if (!array_key_exists($regEx, self::$registry)) {
+            self::$registry[$regEx] = ['type' => self::ROUTE_TYPE_CLASS, 'class' => $class];
+        }
+    }
+
+    /**
+     * Register a callable that will be executed.
+     *
+     * @param string   $regex
+     * @param callable $callable
+     */
+    public static function registerCallable(string $regex, callable $callable): void
+    {
+        if (!array_key_exists($regex, self::$registry)) {
+            self::$registry[$regex] = ['type' => self::ROUTE_TYPE_CALLABLE, 'callable' => $callable];
+        }
+    }
+
+    /**
      * Register a class that will be loaded once the $filename is loaded.
      *
      * @param string $regex
      * @param string $filename
      * @param string $class
      */
-    public static function registerFile(string $regex, string $filename, string $class)
+    public static function registerFile(string $regex, string $filename, string $class): void
     {
         if (!is_readable($filename)) {
             return;
         }
 
         if (!array_key_exists($regex, self::$registry)) {
-            self::$registry[$regex] = ['type' => 'fileClass', 'class' => $class, 'file' => $filename];
-        }
-    }
-
-    /**
-     * Register a class that will be loaded based on internal PSR-4 defined namespaces.
-     *
-     * @param string $regEx
-     * @param string $class
-     */
-    public static function registerPs4(string $regEx, string $class)
-    {
-        if (!array_key_exists($regEx, self::$registry)) {
-            self::$registry[$regEx] = ['type' => 'psr4Class', 'class' => $class];
+            self::$registry[$regex] = ['type' => self::ROUTE_TYPE_FILE, 'file' => $filename, 'class' => $class];
         }
     }
 
@@ -104,10 +132,10 @@ final class Router
      * @param string                $regEx
      * @param RouteHandlerInterface $routeHandler
      */
-    public static function registerRouteHandler(string $regEx, RouteHandlerInterface $routeHandler)
+    public static function registerRouteHandler(string $regEx, RouteHandlerInterface $routeHandler): void
     {
         if (!array_key_exists($regEx, self::$registry)) {
-            self::$registry[$regEx] = ['type' => 'handler', 'instance' => $routeHandler];
+            self::$registry[$regEx] = ['type' => self::ROUTE_TYPE_HANDLER, 'instance' => $routeHandler];
         }
     }
 }

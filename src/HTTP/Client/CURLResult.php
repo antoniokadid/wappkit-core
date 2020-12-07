@@ -2,8 +2,6 @@
 
 namespace AntonioKadid\WAPPKitCore\HTTP\Client;
 
-use AntonioKadid\WAPPKitCore\HTTP\Headers;
-
 /**
  * Class CURLResult.
  *
@@ -13,7 +11,7 @@ class CURLResult
 {
     /** @var string */
     private $body;
-    /** @var Headers */
+    /** @var array */
     private $headers;
     /** @var int */
     private $responseCode;
@@ -21,11 +19,11 @@ class CURLResult
     /**
      * CURLResult constructor.
      *
-     * @param int     $responseCode
-     * @param Headers $headers
-     * @param string  $body
+     * @param int    $responseCode
+     * @param array  $headers
+     * @param string $body
      */
-    public function __construct(int $responseCode, Headers $headers, string $body)
+    public function __construct(int $responseCode, array $headers, string $body)
     {
         $this->responseCode = $responseCode;
         $this->headers      = $headers;
@@ -41,9 +39,9 @@ class CURLResult
     }
 
     /**
-     * @return Headers
+     * @return array
      */
-    public function getHeaders(): Headers
+    public function getHeaders(): array
     {
         return $this->headers;
     }

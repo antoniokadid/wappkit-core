@@ -2,58 +2,21 @@
 
 namespace AntonioKadid\WAPPKitCore\HTTP\Request;
 
-use AntonioKadid\WAPPKitCore\Collections\Map;
-
 /**
  * Class Request.
  *
  * @package AntonioKadid\WAPPKitCore\HTTP\Request
  */
-class Request extends Map
+class Request
 {
     /**
-     * Request constructor.
-     *
-     * @param array $source An array to initialize request. Array keys are preserved. [optional]
-     */
-    private function __construct(array $source = [])
-    {
-        parent::__construct($source);
-    }
-
-    /**
      * @return Request
      *
      * @SuppressWarnings(PHPMD.Superglobals)
      */
-    public static function get(): Request
+    public static function get(): array
     {
-        return new Request($_GET);
-    }
-
-    /**
-     * @return Request
-     */
-    public static function json(): Request
-    {
-        $data = json_decode(
-            file_get_contents('php://input'),
-            true,
-            512,
-            JSON_THROW_ON_ERROR
-        );
-
-        return new Request(($data === null || !is_array($data)) ? [] : $data);
-    }
-
-    /**
-     * @return Request
-     *
-     * @SuppressWarnings(PHPMD.Superglobals)
-     */
-    public static function post(): Request
-    {
-        return new Request($_POST);
+        return $_GET;
     }
 
     /**
@@ -61,7 +24,7 @@ class Request extends Map
      *
      * @SuppressWarnings(PHPMD.Superglobals)
      */
-    public function getMethod(): string
+    public static function getMethod(): string
     {
         return $_SERVER['REQUEST_METHOD'];
     }
@@ -71,7 +34,7 @@ class Request extends Map
      *
      * @SuppressWarnings(PHPMD.Superglobals)
      */
-    public function getQueryString(): string
+    public static function getQueryString(): string
     {
         return $_SERVER['QUERY_STRING'];
     }
@@ -81,7 +44,7 @@ class Request extends Map
      *
      * @SuppressWarnings(PHPMD.Superglobals)
      */
-    public function getRemoteIp(): ?string
+    public static function getRemoteIp(): ?string
     {
         if (isset($_SERVER['HTTP_CLIENT_IP']) && !empty($_SERVER['HTTP_CLIENT_IP'])) {
             return $_SERVER['HTTP_CLIENT_IP'];
@@ -103,7 +66,7 @@ class Request extends Map
      *
      * @SuppressWarnings(PHPMD.Superglobals)
      */
-    public function getUri(): string
+    public static function getUri(): string
     {
         return $_SERVER['REQUEST_URI'];
     }
@@ -113,8 +76,33 @@ class Request extends Map
      *
      * @SuppressWarnings(PHPMD.Superglobals)
      */
-    public function getUserAgent(): string
+    public static function getUserAgent(): string
     {
         return $_SERVER['HTTP_USER_AGENT'];
+    }
+
+    /**
+     * @return Request
+     */
+    public static function json(): array
+    {
+        $data = json_decode(
+            file_get_contents('php://input'),
+            true,
+            512,
+            JSON_THROW_ON_ERROR
+        );
+
+        return ($data === null || !is_array($data)) ? [] : $data;
+    }
+
+    /**
+     * @return Request
+     *
+     * @SuppressWarnings(PHPMD.Superglobals)
+     */
+    public static function post(): array
+    {
+        return $_POST;
     }
 }

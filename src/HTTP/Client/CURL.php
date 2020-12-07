@@ -2,6 +2,7 @@
 
 namespace AntonioKadid\WAPPKitCore\HTTP\Client;
 
+use AntonioKadid\WAPPKitCore\Arrays\Offset;
 use AntonioKadid\WAPPKitCore\HTTP\Exceptions\CURLException;
 use AntonioKadid\WAPPKitCore\HTTP\Headers;
 use AntonioKadid\WAPPKitCore\HTTP\Method;
@@ -184,10 +185,10 @@ class CURL
         }
 
         if ($options->headers == null) {
-            $options->headers = new Headers();
+            $options->headers = [];
         }
 
-        if ($options->headers->getTrimString(Headers::CONTENT_TYPE) === self::CONTENT_TYPE_JSON) {
+        if (Offset::get($options->headers, Headers::CONTENT_TYPE)->getTrimString() === self::CONTENT_TYPE_JSON) {
             $postData = json_encode($data, JSON_THROW_ON_ERROR);
 
             curl_setopt($this->curlRef, CURLOPT_POSTFIELDS, $postData);

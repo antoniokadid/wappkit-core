@@ -2,8 +2,6 @@
 
 namespace AntonioKadid\WAPPKitCore\HTTP;
 
-use AntonioKadid\WAPPKitCore\Collections\Map;
-
 /**
  * Class Headers.
  *
@@ -11,7 +9,7 @@ use AntonioKadid\WAPPKitCore\Collections\Map;
  *
  * @url https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers
  */
-class Headers extends Map
+class Headers
 {
     /** @var string The size of the resource, in decimal number of bytes. */
     public const CONTENT_LENGTH = 'Content-Length';
@@ -20,16 +18,36 @@ class Headers extends Map
     public const CONTENT_TYPE = 'Content-Type';
 
     /**
+     * @return array
+     */
+    public static function asCURLHeaders(array $headers): array
+    {
+        if (empty($headers)) {
+            return $headers;
+        }
+
+        $result = [];
+
+        foreach ($headers as $key => $value) {
+            $result[] = sprintf('%s: %s', $key, $value);
+        }
+
+        return $result;
+    }
+
+    /**
      * @param string $headers
      *
-     * @return Headers
+     * @return array
      */
-    public static function fromString(string $headers): Headers
+    public static function fromString(string $headers): array
     {
-        $parts = preg_split('/\r\n|\r|\n/', $headers);
+        $parts = preg_split('/\r\n|\r|\n/', $headers, -1, PREG_SPLIT_NO_EMPTY);
 
-        $headers = new Headers();
+        $headers = [];
         foreach ($parts as $part) {
+            $matches = [];
+
             $result = preg_match('/^([^:]+):\s*(.*)$/', $part, $matches);
             if ($result === false || $result == 0) {
                 continue;
@@ -42,33 +60,15 @@ class Headers extends Map
     }
 
     /**
-     * @return array
-     */
-    public function asCURLHeaders(): array
-    {
-        if (empty($this->source)) {
-            return $this->source;
-        }
-
-        $result = [];
-
-        foreach ($this->source as $key => $value) {
-            $result[] = sprintf('%s: %s', $key, $value);
-        }
-
-        return $result;
-    }
-
-    /**
      * @return bool
      */
-    public function outputHeaders(): bool
+    public static function outputHeaders(array $headers): bool
     {
         if (headers_sent()) {
             return false;
         }
 
-        foreach ($this->source as $key => $value) {
+        foreach ($headers as $key => $value) {
             header(sprintf('%s: %s', $key, $value));
         }
 

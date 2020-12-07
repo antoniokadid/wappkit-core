@@ -2,15 +2,17 @@
 
 namespace AntonioKadid\WAPPKitCore\Programmability;
 
-use AntonioKadid\WAPPKitCore\Collections\Map;
+use AntonioKadid\WAPPKitCore\Arrays\Offset;
 
 /**
  * Class ExecutionContext.
  *
  * @package AntonioKadid\WAPPKitCore\Programmability
  */
-class ExecutionContext extends Map
+class ExecutionContext
 {
+    /** @var */
+    private $parameters = null;
     /** @var ExecutionContext */
     private $parentContext = null;
 
@@ -22,9 +24,16 @@ class ExecutionContext extends Map
      */
     public function __construct(array $parameters, ?ExecutionContext $parentContext = null)
     {
-        parent::__construct($parameters);
-
+        $this->parameters    = $parameters;
         $this->parentContext = $parentContext;
+    }
+
+    /**
+     * @return array
+     */
+    public function getParameters(): Offset
+    {
+        return new Offset($this->parameters);
     }
 
     /**
