@@ -36,6 +36,14 @@ class TextCase
     }
 
     /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return implode(' ', $this->parts);
+    }
+
+    /**
      * Attempt to detect a valid text case.
      *
      * @param string $text
