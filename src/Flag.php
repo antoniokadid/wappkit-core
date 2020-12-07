@@ -30,4 +30,15 @@ class Flag
     {
         return ($flags & $flag) === $flag;
     }
+
+    /**
+     * @param int $flags
+     * @param int $flag
+     *
+     * @return int
+     */
+    public static function remove(int $flags, int $flag): int
+    {
+        return $flags & ~$flag;
+    }
 }
