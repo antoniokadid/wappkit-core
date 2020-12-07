@@ -1,13 +1,13 @@
 <?php
 
-namespace AntonioKadid\WAPPKitCore\DAL;
+namespace AntonioKadid\WAPPKitCore\Data;
 
-use AntonioKadid\WAPPKitCore\DAL\Exceptions\DatabaseException;
+use AntonioKadid\WAPPKitCore\Data\Exceptions\DatabaseException;
 
 /**
  * Interface IDatabaseConnection.
  *
- * @package AntonioKadid\WAPPKitCore\DAL
+ * @package AntonioKadid\WAPPKitCore\Data
  */
 interface DatabaseConnectionInterface
 {

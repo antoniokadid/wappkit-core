@@ -1,6 +1,6 @@
 <?php
 
-namespace AntonioKadid\WAPPKitCore\DAL\Exceptions;
+namespace AntonioKadid\WAPPKitCore\Data\Exceptions;
 
 use AntonioKadid\WAPPKitCore\Exceptions\WAPPKitCoreException;
 use Throwable;
@@ -8,7 +8,7 @@ use Throwable;
 /**
  * Class DatabaseException.
  *
- * @package AntonioKadid\WAPPKitCore\DAL\Exceptions
+ * @package AntonioKadid\WAPPKitCore\Data\Exceptions
  */
 class DatabaseException extends WAPPKitCoreException
 {

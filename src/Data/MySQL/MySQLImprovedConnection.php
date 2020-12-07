@@ -1,16 +1,16 @@
 <?php
 
-namespace AntonioKadid\WAPPKitCore\DAL\MySQL;
+namespace AntonioKadid\WAPPKitCore\Data\MySQL;
 
-use AntonioKadid\WAPPKitCore\DAL\DatabaseConnectionInterface;
-use AntonioKadid\WAPPKitCore\DAL\Exceptions\DatabaseException;
+use AntonioKadid\WAPPKitCore\Data\DatabaseConnectionInterface;
+use AntonioKadid\WAPPKitCore\Data\Exceptions\DatabaseException;
 use mysqli;
 use mysqli_stmt;
 
 /**
  * Class MySQLImprovedConnection.
  *
- * @package AntonioKadid\WAPPKitCore\DAL\MySQL
+ * @package AntonioKadid\WAPPKitCore\Data\MySQL
  */
 class MySQLImprovedConnection implements DatabaseConnectionInterface
 {

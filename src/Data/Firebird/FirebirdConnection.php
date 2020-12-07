@@ -1,14 +1,14 @@
 <?php
 
-namespace AntonioKadid\WAPPKitCore\DAL\Firebird;
+namespace AntonioKadid\WAPPKitCore\Data\Firebird;
 
-use AntonioKadid\WAPPKitCore\DAL\DatabaseConnectionInterface;
-use AntonioKadid\WAPPKitCore\DAL\Exceptions\DatabaseException;
+use AntonioKadid\WAPPKitCore\Data\DatabaseConnectionInterface;
+use AntonioKadid\WAPPKitCore\Data\Exceptions\DatabaseException;
 
 /**
  * Class FirebirdConnection.
  *
- * @package AntonioKadid\WAPPKitCore\DAL\Firebird
+ * @package AntonioKadid\WAPPKitCore\Data\Firebird
  */
 class FirebirdConnection implements DatabaseConnectionInterface
 {

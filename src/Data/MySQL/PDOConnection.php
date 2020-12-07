@@ -1,9 +1,9 @@
 <?php
 
-namespace AntonioKadid\WAPPKitCore\DAL\MySQL;
+namespace AntonioKadid\WAPPKitCore\Data\MySQL;
 
-use AntonioKadid\WAPPKitCore\DAL\DatabaseConnectionInterface;
-use AntonioKadid\WAPPKitCore\DAL\Exceptions\DatabaseException;
+use AntonioKadid\WAPPKitCore\Data\DatabaseConnectionInterface;
+use AntonioKadid\WAPPKitCore\Data\Exceptions\DatabaseException;
 use PDO;
 use PDOException;
 
