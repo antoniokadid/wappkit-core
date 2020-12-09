@@ -79,7 +79,7 @@ final class Router
             return $route->follow($method, $uri, $params);
         }
 
-        throw new NotFoundException($method, $uri);
+        throw new NotFoundException($method, $uri, $params);
     }
 
     /**

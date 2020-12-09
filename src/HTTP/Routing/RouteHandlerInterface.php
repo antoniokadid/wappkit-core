@@ -12,9 +12,9 @@ interface RouteHandlerInterface
     /**
      * @param string $method
      * @param string $uri
-     * @param array  $uriParams
+     * @param array  $parameters
      *
      * @return mixed
      */
-    public function follow(string $method, string $uri, array $uriParams);
+    public function follow(string $method, string $uri, array $parameters);
 }

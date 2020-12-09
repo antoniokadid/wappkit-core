@@ -14,6 +14,8 @@ class RouteException extends WAPPKitCoreException
 {
     /** @var string */
     private $method;
+    /** @var array */
+    private $parameters = [];
     /** @var string */
     private $uri;
 
@@ -22,16 +24,24 @@ class RouteException extends WAPPKitCoreException
      *
      * @param string         $method
      * @param string         $uri
+     * @param array          $parameters
      * @param string         $message
      * @param int            $code
      * @param null|Throwable $previous
      */
-    public function __construct(string $method, string $uri, string $message, int $code, Throwable $previous = null)
-    {
+    public function __construct(
+        string $method,
+        string $uri,
+        array $parameters = [],
+        string $message = '',
+        int $code = 0,
+        ?Throwable $previous = null
+    ) {
         parent::__construct($message, $code, $previous);
 
-        $this->method = $method;
-        $this->uri    = $uri;
+        $this->method     = $method;
+        $this->uri        = $uri;
+        $this->parameters = $parameters;
     }
 
     /**
@@ -40,6 +50,14 @@ class RouteException extends WAPPKitCoreException
     public function getMethod(): string
     {
         return $this->method;
+    }
+
+    /**
+     * @return array
+     */
+    public function getParameters(): array
+    {
+        return $this->parameters;
     }
 
     /**

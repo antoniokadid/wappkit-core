@@ -17,10 +17,11 @@ class MethodNotAllowedException extends RouteException
      *
      * @param string         $method
      * @param string         $uri
+     * @param array          $parameters
      * @param null|Throwable $previous
      */
-    public function __construct(string $method, string $uri, Throwable $previous = null)
+    public function __construct(string $method, string $uri, array $parameters = [], ?Throwable $previous = null)
     {
-        parent::__construct($method, $uri, 'Method Not Allowed.', Status::METHOD_NOT_ALLOWED, $previous);
+        parent::__construct($method, $uri, $parameters, 'Method Not Allowed.', Status::METHOD_NOT_ALLOWED, $previous);
     }
 }

@@ -4,22 +4,23 @@ namespace AntonioKadid\WAPPKitCore\HTTP\Routing;
 
 use AntonioKadid\WAPPKitCore\HTTP\Exceptions\ForbiddenException;
 use AntonioKadid\WAPPKitCore\HTTP\Exceptions\MethodNotAllowedException;
+use AntonioKadid\WAPPKitCore\HTTP\Exceptions\NotImplementedException;
 use AntonioKadid\WAPPKitCore\HTTP\Exceptions\UnauthorizedException;
 use Throwable;
 
 /**
- * Class Route.
+ * Class RouteHandler.
  *
  * @package AntonioKadid\WAPPKitCore\HTTP\Routing
  */
-abstract class AbstractRouteHandler implements RouteHandlerInterface
+class RouteHandler implements RouteHandlerInterface
 {
     /** @var string */
     private $method;
+    /** @var array */
+    private $parameters;
     /** @var string */
     private $uri;
-    /** @var array */
-    private $uriParams;
 
     /**
      * @return bool
@@ -50,30 +51,30 @@ abstract class AbstractRouteHandler implements RouteHandlerInterface
     /**
      * {@inheritdoc}
      */
-    public function follow(string $method, string $uri, array $uriParams)
+    final public function follow(string $method, string $uri, array $parameters)
     {
-        $this->method    = $method;
-        $this->uri       = $uri;
-        $this->uriParams = $uriParams;
+        $this->method     = $method;
+        $this->uri        = $uri;
+        $this->parameters = $parameters;
 
         try {
             if ($this->methodAllowed() !== true) {
-                throw new MethodNotAllowedException($method, $uri);
+                throw new MethodNotAllowedException($method, $uri, $parameters);
             }
 
-            if ($this->uriParametersValid() !== true) {
+            if ($this->validate() !== true) {
                 return null;
             }
 
             if ($this->authorized() !== true) {
-                throw new UnauthorizedException($method, $uri);
+                throw new UnauthorizedException($method, $uri, $parameters);
             }
 
             if ($this->accessAllowed() !== true) {
-                throw new ForbiddenException($method, $uri);
+                throw new ForbiddenException($method, $uri, $parameters);
             }
 
-            return $this->doWork();
+            return $this->work();
         } catch (Throwable $throwable) {
             $this->catch($throwable);
         }
@@ -84,29 +85,29 @@ abstract class AbstractRouteHandler implements RouteHandlerInterface
     /**
      * @return string
      */
-    public function getMethod(): string
+    final public function getMethod(): string
     {
         return $this->method;
     }
 
     /**
+     * @return array
+     */
+    final public function getParameters(): array
+    {
+        return $this->parameters;
+    }
+
+    /**
      * @return string
      */
-    public function getUri(): string
+    final public function getUri(): string
     {
         return $this->uri;
     }
 
     /**
-     * @return array
-     */
-    public function getUriParams(): array
-    {
-        return $this->uriParams;
-    }
-
-    /**
-     * {@inheritdoc}
+     * @return bool
      */
     public function methodAllowed(): bool
     {
@@ -116,7 +117,7 @@ abstract class AbstractRouteHandler implements RouteHandlerInterface
     /**
      * @return bool
      */
-    public function uriParametersValid(): bool
+    public function validate(): bool
     {
         return true;
     }
@@ -124,5 +125,8 @@ abstract class AbstractRouteHandler implements RouteHandlerInterface
     /**
      * @return mixed
      */
-    abstract protected function doWork();
+    protected function work()
+    {
+        throw new NotImplementedException($this->method, $this->uri, $this->parameters);
+    }
 }
