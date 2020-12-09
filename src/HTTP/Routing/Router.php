@@ -85,57 +85,65 @@ final class Router
     /**
      * Register a class that will be loaded based on internal PSR-4 defined namespaces.
      *
-     * @param string $regEx
-     * @param string $class
+     * @param string   $class
+     * @param string[] $routeRegexs
      */
-    public static function register(string $regEx, string $class): void
+    public static function register(string $class, string ...$routeRegexs): void
     {
-        if (!array_key_exists($regEx, self::$registry)) {
-            self::$registry[$regEx] = ['type' => self::ROUTE_TYPE_CLASS, 'class' => $class];
+        foreach ($routeRegexs as $routeRegex) {
+            if (!array_key_exists($routeRegex, self::$registry)) {
+                self::$registry[$routeRegex] = ['type' => self::ROUTE_TYPE_CLASS, 'class' => $class];
+            }
         }
     }
 
     /**
      * Register a callable that will be executed.
      *
-     * @param string   $regex
-     * @param callable $callable
+     * @param string   $class
+     * @param string[] $routeRegexs
      */
-    public static function registerCallable(string $regex, callable $callable): void
+    public static function registerCallable(callable $callable, string ...$routeRegexs): void
     {
-        if (!array_key_exists($regex, self::$registry)) {
-            self::$registry[$regex] = ['type' => self::ROUTE_TYPE_CALLABLE, 'callable' => $callable];
+        foreach ($routeRegexs as $routeRegex) {
+            if (!array_key_exists($routeRegex, self::$registry)) {
+                self::$registry[$routeRegex] = ['type' => self::ROUTE_TYPE_CALLABLE, 'callable' => $callable];
+            }
         }
     }
 
     /**
      * Register a class that will be loaded once the $filename is loaded.
      *
-     * @param string $regex
-     * @param string $filename
-     * @param string $class
+     * @param string   $filename
+     * @param string   $class
+     * @param string[] $routeRegexs
      */
-    public static function registerFile(string $regex, string $filename, string $class): void
+    public static function registerFile(string $filename, string $class, string ...$routeRegexs): void
     {
         if (!is_readable($filename)) {
             return;
         }
 
-        if (!array_key_exists($regex, self::$registry)) {
-            self::$registry[$regex] = ['type' => self::ROUTE_TYPE_FILE, 'file' => $filename, 'class' => $class];
+        foreach ($routeRegexs as $routeRegex) {
+            if (!array_key_exists($routeRegex, self::$registry)) {
+                self::$registry[$routeRegex] = ['type' => self::ROUTE_TYPE_FILE, 'file' => $filename, 'class' => $class];
+            }
         }
     }
 
     /**
      * Register an object that implements RouteHandlerInterface.
      *
-     * @param string                $regEx
      * @param RouteHandlerInterface $routeHandler
+     * @param string[]              $routeRegexs
      */
-    public static function registerRouteHandler(string $regEx, RouteHandlerInterface $routeHandler): void
+    public static function registerRouteHandler(RouteHandlerInterface $routeHandler, string ...$routeRegexs): void
     {
-        if (!array_key_exists($regEx, self::$registry)) {
-            self::$registry[$regEx] = ['type' => self::ROUTE_TYPE_HANDLER, 'instance' => $routeHandler];
+        foreach ($routeRegexs as $routeRegex) {
+            if (!array_key_exists($routeRegex, self::$registry)) {
+                self::$registry[$routeRegex] = ['type' => self::ROUTE_TYPE_HANDLER, 'instance' => $routeHandler];
+            }
         }
     }
 }

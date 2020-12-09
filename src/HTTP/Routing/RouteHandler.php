@@ -23,32 +23,6 @@ class RouteHandler implements RouteHandlerInterface
     private $uri;
 
     /**
-     * @return bool
-     */
-    public function accessAllowed(): bool
-    {
-        return true;
-    }
-
-    /**
-     * @return bool
-     */
-    public function authorized(): bool
-    {
-        return true;
-    }
-
-    /**
-     * @param Throwable $throwable
-     *
-     * @throws Throwable
-     */
-    public function catch(Throwable $throwable): void
-    {
-        throw $throwable;
-    }
-
-    /**
      * {@inheritdoc}
      */
     final public function follow(string $method, string $uri, array $parameters)
@@ -109,7 +83,7 @@ class RouteHandler implements RouteHandlerInterface
     /**
      * @return bool
      */
-    public function methodAllowed(): bool
+    protected function accessAllowed(): bool
     {
         return true;
     }
@@ -117,7 +91,33 @@ class RouteHandler implements RouteHandlerInterface
     /**
      * @return bool
      */
-    public function validate(): bool
+    protected function authorized(): bool
+    {
+        return true;
+    }
+
+    /**
+     * @param Throwable $throwable
+     *
+     * @throws Throwable
+     */
+    protected function catch(Throwable $throwable): void
+    {
+        throw $throwable;
+    }
+
+    /**
+     * @return bool
+     */
+    protected function methodAllowed(): bool
+    {
+        return true;
+    }
+
+    /**
+     * @return bool
+     */
+    protected function validate(): bool
     {
         return true;
     }
