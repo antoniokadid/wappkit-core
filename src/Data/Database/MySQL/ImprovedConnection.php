@@ -1,24 +1,24 @@
 <?php
 
-namespace AntonioKadid\WAPPKitCore\Data\MySQL;
+namespace AntonioKadid\WAPPKitCore\Data\Database\MySQL;
 
-use AntonioKadid\WAPPKitCore\Data\DatabaseConnectionInterface;
-use AntonioKadid\WAPPKitCore\Data\Exceptions\DatabaseException;
+use AntonioKadid\WAPPKitCore\Data\Database\ConnectionInterface;
+use AntonioKadid\WAPPKitCore\Data\Database\DatabaseException;
 use mysqli;
 use mysqli_stmt;
 
 /**
- * Class MySQLImprovedConnection.
+ * Class ImprovedConnection.
  *
- * @package AntonioKadid\WAPPKitCore\Data\MySQL
+ * @package AntonioKadid\WAPPKitCore\Data\Database\MySQL
  */
-class MySQLImprovedConnection implements DatabaseConnectionInterface
+class ImprovedConnection implements ConnectionInterface
 {
     /** @var mysqli */
     private $mysqli;
 
     /**
-     * MySQLImprovedConnection constructor.
+     * ImprovedConnection constructor.
      *
      * @param string $host
      * @param int    $port

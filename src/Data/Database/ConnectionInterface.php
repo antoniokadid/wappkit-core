@@ -1,15 +1,15 @@
 <?php
 
-namespace AntonioKadid\WAPPKitCore\Data;
+namespace AntonioKadid\WAPPKitCore\Data\Database;
 
 use AntonioKadid\WAPPKitCore\Data\Exceptions\DatabaseException;
 
 /**
- * Interface DatabaseConnectionInterface.
+ * Interface ConnectionInterface.
  *
- * @package AntonioKadid\WAPPKitCore\Data
+ * @package AntonioKadid\WAPPKitCore\Data\Database
  */
-interface DatabaseConnectionInterface
+interface ConnectionInterface
 {
     /**
      * Commit the active transaction.

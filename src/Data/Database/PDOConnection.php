@@ -1,18 +1,18 @@
 <?php
 
-namespace AntonioKadid\WAPPKitCore\Data\MySQL;
+namespace AntonioKadid\WAPPKitCore\Data\Database;
 
-use AntonioKadid\WAPPKitCore\Data\DatabaseConnectionInterface;
-use AntonioKadid\WAPPKitCore\Data\Exceptions\DatabaseException;
+use AntonioKadid\WAPPKitCore\Data\Database\ConnectionInterface;
+use AntonioKadid\WAPPKitCore\Data\Database\DatabaseException;
 use PDO;
 use PDOException;
 
 /**
  * Class PDOConnection.
  *
- * @package AntonioKadid\WAPPKitCore\Database\MySQL
+ * @package AntonioKadid\WAPPKitCore\Data\Database
  */
-class PDOConnection implements DatabaseConnectionInterface
+class PDOConnection implements ConnectionInterface
 {
     /** @var PDO */
     private $pdo;
@@ -20,37 +20,34 @@ class PDOConnection implements DatabaseConnectionInterface
     /**
      * PDOConnection constructor.
      *
-     * @param string $host
-     * @param int    $port
-     * @param string $dbName
+     * @param string $dsn
      * @param string $username
      * @param string $password
-     * @param string $encoding
      *
      * @throws DatabaseException
      */
-    public function __construct(
-        string $host,
-        int $port,
-        string $dbName,
-        string $username,
-        string $password,
-        string $encoding = 'utf8'
-    ) {
-        $dsn     = sprintf('mysql:host=%s;port=%d;dbname=%s;charset=%s', $host, $port, $dbName, $encoding);
-        $options = [
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-            PDO::ATTR_EMULATE_PREPARES   => false,
-            PDO::ATTR_CASE               => PDO::CASE_NATURAL,
-            PDO::ATTR_ERRMODE            => PDO::ERRMODE_SILENT,
-            PDO::ATTR_AUTOCOMMIT         => false
-        ];
-
+    public function __construct(string $dsn, string $username, string $password)
+    {
         try {
-            $this->pdo = new PDO($dsn, $username, $password, $options);
-            $this->pdo->beginTransaction();
+            $this->pdo = new PDO(
+                $dsn,
+                $username,
+                $password,
+                [
+                    PDO::ATTR_CASE               => PDO::CASE_NATURAL,
+                    PDO::ATTR_ERRMODE            => PDO::ERRMODE_SILENT,
+                    PDO::ATTR_ORACLE_NULLS       => PDO::NULL_NATURAL,
+                    PDO::ATTR_AUTOCOMMIT         => false,
+                    PDO::ATTR_EMULATE_PREPARES   => false,
+                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+                ]
+            );
         } catch (PDOException $pdoEx) {
             throw new DatabaseException($pdoEx->getMessage(), '', [], $pdoEx->getCode(), $pdoEx);
+        }
+
+        if (!$this->pdo->beginTransaction()) {
+            throw new DatabaseException($this->pdo->errorInfo()[2], '', [], $this->po->errorInfo()[1]);
         }
     }
 

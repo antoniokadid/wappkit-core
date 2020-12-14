@@ -1,16 +1,16 @@
 <?php
 
-namespace AntonioKadid\WAPPKitCore\Data\Firebird;
+namespace AntonioKadid\WAPPKitCore\Data\Database\Firebird;
 
-use AntonioKadid\WAPPKitCore\Data\DatabaseConnectionInterface;
-use AntonioKadid\WAPPKitCore\Data\Exceptions\DatabaseException;
+use AntonioKadid\WAPPKitCore\Data\Database\ConnectionInterface;
+use AntonioKadid\WAPPKitCore\Data\Database\DatabaseException;
 
 /**
  * Class FirebirdConnection.
  *
- * @package AntonioKadid\WAPPKitCore\Data\Firebird
+ * @package AntonioKadid\WAPPKitCore\Data\Database\Firebird
  */
-class FirebirdConnection implements DatabaseConnectionInterface
+class FirebirdConnection implements ConnectionInterface
 {
     private $connection;
 
@@ -24,14 +24,14 @@ class FirebirdConnection implements DatabaseConnectionInterface
         string $password,
         string $encoding = 'UTF-8'
     ) {
-        $connection = @ibase_connect("{$host}/{$port}:{$dbName}", $username, $password, $encoding);
+        $connection = ibase_connect("{$host}/{$port}:{$dbName}", $username, $password, $encoding);
         if ($connection === false) {
             throw new DatabaseException(sprintf('Unable to connect to %s', $dbName));
         }
 
         $this->connection = $connection;
 
-        $transaction = @ibase_trans(IBASE_DEFAULT, $this->connection);
+        $transaction = ibase_trans(IBASE_DEFAULT, $this->connection);
         if ($transaction === false) {
             throw new DatabaseException(sprintf('Unable to start transaction for %s', $dbName));
         }
@@ -44,22 +44,22 @@ class FirebirdConnection implements DatabaseConnectionInterface
         $this->rollback();
 
         if (is_resource($this->connection)) {
-            @ibase_close($this->connection);
+            ibase_close($this->connection);
         }
     }
 
     public function blob($value)
     {
-        $result = @ibase_blob_create($this->transaction);
+        $result = ibase_blob_create($this->transaction);
         if ($result === false) {
             throw new DatabaseException('Unable to create blob.');
         }
 
-        @ibase_blob_add($result, $value);
+        ibase_blob_add($result, $value);
 
-        $blobRef = @ibase_blob_close($result);
+        $blobRef = ibase_blob_close($result);
         if ($blobRef === false) {
-            @ibase_blob_cancel($result);
+            ibase_blob_cancel($result);
 
             throw new DatabaseException('Unable to create blob.');
         }
@@ -73,7 +73,7 @@ class FirebirdConnection implements DatabaseConnectionInterface
             return false;
         }
 
-        $result = @ibase_commit($this->transaction);
+        $result = ibase_commit($this->transaction);
         if ($result === false) {
             return false;
         }
@@ -85,7 +85,7 @@ class FirebirdConnection implements DatabaseConnectionInterface
 
     public function execute(string $sql, array $params = []): int
     {
-        $query = @ibase_prepare($this->connection, $this->transaction, $sql);
+        $query = ibase_prepare($this->connection, $this->transaction, $sql);
         if ($query === false) {
             throw new DatabaseException('Unable to prepare query.', $sql, $params);
         }
@@ -96,7 +96,7 @@ class FirebirdConnection implements DatabaseConnectionInterface
 
         array_unshift($params, $query);
 
-        $result = @call_user_func_array('ibase_execute', $params);
+        $result = call_user_func_array('ibase_execute', $params);
         if ($result === false) {
             throw new DatabaseException('Unable to execute query.', $sql, $params);
         }
@@ -117,7 +117,7 @@ class FirebirdConnection implements DatabaseConnectionInterface
 
     public function query(string $sql, array $params = []): array
     {
-        $query = @ibase_prepare($this->connection, $this->transaction, $sql);
+        $query = ibase_prepare($this->connection, $this->transaction, $sql);
         if ($query === false) {
             throw new DatabaseException('Unable to prepare query.', $sql, $params);
         }
@@ -128,17 +128,17 @@ class FirebirdConnection implements DatabaseConnectionInterface
 
         array_unshift($params, $query);
 
-        $result = @call_user_func_array('ibase_execute', $params);
+        $result = call_user_func_array('ibase_execute', $params);
         if ($result === false) {
             throw new DatabaseException('Unable to execute query.', $sql, $params);
         }
 
         $records = [];
-        while (($row = @ibase_fetch_assoc($result, IBASE_TEXT)) !== false) {
+        while (($row = ibase_fetch_assoc($result, IBASE_TEXT)) !== false) {
             $records[] = $row;
         }
 
-        @ibase_free_result($result);
+        ibase_free_result($result);
 
         return $records;
     }
@@ -149,7 +149,7 @@ class FirebirdConnection implements DatabaseConnectionInterface
             return false;
         }
 
-        @ibase_rollback($this->transaction);
+        ibase_rollback($this->transaction);
         $this->transaction = null;
 
         return true;
