@@ -36,8 +36,8 @@ class Image
         if (is_resource($resource)) {
             $this->resource = $resource;
             $this->type     = $type;
-            $this->width    = @imagesx($resource);
-            $this->height   = @imagesy($resource);
+            $this->width    = imagesx($resource);
+            $this->height   = imagesy($resource);
             $this->ratio    = $this->width / $this->height;
         } else {
             if ($width <= 0) {
@@ -48,21 +48,21 @@ class Image
                 throw new InvalidArgumentException('Height cannot be less than or equal to 0.');
             }
 
-            $this->resource = @imagecreatetruecolor($width, $height);
+            $this->resource = imagecreatetruecolor($width, $height);
             $this->type     = $type;
-            $this->width    = @imagesx($this->resource);
-            $this->height   = @imagesy($this->resource);
+            $this->width    = imagesx($this->resource);
+            $this->height   = imagesy($this->resource);
             $this->ratio    = $this->width / $this->height;
         }
 
-        @imagealphablending($this->resource, false);
-        @imagesavealpha($this->resource, true);
+        imagealphablending($this->resource, false);
+        imagesavealpha($this->resource, true);
     }
 
     public function __destruct()
     {
         if (is_resource($this->resource)) {
-            @imagedestroy($this->resource);
+            imagedestroy($this->resource);
         }
     }
 
@@ -106,7 +106,7 @@ class Image
      */
     public static function fromData(string $data): Image
     {
-        $resource = @imagecreatefromstring($data);
+        $resource = imagecreatefromstring($data);
         if ($resource === false) {
             throw new GraphicsException('Unable to process image data.');
         }
@@ -173,7 +173,7 @@ class Image
             header('Content-Type: image/bmp');
         }
 
-        return @imagebmp($this->resource, $to, $compressed);
+        return imagebmp($this->resource, $to, $compressed);
     }
 
     /**
@@ -201,7 +201,7 @@ class Image
             header('Content-Type: image/jpeg');
         }
 
-        return @imagejpeg($this->resource, $to, $quality);
+        return imagejpeg($this->resource, $to, $quality);
     }
 
     /**
@@ -230,7 +230,7 @@ class Image
             header('Content-Type: image/png');
         }
 
-        return @imagepng($this->resource, $to, $quality, $filters);
+        return imagepng($this->resource, $to, $quality, $filters);
     }
 
     /**
@@ -242,7 +242,7 @@ class Image
     {
         $image = new Image($this->width, $this->height, null, $this->type);
 
-        $result = @imagecopy($image->resource, $this->resource, 0, 0, 0, 0, $this->width, $this->height);
+        $result = imagecopy($image->resource, $this->resource, 0, 0, 0, 0, $this->width, $this->height);
         if ($result === false) {
             throw new GraphicsException('Unable to copy image.');
         }
@@ -293,7 +293,7 @@ class Image
      */
     public function drawImage(Image $image, int $x = 0, int $y = 0): Image
     {
-        if (@imagecopy($this->resource, $image->resource, $x, $y, 0, 0, $image->width, $image->height) === false) {
+        if (imagecopy($this->resource, $image->resource, $x, $y, 0, 0, $image->width, $image->height) === false) {
             throw new GraphicsException('Unable to draw image on image.');
         }
 
@@ -316,7 +316,7 @@ class Image
      */
     public function drawText(string $text, int $x, int $y, int $color, int $font = 1): Image
     {
-        if (@imagestring($this->resource, $font, $x, $y, $text, $color) === false) {
+        if (imagestring($this->resource, $font, $x, $y, $text, $color) === false) {
             throw new GraphicsException('Unable to write text on image.');
         }
 
@@ -336,7 +336,7 @@ class Image
      */
     public function fill(int $color, int $x = 0, int $y = 0): Image
     {
-        if (@imagefill($this->resource, $x, $y, $color) === false) {
+        if (imagefill($this->resource, $x, $y, $color) === false) {
             throw new GraphicsException('Unable to fill image.');
         }
 
@@ -350,7 +350,7 @@ class Image
      */
     public function flipHorizontal(): Image
     {
-        @imageflip($this->resource, IMG_FLIP_HORIZONTAL);
+        imageflip($this->resource, IMG_FLIP_HORIZONTAL);
 
         return $this;
     }
@@ -362,7 +362,7 @@ class Image
      */
     public function flipVertical(): Image
     {
-        @imageflip($this->resource, IMG_FLIP_VERTICAL);
+        imageflip($this->resource, IMG_FLIP_VERTICAL);
 
         return $this;
     }
@@ -414,7 +414,7 @@ class Image
         $image = new Image($width, $height, null, $this->type);
 
         if (
-            @imagecopyresampled(
+            imagecopyresampled(
                 $image->resource,
                 $this->resource,
                 0,
@@ -484,9 +484,9 @@ class Image
     {
         $corner = Image::blank($radius, $radius);
         // Fill the image with the base transparent color.
-        @imagefill($corner->resource, 0, 0, Color::TRANSPARENT);
+        imagefill($corner->resource, 0, 0, Color::TRANSPARENT);
         // Draw a black filled arc.
-        @imagefilledarc(
+        imagefilledarc(
             $corner->resource,
             $radius,
             $radius,
@@ -498,12 +498,12 @@ class Image
             IMG_ARC_PIE
         );
         // Make the black color as transparent (only for $corner). This will make the arc transparent.
-        @imagecolortransparent($corner->resource, Color::BLACK);
+        imagecolortransparent($corner->resource, Color::BLACK);
 
         // Add $corner to the corners of the main image.
 
         // Set the transparent color to the base transparent color.
-        @imagecolortransparent($this->resource, Color::TRANSPARENT);
+        imagecolortransparent($this->resource, Color::TRANSPARENT);
 
         // TOP LEFT
         $this->drawImage($corner);

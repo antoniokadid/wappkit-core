@@ -220,14 +220,18 @@ class Color
      */
     public static function fromHex(string $hex): Color
     {
-        if (preg_match('/^\s*#?\s*(?<r>[0-9A-F]{2})(?<g>[0-9A-F]{2})(?<b>[0-9A-F]{2})\s*$/i', $hex, $rgb) === 1) {
-            $r = hexdec($rgb['r']);
-            $g = hexdec($rgb['g']);
-            $b = hexdec($rgb['b']);
+        $rgb = [];
 
-            return new Color($r, $g, $b);
+        // RGB
+        if (preg_match('/^\s*#?\s*(?<r>[0-9A-F]{2})(?<g>[0-9A-F]{2})(?<b>[0-9A-F]{2})\s*$/i', $hex, $rgb) === 1) {
+            $red = hexdec($rgb['r']);
+            $green = hexdec($rgb['g']);
+            $blue = hexdec($rgb['b']);
+
+            return new Color($red, $green, $blue);
         }
 
+        // ARGB
         if (
             preg_match(
                 '/^\s*#?\s*(?<a>[0-9A-F]{2})(?<r>[0-9A-F]{2})(?<g>[0-9A-F]{2})(?<b>[0-9A-F]{2})\s*$/i',
@@ -235,16 +239,15 @@ class Color
                 $rgb
             )
         ) {
-            // convert hex alpha to PHP alpha
-            $a = hexdec($rgb['a']);
-            $r = hexdec($rgb['r']);
-            $g = hexdec($rgb['g']);
-            $b = hexdec($rgb['b']);
+            $alpha = hexdec($rgb['a']);
+            $red = hexdec($rgb['r']);
+            $green = hexdec($rgb['g']);
+            $blue = hexdec($rgb['b']);
 
-            return new Color($r, $g, $b, $a);
+            return new Color($red, $green, $blue, $alpha);
         }
 
-        throw new GraphicsException('Unable to create color from Hex.');
+        throw new GraphicsException(sprintf('Cannot convert %s to color.', $hex));
     }
 
     /**
