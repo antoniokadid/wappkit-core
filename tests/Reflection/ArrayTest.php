@@ -2,32 +2,17 @@
 
 namespace AntonioKadid\WAPPKitCore\Tests\Reflection;
 
-use AntonioKadid\WAPPKitCore\Exceptions\InvalidArgumentException;
-use AntonioKadid\WAPPKitCore\Exceptions\UnknownParameterTypeException;
-use AntonioKadid\WAPPKitCore\Reflection\ClosureInvoker;
+use AntonioKadid\WAPPKitCore\Reflection\Injector;
 use PHPUnit\Framework\TestCase;
-use ReflectionException;
 
-/**
- * Class ArrayTest.
- *
- * @package AntonioKadid\WAPPKitCore\Tests\Reflection
- */
 class ArrayTest extends TestCase
 {
-    /**
-     * @throws InvalidArgumentException
-     * @throws UnknownParameterTypeException
-     * @throws ReflectionException
-     */
     public function testClosure()
     {
-        $invoker = new ClosureInvoker(
-            function (array $value) {
-                return $value;
-            });
+        $result = Injector::inject(
+            fn(array $value) => $value,
+            ['value'         => [5, 10, 15]]);
 
-        $result = $invoker->invoke(['value' => [5, 10, 15]]);
         $this->assertIsArray($result);
         $this->assertEquals(5, $result[0]);
         $this->assertEquals(10, $result[1]);

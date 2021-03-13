@@ -2,29 +2,17 @@
 
 namespace AntonioKadid\WAPPKitCore\Tests\Reflection;
 
-use AntonioKadid\WAPPKitCore\Exceptions\InvalidArgumentException;
-use AntonioKadid\WAPPKitCore\Exceptions\UnknownParameterTypeException;
-use AntonioKadid\WAPPKitCore\Reflection\ClosureInvoker;
+use AntonioKadid\WAPPKitCore\Reflection\Injector;
 use PHPUnit\Framework\TestCase;
-use ReflectionException;
 
-/**
- * Class CallableTest.
- *
- * @package AntonioKadid\WAPPKitCore\Tests\Reflection
- */
 class CallableTest extends TestCase
 {
-    /**
-     * @throws InvalidArgumentException
-     * @throws UnknownParameterTypeException
-     * @throws ReflectionException
-     */
     public function testClosure()
     {
-        $invoker = new ClosureInvoker(fn (callable $value) => call_user_func($value, 5, 'test'));
+        $result = Injector::inject(
+            fn (callable $value) => call_user_func($value, 5, 'test'),
+            ['value'             => [$this, 'theCallable']]);
 
-        $result = $invoker->invoke(['value' => [$this, 'theCallable']]);
         $this->assertEquals('test_5', $result);
     }
 

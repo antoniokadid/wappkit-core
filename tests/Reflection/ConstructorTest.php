@@ -2,8 +2,7 @@
 
 namespace AntonioKadid\WAPPKitCore\Tests\Reflection;
 
-use AntonioKadid\WAPPKitCore\Reflection\ClosureInvoker;
-use AntonioKadid\WAPPKitCore\Reflection\ConstructorInvoker;
+use AntonioKadid\WAPPKitCore\Reflection\Injector;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -15,28 +14,28 @@ class ConstructorTest extends TestCase
 {
     public function testConstructor()
     {
-        $invoker = new ConstructorInvoker(TheSample::class);
-        $this->assertEquals('THE_SAMPLE_1', $invoker->invoke(['number' => 1])->process());
+        $instance = Injector::inject(TheSample::class, [['number' => 1]]);
+        $this->assertEquals('THE_SAMPLE_1', $instance->process());
     }
 
     public function testConstructorWithClosure()
     {
-        $invoker = new ClosureInvoker(fn (TheSample $instance) => $instance->process());
-        $this->assertEquals('THE_SAMPLE_2', $invoker->invoke(['number' => 2]));
+        $result = Injector::inject(
+            fn (TheSample $instance) => $instance->process(),
+            ['number'                => 2]);
+
+        $this->assertEquals('THE_SAMPLE_2', $result);
     }
 }
 
 class TheSample
 {
-    private $_number;
-
-    public function __construct(int $number)
+    public function __construct(private int $number)
     {
-        $this->_number = $number;
     }
 
     public function process()
     {
-        return sprintf('THE_SAMPLE_%d', $this->_number);
+        return sprintf('THE_SAMPLE_%d', $this->number);
     }
 }

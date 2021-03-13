@@ -2,47 +2,29 @@
 
 namespace AntonioKadid\WAPPKitCore\Tests\Reflection;
 
-use AntonioKadid\WAPPKitCore\Exceptions\InvalidArgumentException;
-use AntonioKadid\WAPPKitCore\Exceptions\UnknownParameterTypeException;
-use AntonioKadid\WAPPKitCore\Reflection\ClosureInvoker;
+use AntonioKadid\WAPPKitCore\Reflection\Injector;
 use PHPUnit\Framework\TestCase;
-use ReflectionException;
 
-/**
- * Class BoolTest.
- *
- * @package AntonioKadid\WAPPKitCore\Tests\Reflection
- */
 class BoolTest extends TestCase
 {
-    /**
-     * @throws InvalidArgumentException
-     * @throws UnknownParameterTypeException
-     * @throws ReflectionException
-     */
     public function testClosure()
     {
-        $invoker = new ClosureInvoker(
-            function (bool $value) {
-                return $value;
-            });
-
-        $result = $invoker->invoke(['value' => true]);
+        $result = Injector::inject(fn(bool $value) => $value, ['value' => true]);
         $this->assertTrue($result);
 
-        $result = $invoker->invoke(['value' => 1]);
+        $result = Injector::inject(fn(bool $value) => $value, ['value' => 1]);
         $this->assertTrue($result);
 
-        $result = $invoker->invoke(['value' => '1']);
+        $result = Injector::inject(fn(bool $value) => $value, ['value' => '1']);
         $this->assertTrue($result);
 
-        $result = $invoker->invoke(['value' => false]);
+        $result = Injector::inject(fn(bool $value) => $value, ['value' => false]);
         $this->assertFalse($result);
 
-        $result = $invoker->invoke(['value' => 0]);
+        $result = Injector::inject(fn(bool $value) => $value, ['value' => 0]);
         $this->assertFalse($result);
 
-        $result = $invoker->invoke(['value' => '0']);
+        $result = Injector::inject(fn(bool $value) => $value, ['value' => '0']);
         $this->assertFalse($result);
     }
 }

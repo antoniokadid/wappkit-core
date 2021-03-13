@@ -4,11 +4,10 @@ namespace AntonioKadid\WAPPKitCore\Tests\Reflection;
 
 use AntonioKadid\WAPPKitCore\Exceptions\InvalidArgumentException;
 use AntonioKadid\WAPPKitCore\Exceptions\UnknownParameterTypeException;
-use AntonioKadid\WAPPKitCore\Reflection\CallableInvoker;
-use AntonioKadid\WAPPKitCore\Reflection\ClosureInvoker;
+use AntonioKadid\WAPPKitCore\Reflection\CallableInjector;
+use AntonioKadid\WAPPKitCore\Reflection\Injector;
 use PHPUnit\Framework\TestCase;
 use ReflectionException;
-use SebastianBergmann\Type\NullType;
 
 /**
  * Class IntegerTest.
@@ -24,10 +23,10 @@ class IntegerTest extends TestCase
      */
     public function testCallable()
     {
-        $invoker = new CallableInvoker([$this, 'theCallable']);
-        $result  = $invoker->invoke(['value' => 15]);
+        $result = Injector::inject([$this, 'theCallable'], ['value' => 15]);
         $this->assertEquals(20, $result);
     }
+
     /**
      * @throws InvalidArgumentException
      * @throws UnknownParameterTypeException
@@ -35,34 +34,22 @@ class IntegerTest extends TestCase
      */
     public function testClosure()
     {
-        $invoker = new ClosureInvoker(fn(int $value) => $value + 5);
-
-        $result = $invoker->invoke(['value' => 15]);
+        $result = Injector::inject(fn(int $value) => $value + 5,['value'       => 15]);
         $this->assertEquals(20, $result);
 
-        $result = $invoker
-            ->setClosure(fn (int $value = null) => $value + 5)
-            ->invoke(['value1' => 15]);
+        $result = Injector::inject(fn (int $value = null) => $value + 5, ['value1' => 15]);
         $this->assertEquals(20, $result);
 
-        $result = $invoker
-            ->setClosure(fn (int $value = null, int $value1 = null) => $value + 5)
-            ->invoke(['value1' => 15]);
+        $result = Injector::inject(fn (int $value = null, int $value1 = null) => $value + 5, ['value1' => 15]);
         $this->assertEquals(5, $result);
 
-        $result = $invoker
-            ->setClosure(fn (int $value = 6) => $value + 5)
-            ->invoke(['value' => 15]);
+        $result = Injector::inject(fn (int $value = 6) => $value + 5, ['value' => 15]);
         $this->assertEquals(20, $result);
 
-        $result = $invoker
-            ->setClosure(fn(int $value) => $value + 5)
-            ->invoke(['value' => 15]);
+        $result = Injector::inject(fn(int $value) => $value + 5, ['value' => 15]);
         $this->assertEquals(20, $result);
 
-        $result = $invoker
-            ->setClosure(fn ($value = 6) => $value + 5)
-            ->invoke(['value' => 15]);
+        $result = Injector::inject(fn ($value = 6) => $value + 5, ['value' => 15]);
         $this->assertEquals(20, $result);
     }
 
