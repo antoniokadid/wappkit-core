@@ -2,6 +2,9 @@
 
 namespace AntonioKadid\WAPPKitCore\HTTP\Request;
 
+use DateTime;
+use DateTimeZone;
+
 /**
  * Class Request.
  *
@@ -104,5 +107,17 @@ class Request
     public static function post(): array
     {
         return $_POST;
+    }
+
+    /**
+     * @param string $timezone
+     *
+     * @return DateTime
+     *
+     * @SuppressWarnings(PHPMD.Superglobals)
+     */
+    public static function time(string $timezone = 'UTC'): DateTime
+    {
+        return new DateTime("@$_SERVER[REQUEST_TIME]", new DateTimeZone($timezone));
     }
 }
