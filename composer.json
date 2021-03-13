@@ -18,7 +18,7 @@
         }
     ],
     "require": {
-        "php": ">=7.3",
+        "php": ">=8.0",
         "ext-json": "*",
         "ext-gd": "*",
         "ext-mbstring": "*",
@@ -34,7 +34,7 @@
     },
     "config": {
         "platform": {
-            "php": "7.3.25"
+            "php": "8.0"
         },
         "sort-packages": true
     },
