@@ -53,7 +53,7 @@
     },
     "scripts": {
         "build": "php vendor/bin/phing",
-        "test": "./vendor/bin/phpunit --testdox --verbose tests",
+        "test": "./vendor/bin/phpunit --testdox --verbose --configuration ./phpunit.xml",
         "code:sniff": "php vendor/bin/phpcs --standard=phpcs.xml src",
         "code:mess": "php vendor/bin/phpmd src text phpmd.xml",
         "code:fix": [
