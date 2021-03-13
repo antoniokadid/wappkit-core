@@ -19,7 +19,7 @@ jobs:
       uses: php-actions/composer@v5
       with:
         php_version: 8.0
-        php_extensions: curl,gd,xml
+        php_extensions: curl gd xml
 
     - name: PHPUnit Tests
       uses: php-actions/phpunit@v2
