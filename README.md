@@ -6,6 +6,8 @@ Powers WAPPKit, a privately owned CMS.
 
 *Project under development and may be subject to a lot of changes. Use at your own risk.*
 
+[![CI](https://github.com/antoniokadid/wappkit-core/actions/workflows/ci.yml/badge.svg)](https://github.com/antoniokadid/wappkit-core/actions/workflows/ci.yml)
+
 ## Installation
 
 composer require antoniokadid/wappkit-core:dev-main
