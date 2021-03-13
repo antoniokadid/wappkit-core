@@ -10,20 +10,17 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    #- name: Install PHP
-    #  uses: nanasess/setup-php@master
-    #  with:
-    #    php-version: 8.0
-
     - name: Composer
       uses: php-actions/composer@v5
       with:
         php_version: 8.0
         php_extensions: curl gd xml
 
-    - name: PHPUnit Tests
+    - name: PHPUnit
       uses: php-actions/phpunit@v2
       with:
         bootstrap: vendor/autoload.php
         configuration: phpunit.xml
         args: --testdox --verbose
+        php_version: 8.0
+        php_extensions: curl gd xml
