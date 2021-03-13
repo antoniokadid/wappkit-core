@@ -22,10 +22,7 @@ class CallableTest extends TestCase
      */
     public function testClosure()
     {
-        $invoker = new ClosureInvoker(
-            function (callable $value) {
-                return call_user_func($value, 5, 'test');
-            });
+        $invoker = new ClosureInvoker(fn (callable $value) => call_user_func($value, 5, 'test'));
 
         $result = $invoker->invoke(['value' => [$this, 'theCallable']]);
         $this->assertEquals('test_5', $result);

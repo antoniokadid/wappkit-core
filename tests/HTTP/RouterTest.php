@@ -18,10 +18,8 @@ class RouterTest extends TestCase
     public function testRegisterCallable()
     {
         Router::registerCallable(
-            '/route\/(?<count>\d+)/',
-            function($method, $route, $params) {
-                return $params['count'];
-            });
+            fn($method, $route, $params) => $params['count'],
+            '/route\/(?<count>\d+)/');
 
         $result = Router::execute(Method::GET, '/route/15');
 

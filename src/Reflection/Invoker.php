@@ -4,9 +4,9 @@ namespace AntonioKadid\WAPPKitCore\Reflection;
 
 use AntonioKadid\WAPPKitCore\Exceptions\InvalidArgumentException;
 use AntonioKadid\WAPPKitCore\Exceptions\UnknownParameterTypeException;
-use ReflectionException;
 use ReflectionNamedType;
 use ReflectionParameter;
+use ReflectionUnionType;
 
 /**
  * Class Invoker.
@@ -25,25 +25,34 @@ class Invoker
      */
     protected function buildParameters(array $reflectionParameters, array $values): array
     {
-        if ($this->isDataKeyValuePairs) {
-            return $values;
-        }
-
         $keys = array_map(
-            function (ReflectionParameter $parameter) {
-                return $parameter->getName();
-            },
+            fn(ReflectionParameter $parameter) => $parameter->getName(),
             $reflectionParameters
         );
 
+        $result = [];
         $values = array_pad($values, count($keys), null);
 
-        return array_combine($keys, $values);
+        // Assing to named parameters values that are already defined with the same name.
+        foreach ($keys as $key) {
+            if (array_key_exists($key, $values)) {
+                $result[$key] = $values[$key];
+                unset($values[$key]);
+            }
+        }
+
+        // For the remaining named parameters a value by the order of appearance.
+        $keysNotProcessed = array_diff($keys, array_keys($result));
+        foreach ($keysNotProcessed as $key) {
+            $result[$key] = array_shift($values);
+        }
+
+        return $result;
     }
 
     /**
-     * @param array $reflectionParameters
-     * @param array $data
+     * @param ReflectionParameter[] $reflectionParameters
+     * @param array                 $data
      *
      * @throws InvalidArgumentException
      * @throws ReflectionException
@@ -55,113 +64,74 @@ class Invoker
     {
         $result = [];
 
-        /** @var ReflectionParameter $reflectionParameter */
         foreach ($reflectionParameters as $reflectionParameter) {
-            $parameterName = $reflectionParameter->getName();
-
-            if (($class = $reflectionParameter->getClass()) != null) {
-                $result[] = $this->getValueForClassParameter($reflectionParameter, $class->getName(), $data);
-                continue;
-            }
-
-            if ($reflectionParameter->isArray() && is_array($data[$parameterName])) {
-                $result[] = $data[$parameterName];
-                continue;
-            }
-
-            if ($reflectionParameter->isCallable() && is_callable($data[$parameterName])) {
-                $result[] = $data[$parameterName];
-                continue;
-            }
-
-            if (
-                !array_key_exists($parameterName, $data) ||
-                ($reflectionParameter->isCallable() && !is_callable($data[$parameterName]))
-            ) {
-                if ($reflectionParameter->isOptional() && $reflectionParameter->isDefaultValueAvailable()) {
-                    $result[] = $reflectionParameter->getDefaultValue();
-                } elseif ($reflectionParameter->allowsNull()) {
-                    $result[] = null;
-                }
-
-                throw new InvalidArgumentException($parameterName, sprintf('Invalid value for parameter %s.', $parameterName));
-            }
-
-            $result[] = !$reflectionParameter->hasType() ?
-                $data[$parameterName] :
-                $this->getValueForTypedParameter($reflectionParameter, $data);
+            $result[$reflectionParameter->getName()] = $this->processParameter($reflectionParameter, $data);
         }
 
         return $result;
     }
 
     /**
-     * @param ReflectionParameter $parameter
-     * @param callable            $callable
-     * @param array               $data
+     * @param string $parameterName
+     * @param bool   $nullable
+     * @param bool   $canUseDefaultValue
+     * @param mixed  $defaultValue
      *
      * @throws InvalidArgumentException
-     * @throws ReflectionException
-     * @throws UnknownParameterTypeException
-     *
-     * @return mixed
      */
-    private function getValueForCallableParameter(ReflectionParameter $parameter, callable $callable, array $data)
+    private function defaultValueOrThrowInvalidType($parameterName, $nullable, $canUseDefaultValue, $defaultValue)
     {
-        $invoker = new CallableInvoker($callable);
-        return $invoker->invoke($data, $this->isDataKeyValuePairs);
+        if ($canUseDefaultValue) {
+            return $defaultValue;
+        }
+
+        if ($nullable) {
+            return null;
+        }
+
+        throw new UnknownParameterTypeException($parameterName, sprintf('Unknown type for parameter %s', $parameterName));
     }
 
     /**
-     * @param ReflectionParameter $parameter
-     * @param string              $className
-     * @param array               $data
+     * @param string $parameterName
+     * @param bool   $nullable
+     * @param bool   $canUseDefaultValue
+     * @param mixed  $defaultValue
      *
      * @throws InvalidArgumentException
-     * @throws ReflectionException
-     * @throws UnknownParameterTypeException
-     *
-     * @return mixed|object
      */
-    private function getValueForClassParameter(ReflectionParameter $parameter, string $className, array $data)
+    private function defaultValueOrThrowInvalidValue($parameterName, $nullable, $canUseDefaultValue, $defaultValue)
     {
-        $invoker  = new ConstructorInvoker($className);
-        $instance = $invoker->invoke($data, $this->isDataKeyValuePairs);
-
-        if ($instance === null) {
-            if ($parameter->isOptional() && $parameter->isDefaultValueAvailable()) {
-                return $parameter->getDefaultValue();
-            }
-
-            throw new UnknownParameterTypeException($parameter->getName(), sprintf('Unknown type for parameter %s', $parameter->getName()));
+        if ($canUseDefaultValue) {
+            return $defaultValue;
         }
 
-        return $instance;
+        if ($nullable) {
+            return null;
+        }
+
+        throw new InvalidArgumentException($parameterName, sprintf('Invalid value for parameter %s.', $parameterName));
     }
 
     /**
-     * @param ReflectionParameter $parameter
-     * @param array               $data
+     * @param string $parameterName
+     * @param string $parameterType
+     * @param mixed  $parameterValue
+     * @param bool   $nullable
+     * @param bool   $canUseDefaultValue
+     * @param mixed  $defaultValue
      *
      * @throws InvalidArgumentException
-     * @throws ReflectionException
-     * @throws UnknownParameterTypeException
-     *
-     * @return null|array|bool|float|int|mixed|string
      */
-    private function getValueForTypedParameter(ReflectionParameter $parameter, array $data)
-    {
-        $parameterName  = $parameter->getName();
-        $parameterType  = $parameter->getType();
-        $parameterValue = $data[$parameterName];
-
-        if (!($parameterType instanceof ReflectionNamedType)) {
-            throw new UnknownParameterTypeException($parameterName, sprintf('Unknown type for parameter %s', $parameterName));
-        }
-
-        $parameterTypeName = $parameterType->getName();
-
-        switch (strtolower($parameterTypeName)) {
+    private function handleBuiltinType(
+        string $parameterName,
+        string $parameterType,
+        $parameterValue,
+        bool $nullable,
+        bool $canUseDefaultValue,
+        $defaultValue
+    ): null | string | bool | int | float | array {
+        switch (strtolower($parameterType)) {
             case 'string':
                 return strval($parameterValue);
             case 'bool':
@@ -170,8 +140,122 @@ class Invoker
                 return intval($parameterValue);
             case 'float':
                 return floatval($parameterValue);
+            case 'array':
+                if (is_array($parameterValue)) {
+                    return $parameterValue;
+                }
+
+                if (is_string($parameterValue)) {
+                    $result = preg_split('/\s+/', $parameterValue);
+                    if (is_array($result)) {
+                        return $result;
+                    }
+                }
+
+                // intentional fallback to default if array wasn't parsed.
             default:
-                throw new InvalidArgumentException($parameterName, sprintf('Invalid value for parameter %s.', $parameterName));
+                return $this->defaultValueOrThrowInvalidValue($parameterName, $nullable, $canUseDefaultValue, $defaultValue);
         }
+    }
+
+    /**
+     * @param string $parameterName
+     * @param string $parameterType
+     * @param mixed  $parameterValue
+     * @param bool   $nullable
+     * @param bool   $canUseDefaultValue
+     * @param mixed  $defaultValue
+     *
+     * @throws UnknownParameterTypeException
+     *
+     * @return mixed
+     */
+    private function handleCallable(
+        string $parameterName,
+        string $parameterType,
+        $parameterValue,
+        bool $nullable,
+        bool $canUseDefaultValue,
+        $defaultValue
+    ) {
+        $invoker = new ClosureInvoker(\Closure::fromCallable($parameterValue));
+        return $invoker->invoke([$parameterName => $parameterValue]);
+    }
+
+    /**
+     * @param string $parameterName
+     * @param string $parameterType
+     * @param mixed  $parameterValue
+     * @param bool   $nullable
+     * @param bool   $canUseDefaultValue
+     * @param mixed  $defaultValue
+     *
+     * @throws UnknownParameterTypeException
+     *
+     * @return mixed
+     */
+    private function handleClass(
+        string $parameterName,
+        string $parameterType,
+        $parameterValue,
+        bool $nullable,
+        bool $canUseDefaultValue,
+        $defaultValue
+    ) {
+        $invoker       = new ConstructorInvoker($parameterType);
+        $classInstance = $invoker->invoke([$parameterName => $parameterValue]);
+
+        if ($classInstance === null) {
+            return $this->defaultValueOrThrowInvalidType($parameterName, $nullable, $canUseDefaultValue, $defaultValue);
+        }
+
+        return $classInstance;
+    }
+
+    private function processParameter(ReflectionParameter $reflectionParameter, array $data)
+    {
+        $parameterName  = $reflectionParameter->getName();
+        $parameterType  = $reflectionParameter->getType();
+        $parameterValue = $data[$parameterName];
+
+        if ($parameterType == null) {
+            return $parameterValue;
+        }
+
+        $nullable              = $parameterType->allowsNull();
+        $defaultValueAvailable = $reflectionParameter->isOptional() && $reflectionParameter->isDefaultValueAvailable();
+        $defaultValue          = $defaultValueAvailable ? $reflectionParameter->getDefaultValue() : null;
+
+        if ($parameterType instanceof ReflectionUnionType) {
+            if ($defaultValueAvailable) {
+                return $defaultValue;
+            }
+
+            if ($nullable) {
+                return null;
+            }
+
+            throw new UnknownParameterTypeException($parameterName, sprintf('Unsupported union type detected for parameter %s.', $parameterName));
+        }
+
+        if (!($parameterType instanceof ReflectionNamedType)) {
+            return $this->defaultValueOrThrowInvalidType($parameterName, $nullable, $defaultValueAvailable, $defaultValue);
+        }
+
+        $parameterTypeName = $parameterType->getName();
+
+        if ($parameterTypeName === 'callable' && is_callable($parameterValue)) {
+            return $parameterValue; // $this->handleCallable($parameterName, $parameterTypeName, $parameterValue, $nullable, $defaultValueAvailable, $defaultValue);
+        }
+
+        if ($parameterType->isBuiltin()) {
+            return $this->handleBuiltinType($parameterName, $parameterTypeName, $parameterValue, $nullable, $defaultValueAvailable, $defaultValue);
+        }
+
+        if (class_exists($parameterType)) {
+            return $this->handleClass($parameterName, $parameterTypeName, $parameterValue, $nullable, $defaultValueAvailable, $defaultValue);
+        }
+
+        return $this->defaultValueOrThrowInvalidType($parameterName, $nullable, $defaultValueAvailable, $defaultValue);
     }
 }

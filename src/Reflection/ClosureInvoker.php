@@ -30,7 +30,6 @@ class ClosureInvoker extends Invoker implements IInvoker
 
     /**
      * @param array $parameters
-     * @param bool  $keyValuePairs true, if the $parameters is a key-value pair array else False
      *
      * @throws InvalidArgumentException
      * @throws UnknownParameterTypeException
@@ -38,10 +37,8 @@ class ClosureInvoker extends Invoker implements IInvoker
      *
      * @return mixed
      */
-    public function invoke(array $parameters = [], bool $keyValuePairs = true)
+    public function invoke(array $parameters = [])
     {
-        $this->isDataKeyValuePairs = $keyValuePairs;
-
         $reflectionFunction = new ReflectionFunction($this->closure);
         if ($reflectionFunction->getNumberOfParameters() === 0) {
             return $reflectionFunction->invoke();
@@ -50,12 +47,12 @@ class ClosureInvoker extends Invoker implements IInvoker
         $reflectionParameters = $reflectionFunction->getParameters();
         $parameters           = $this->buildParameters($reflectionParameters, $parameters);
 
-        return $reflectionFunction->invokeArgs(
-            $this->getInvokeArgs(
-                $reflectionParameters,
-                $parameters
-            )
+        $invokeArgs = $this->getInvokeArgs(
+            $reflectionParameters,
+            $parameters
         );
+
+        return $reflectionFunction->invokeArgs($invokeArgs);
     }
 
     /**

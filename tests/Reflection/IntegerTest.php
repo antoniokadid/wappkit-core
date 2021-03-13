@@ -8,6 +8,7 @@ use AntonioKadid\WAPPKitCore\Reflection\CallableInvoker;
 use AntonioKadid\WAPPKitCore\Reflection\ClosureInvoker;
 use PHPUnit\Framework\TestCase;
 use ReflectionException;
+use SebastianBergmann\Type\NullType;
 
 /**
  * Class IntegerTest.
@@ -34,50 +35,35 @@ class IntegerTest extends TestCase
      */
     public function testClosure()
     {
-        $invoker = new ClosureInvoker(
-            function (int $value) {
-                return $value + 5;
-            });
+        $invoker = new ClosureInvoker(fn(int $value) => $value + 5);
 
         $result = $invoker->invoke(['value' => 15]);
         $this->assertEquals(20, $result);
 
-        $this->expectException(InvalidArgumentException::class);
-        $invoker->invoke(['value1' => 15]);
+        $result = $invoker
+            ->setClosure(fn (int $value = null) => $value + 5)
+            ->invoke(['value1' => 15]);
+        $this->assertEquals(20, $result);
 
-        $invoker->setClosure(
-            function (int $value = null) {
-                return $value + 5;
-            });
-        $result = $invoker->invoke(['value1' => 15]);
-        $this->assertNull($result);
+        $result = $invoker
+            ->setClosure(fn (int $value = null, int $value1 = null) => $value + 5)
+            ->invoke(['value1' => 15]);
+        $this->assertEquals(5, $result);
 
-        $result = $invoker->setClosure(
-            function (int $value = 6) {
-                return $value + 5;
-            })
+        $result = $invoker
+            ->setClosure(fn (int $value = 6) => $value + 5)
             ->invoke(['value' => 15]);
         $this->assertEquals(20, $result);
 
-        $result = $invoker->invoke(['value1' => 15]);
-        $this->assertEquals(11, $result);
-
-        $result = $invoker->setClosure(
-            function ($value) {
-                return $value + 5;
-            })
+        $result = $invoker
+            ->setClosure(fn(int $value) => $value + 5)
             ->invoke(['value' => 15]);
         $this->assertEquals(20, $result);
 
-        $result = $invoker->setClosure(
-            function ($value = 6) {
-                return $value + 5;
-            })
+        $result = $invoker
+            ->setClosure(fn ($value = 6) => $value + 5)
             ->invoke(['value' => 15]);
         $this->assertEquals(20, $result);
-
-        $result = $invoker->invoke(['value1' => 15]);
-        $this->assertEquals(11, $result);
     }
 
     /**

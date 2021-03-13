@@ -28,7 +28,6 @@ class ConstructorInvoker extends Invoker implements IInvoker
 
     /**
      * @param array $parameters
-     * @param bool  $keyValuePairs
      *
      * @throws InvalidArgumentException
      * @throws UnknownParameterTypeException
@@ -36,10 +35,8 @@ class ConstructorInvoker extends Invoker implements IInvoker
      *
      * @return null|mixed|object
      */
-    public function invoke(array $parameters = [], bool $keyValuePairs = true)
+    public function invoke(array $parameters = [])
     {
-        $this->isDataKeyValuePairs = $keyValuePairs;
-
         if (!class_exists($this->className, false)) {
             return null;
         }
