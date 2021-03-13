@@ -7,12 +7,26 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - uses: php-actions/composer@v5
+    - name: Certificates
+      run: apt-get install -y ca-certificates apt-transport-https software-properties-common
 
-    - name: PHPUnit Tests
-      uses: php-actions/phpunit@v2
-      with:
-          bootstrap: vendor/autoload.php
-          configuration: phpunit.xml
-          args: --testdox --verbose
+    - name: Add repo
+      run: add-apt-repository -y ppa:ondrej/php
+
+    - name: Updated environment
+      run: apt-get update -y
+
+    - name: Install PHP8
+      run: apt-get install php8.0 php8.0-curl php8.0-gd php8.0-xml -y
+
+    - name: Install Composer
+      run: apt-get install -y composer
+
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Run composer
+      run: composer install
+
+    - name: Run tests
+      run: composer run-script test

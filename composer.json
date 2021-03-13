@@ -19,10 +19,10 @@
     ],
     "require": {
         "php": ">=8.0",
-        "ext-json": "*",
+        "ext-curl": "*",
         "ext-gd": "*",
-        "ext-mbstring": "*",
-        "ext-curl": "*"
+        "ext-json": "*",
+        "ext-mbstring": "*"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.16",
